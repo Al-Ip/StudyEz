@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1011677717940",
+    "project_id": "fyp-android-1a215",
+    "storage_bucket": "fyp-android-1a215.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011677717940:android:26c21e12b571f8e653fee1",
+        "android_client_info": {
+          "package_name": "net.project.studyez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011677717940-ul9ltutsfa1pln73k1hu2ptgh2kutkt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ehw9hoOnEDVMVEMglk7S9Z4vkJ4WH24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011677717940-ul9ltutsfa1pln73k1hu2ptgh2kutkt7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
