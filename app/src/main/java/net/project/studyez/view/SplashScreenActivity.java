@@ -1,6 +1,8 @@
 package net.project.studyez.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -9,12 +11,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.adapters.ScreenSlideAdapter;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

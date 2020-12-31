@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="id_activityScreenTitles">
+
+        <item></item>
+        <item>Dashboard</item>
+        <item>My Profile</item>
+        <item>Decks</item>
+        <item>Settings</item>
+        <item>About Us</item>
+        <item/>
+        <item>Log out</item>
+    </string-array>
+    
+    <array name="id_activityScreenIcons">
+
+        <item>@drawable/close_icon</item>
+        <item>@drawable/home_icon</item>
+        <item>@drawable/my_profile_icon</item>
+        <item>@drawable/decks_icon</item>
+        <item>@drawable/settings_icon</item>
+        <item>@drawable/about_icon</item>
+        <item>0</item>
+        <item>@drawable/logout_icon</item>
+
+    </array>
+</resources>
