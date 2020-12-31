@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color2">
+    android:background="#6FCFA3">
 
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="10dp"
+        android:layout_height="wrap_content"
         android:src="@drawable/tab1"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -66,6 +66,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
         android:text="A place where you can learn and achieve your academic goals through the lens of studying!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +98,7 @@
         android:layout_width="0dp"
         android:layout_height="288dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
