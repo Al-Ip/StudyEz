@@ -8,11 +8,13 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import net.project.studyez.view.IntroductionFragment1;
 import net.project.studyez.view.IntroductionFragment2;
 import net.project.studyez.view.IntroductionFragment3;
+import net.project.studyez.view.IntroductionFragment4;
 
 
 public class ScreenSlideAdapter extends FragmentStatePagerAdapter {
 
-    private static final int NUM_FRAGMENTS = 3;
+    // This variable is used to tell how many fragments exist so that the slider appears
+    private static final int NUM_FRAGMENTS = 4;
 
     public ScreenSlideAdapter(@NonNull FragmentManager fm) {
         super(fm);
@@ -28,6 +30,8 @@ public class ScreenSlideAdapter extends FragmentStatePagerAdapter {
                 return new IntroductionFragment2();
             case 2:
                 return new IntroductionFragment3();
+            case 3:
+                return new IntroductionFragment4();
         }
         return null;
     }

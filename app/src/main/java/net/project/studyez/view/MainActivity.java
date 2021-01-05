@@ -1,18 +1,15 @@
-package net.project.studyez;
+package net.project.studyez.view;
 
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.WindowManager;
-import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
-
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,15 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
+import net.project.studyez.R;
 import net.project.studyez.adapters.DrawerAdapter;
 import net.project.studyez.presenter.DrawerItem;
 import net.project.studyez.presenter.SimpleItem;
 import net.project.studyez.presenter.SpaceItem;
-import net.project.studyez.view.AboutUsFragment;
-import net.project.studyez.view.DashboardFragment;
-import net.project.studyez.view.DecksFragment;
-import net.project.studyez.view.MyProfileFragment;
-import net.project.studyez.view.SettingsFragment;
 
 import java.util.Arrays;
 
@@ -47,11 +40,15 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
     private SlidingRootNav slidingRootNav;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+        // presenter
+        //mainActivityPresenter = new MainActivityPresenter(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 new SpaceItem(260),
                 createItemFor(POS_LOGOUT)
         ));
-        adapter.setListener(this);
+        adapter.setListener((DrawerAdapter.OnItemSelectedListener) this);
 
         RecyclerView list = findViewById(R.id.drawer_list);
         list.setNestedScrollingEnabled(false);
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     }
 
     @SuppressWarnings("rawtypes")
-    private DrawerItem createItemFor (int position){
+    public DrawerItem createItemFor (int position){
         return new SimpleItem(screenIcons[position], screenTitles[position])
                 .withIconTint(color(R.color.pink))
                 .withTextTint(color(R.color.black))
@@ -100,15 +97,15 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     }
 
     @ColorInt
-    private int color(@ColorRes int res){
+    public int color(@ColorRes int res){
         return ContextCompat.getColor(this, res);
     }
 
-    private  String[] loadScreenTitles(){
+    public  String[] loadScreenTitles(){
         return getResources().getStringArray(R.array.id_activityScreenTitles);
 
     }
-    private Drawable[] loadScreenIcons(){
+    public Drawable[] loadScreenIcons(){
         TypedArray ta = getResources().obtainTypedArray(R.array.id_activityScreenIcons);
         Drawable[] icons = new Drawable[ta.length()];
         for(int i = 0; i < ta.length(); i++){
@@ -125,7 +122,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     public void onBackPressed() {
         finish();
     }
-
 
     @Override
     public void onItemSelected(int position) {
@@ -158,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         slidingRootNav.closeMenu();
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
+
+
 }

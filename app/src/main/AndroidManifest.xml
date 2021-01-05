@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyEz">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.RegisterActivity"
+            android:theme="@style/Theme.StudyEz.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.MainActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar">
         </activity>
         <activity
