@@ -33,22 +33,18 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_DECKS = 3;
     private static final int POS_SETTINGS = 4;
     private static final int POS_ABOUT_US = 5;
-    private static final int POS_LOGOUT = 6;
+    private static final int POS_LOGOUT = 7;
 
     private String[] screenTitles;
     private Drawable[] screenIcons;
 
     private SlidingRootNav slidingRootNav;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
-        // presenter
-        //mainActivityPresenter = new MainActivityPresenter(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 new SpaceItem(260),
                 createItemFor(POS_LOGOUT)
         ));
-        adapter.setListener((DrawerAdapter.OnItemSelectedListener) this);
+        adapter.setListener(this);
 
         RecyclerView list = findViewById(R.id.drawer_list);
         list.setNestedScrollingEnabled(false);
@@ -90,10 +86,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     @SuppressWarnings("rawtypes")
     public DrawerItem createItemFor (int position){
         return new SimpleItem(screenIcons[position], screenTitles[position])
-                .withIconTint(color(R.color.pink))
+                .withIconTint(color(R.color.defualt_blue))
                 .withTextTint(color(R.color.black))
-                .withSelectedIconTint(color(R.color.pink))
-                .withSelectedTextTint(color(R.color.pink));
+                .withSelectedIconTint(color(R.color.defualt_blue))
+                .withSelectedTextTint(color(R.color.defualt_blue));
     }
 
     @ColorInt

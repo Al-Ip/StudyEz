@@ -32,7 +32,7 @@ public class IntroductionFragment4 extends Fragment implements IntroContract.Vie
 
     @Override
     public void showRegisterScreen() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), RegisterActivity.class);
         startActivity(intent);
     }
 }

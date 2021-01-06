@@ -9,7 +9,7 @@
 
     <FrameLayout
         android:id="@+id/container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
@@ -21,8 +21,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pink"
-            android:titleTextColor="@color/pink" />
+            android:background="#467A95"
+            android:titleTextColor="#467A95" />
     </com.google.android.material.appbar.AppBarLayout>
 
 </LinearLayout>

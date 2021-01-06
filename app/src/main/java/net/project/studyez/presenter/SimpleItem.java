@@ -62,8 +62,6 @@ public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
         return this;
     }
 
-
-
     static class ViewHolder extends DrawerAdapter.ViewHolder{
 
         private ImageView icon;

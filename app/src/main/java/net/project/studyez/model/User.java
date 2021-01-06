@@ -14,9 +14,7 @@ public class User {
     private String occupation;
 
     //On initial sign up, REQUIRED
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }

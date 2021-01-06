@@ -6,6 +6,7 @@ import net.project.studyez.contracts.IntroContract;
 
 public class IntroPresenter implements IntroContract.Presenter {
 
+    // to keep reference to view
     private IntroContract.View mView;
 
     public IntroPresenter(IntroContract.View view){

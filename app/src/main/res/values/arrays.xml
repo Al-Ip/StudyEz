@@ -21,7 +21,7 @@
         <item>@drawable/decks_icon</item>
         <item>@drawable/settings_icon</item>
         <item>@drawable/about_icon</item>
-        <item>0</item>
+        <item/>
         <item>@drawable/logout_icon</item>
 
     </array>
