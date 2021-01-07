@@ -1,28 +1,32 @@
-package net.project.studyez.view;
+package net.project.studyez.registration;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseUser;
 
 import net.project.studyez.R;
-import net.project.studyez.contracts.RegistrationContract;
+import net.project.studyez.registration.RegistrationContract;
 
 import net.project.studyez.databinding.ActivityRegisterBinding;
-import net.project.studyez.presenter.RegistrationPresenter;
+import net.project.studyez.registration.RegistrationPresenter;
 
 public class RegisterActivity extends AppCompatActivity implements RegistrationContract.View {
 
     private TextInputEditText email, password;
-    private ImageView nextButton;
+    private ImageView nextButton, blackFadeImage;
+    private ProgressBar progressBar;
     private RegistrationPresenter presenter;
 
 
@@ -39,6 +43,8 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         nextButton = findViewById(R.id.registrationPage1NextButton);
+        blackFadeImage = findViewById(R.id.blackFadeImage);
+        progressBar = findViewById(R.id.registerPage1ProgressBar);
 
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
@@ -50,21 +56,17 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String emailInput = getEmailText();
-            String passInput = getPasswordText();
-            if(!emailInput.isEmpty() && ! passInput.isEmpty())
-                showAnimatedNextButton();
-            else
-                hideAnimatedNextButton();
+            presenter.toggleAnimatedTextButtonVisibility(getEmailText(), getPasswordText());
         }
         @Override
-        public void afterTextChanged(Editable s) { }
+        public void afterTextChanged(Editable s) {
+            showEmailError();
+        }
     };
 
     @Override
     public void showNextRegistrationScreen() {
-        presenter.getEmailAndPasswordValues(getEmailText(), getPasswordText());
-        showEmailError();
+        presenter.addEmailAndPasswordToDatabase(this, getEmailText(), getPasswordText());
     }
 
     @Override
@@ -75,6 +77,27 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     @Override
     public void hideAnimatedNextButton() {
         nextButton.setVisibility(View.INVISIBLE);
+    }
+
+
+    @Override
+    public void showBlackFadeIn() {
+        blackFadeImage.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideBlackFadeIn() {
+        blackFadeImage.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -89,12 +112,22 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
 
     @Override
     public void showEmailError() {
-        email.setError("You need to enter a correct email");
+        if(!TextUtils.isEmpty(email.getText().toString()) && !android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())
+            email.setError("You need to enter a correct email");
     }
 
     @Override
     public void showPasswordError() {
+    }
 
+    @Override
+    public void onRegistrationSuccess(FirebaseUser firebaseUser) {
+        Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRegistrationFailure(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
 }

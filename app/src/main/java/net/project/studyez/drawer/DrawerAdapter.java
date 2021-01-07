@@ -1,14 +1,11 @@
-package net.project.studyez.adapters;
+package net.project.studyez.drawer;
 
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import net.project.studyez.presenter.DrawerItem;
 
 import java.util.HashMap;
 import java.util.List;

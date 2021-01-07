@@ -1,19 +1,17 @@
-package net.project.studyez.view;
+package net.project.studyez.introduction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
-import net.project.studyez.contracts.IntroContract;
 import net.project.studyez.databinding.FragmentIntro4Binding;
-import net.project.studyez.presenter.IntroPresenter;
+import net.project.studyez.registration.RegisterActivity;
 
 public class IntroductionFragment4 extends Fragment implements IntroContract.View{
 

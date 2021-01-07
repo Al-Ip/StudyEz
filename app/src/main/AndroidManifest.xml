@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyEz">
         <activity
-            android:name=".view.RegisterActivity"
+            android:name=".registration.RegisterActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

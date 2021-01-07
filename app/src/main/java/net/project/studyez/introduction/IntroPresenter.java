@@ -1,8 +1,8 @@
-package net.project.studyez.presenter;
+package net.project.studyez.introduction;
 
 import android.view.View;
 
-import net.project.studyez.contracts.IntroContract;
+import net.project.studyez.introduction.IntroContract;
 
 public class IntroPresenter implements IntroContract.Presenter {
 

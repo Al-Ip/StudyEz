@@ -6,7 +6,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.presenter.IntroPresenter" />
+            type="net.project.studyez.introduction.IntroPresenter" />
     </data>
     
 <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,14 +1,10 @@
-package net.project.studyez.presenter;
+package net.project.studyez.drawer;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-
-import net.project.studyez.adapters.DrawerAdapter;
-
-import java.util.List;
 
 // To add space between items in drawer menu
 public class SpaceItem extends DrawerItem<SpaceItem.ViewHolder> {

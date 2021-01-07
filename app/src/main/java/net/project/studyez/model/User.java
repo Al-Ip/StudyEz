@@ -13,6 +13,9 @@ public class User {
     private Date dateOfBirth;
     private String occupation;
 
+    public User() {
+    }
+
     //On initial sign up, REQUIRED
     public User(String email, String password) {
         this.email = email;

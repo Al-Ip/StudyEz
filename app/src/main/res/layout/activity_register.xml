@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.presenter.RegistrationPresenter" />
+            type="net.project.studyez.registration.RegistrationPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:background="@drawable/background_color"
         app:layout_constraintEnd_toStartOf="@+id/editTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        tools:context=".view.RegisterActivity">
+        tools:context=".registration.RegisterActivity">
 
         <ImageView
             android:id="@+id/imageWhiteLine"
@@ -51,7 +51,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:clickable="true"
-            android:onClick="@{presenter::handleRegisterButtonClick}"
+            android:onClick="@{presenter::clickAnimatedNextButton}"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,10 +64,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="160dp"
             android:layout_marginEnd="16dp"
             app:errorEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine">
 
@@ -79,7 +80,8 @@
                 android:drawableStart="@drawable/ic_twotone_email_24"
                 android:drawablePadding="15dp"
                 android:hint="Enter an Email Address"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -87,10 +89,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailTextField">
 
@@ -101,8 +103,32 @@
                 android:drawableStart="@drawable/ic_twotone_lock_24"
                 android:drawablePadding="15dp"
                 android:hint="Enter a Strong Password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="20sp" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/blackFadeImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#A6000000"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/registerPage1ProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/blackFadeImage"
+            app:layout_constraintTop_toTopOf="@+id/blackFadeImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

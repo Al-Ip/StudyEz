@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import net.project.studyez.view.IntroductionFragment1;
-import net.project.studyez.view.IntroductionFragment2;
-import net.project.studyez.view.IntroductionFragment3;
-import net.project.studyez.view.IntroductionFragment4;
+import net.project.studyez.introduction.IntroductionFragment1;
+import net.project.studyez.introduction.IntroductionFragment2;
+import net.project.studyez.introduction.IntroductionFragment3;
+import net.project.studyez.introduction.IntroductionFragment4;
 
 
 public class ScreenSlideAdapter extends FragmentStatePagerAdapter {

@@ -18,10 +18,10 @@ import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import net.project.studyez.R;
-import net.project.studyez.adapters.DrawerAdapter;
-import net.project.studyez.presenter.DrawerItem;
-import net.project.studyez.presenter.SimpleItem;
-import net.project.studyez.presenter.SpaceItem;
+import net.project.studyez.drawer.DrawerAdapter;
+import net.project.studyez.drawer.DrawerItem;
+import net.project.studyez.drawer.SimpleItem;
+import net.project.studyez.drawer.SpaceItem;
 
 import java.util.Arrays;
 

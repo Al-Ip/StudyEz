@@ -1,4 +1,4 @@
-package net.project.studyez.presenter;
+package net.project.studyez.drawer;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.project.studyez.R;
-import net.project.studyez.adapters.DrawerAdapter;
 
 public class SimpleItem extends DrawerItem<SimpleItem.ViewHolder> {
 

@@ -1,4 +1,4 @@
-package net.project.studyez.view;
+package net.project.studyez.introduction;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 
-public class IntroductionFragment3 extends Fragment {
+public class IntroductionFragment1 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_intro3, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_intro1, container, false);
         return root;
     }
-
 }

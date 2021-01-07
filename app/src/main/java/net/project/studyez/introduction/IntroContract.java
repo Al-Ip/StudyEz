@@ -1,4 +1,4 @@
-package net.project.studyez.contracts;
+package net.project.studyez.introduction;
 
 public interface IntroContract {
 

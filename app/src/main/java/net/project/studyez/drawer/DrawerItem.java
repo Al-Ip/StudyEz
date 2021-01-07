@@ -1,8 +1,6 @@
-package net.project.studyez.presenter;
+package net.project.studyez.drawer;
 
 import android.view.ViewGroup;
-
-import net.project.studyez.adapters.DrawerAdapter;
 
 public abstract class DrawerItem<T extends DrawerAdapter.ViewHolder> {
 
