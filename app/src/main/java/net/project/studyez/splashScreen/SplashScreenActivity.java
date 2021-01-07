@@ -1,4 +1,4 @@
-package net.project.studyez.view;
+package net.project.studyez.splashScreen;
 
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -18,7 +18,6 @@ import net.project.studyez.adapters.ScreenSlideAdapter;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    FirebaseAuth firebaseAuth;
     ImageView animation;
     TextView appName;
     ProgressBar progBar;
@@ -33,7 +32,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
-        firebaseAuth = FirebaseAuth.getInstance();
         animation = findViewById(R.id.splash_animation_id);
         appName = findViewById(R.id.app_name_id);
         progBar = findViewById(R.id.progressBarSplash_id);

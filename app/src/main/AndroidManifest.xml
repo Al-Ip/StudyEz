@@ -23,7 +23,7 @@
             android:theme="@style/Theme.StudyEz.NoActionBar">
         </activity>
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar">
 
         </activity>

@@ -1,6 +1,8 @@
 package net.project.studyez.registration;
 
 import android.app.Activity;
+import androidx.fragment.app.Fragment;
+
 
 import com.google.firebase.auth.FirebaseUser;
 
@@ -8,7 +10,7 @@ public interface RegistrationContract {
 
     // implemented by RegisterActivity to provide concrete implementation
     interface View {
-        void showNextRegistrationScreen();
+        void onNextAnimatedButtonClick();
         void showAnimatedNextButton();
         void hideAnimatedNextButton();
         void showBlackFadeIn();
@@ -19,14 +21,15 @@ public interface RegistrationContract {
         String getPasswordText();
         void showEmailError();
         void showPasswordError();
+        void changeFragment(Fragment fragment, int id);
         void onRegistrationSuccess(FirebaseUser firebaseUser);
         void onRegistrationFailure(String message);
     }
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
+        void setFragment(Fragment fragment, int id);
         void clickAnimatedNextButton(android.view.View view);
-        //void handleRegisterButtonClick(android.view.View view);
         void toggleAnimatedTextButtonVisibility(String email, String password);
         void addEmailAndPasswordToDatabase(Activity activity, String email, String password);
     }

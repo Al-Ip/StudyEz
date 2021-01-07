@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationPresenter implements RegistrationContract.Presenter, RegistrationContract.onRegistrationListener {
@@ -20,8 +22,13 @@ public class RegistrationPresenter implements RegistrationContract.Presenter, Re
     }
 
     @Override
+    public void setFragment(Fragment fragment, int id) {
+        mView.changeFragment(fragment, id);
+    }
+
+    @Override
     public void clickAnimatedNextButton(View view) {
-        mView.showNextRegistrationScreen();
+        mView.onNextAnimatedButtonClick();
     }
 
     @Override
@@ -46,7 +53,6 @@ public class RegistrationPresenter implements RegistrationContract.Presenter, Re
     @Override
     public void onSuccess(FirebaseUser firebaseUser) {
         mView.onRegistrationSuccess(firebaseUser);
-
     }
 
     @Override
