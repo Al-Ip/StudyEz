@@ -13,5 +13,5 @@
     //Splash
     <string name="splash_text">Study EZ</string>
     <string name="app_activity_splash">Splash</string>
-
+    <string name="cancelled">Cancelled!</string>
 </resources>

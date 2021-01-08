@@ -1,10 +1,9 @@
-package net.project.studyez.registration;
+package net.project.studyez.registration.main;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -14,13 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.ActivityRegisterBinding;
+import net.project.studyez.registration.pageOne.RegContinuedPageOneFragment;
 
 public class RegisterActivity extends AppCompatActivity implements RegistrationContract.View {
 
@@ -28,7 +27,6 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     private ImageView nextButton, blackFadeImage;
     private ProgressBar progressBar;
     private RegistrationPresenter presenter;
-    private Fragment newFragment;
 
 
     @Override
@@ -73,32 +71,32 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
 
     @Override
     public void showAnimatedNextButton() {
-        nextButton.setVisibility(View.VISIBLE);
+        nextButton.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void hideAnimatedNextButton() {
-        nextButton.setVisibility(View.INVISIBLE);
+        nextButton.setVisibility(android.view.View.INVISIBLE);
     }
 
     @Override
     public void showBlackFadeIn() {
-        blackFadeImage.setVisibility(View.VISIBLE);
+        blackFadeImage.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void hideBlackFadeIn() {
-        blackFadeImage.setVisibility(View.INVISIBLE);
+        blackFadeImage.setVisibility(android.view.View.INVISIBLE);
     }
 
     @Override
     public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(android.view.View.VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(android.view.View.INVISIBLE);
     }
 
     @Override
@@ -130,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     @Override
     public void onRegistrationSuccess(FirebaseUser firebaseUser) {
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
-        presenter.setFragment(new RegistrationContinuedPageOne(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegContinuedPageOneFragment(), R.id.registerLayout);
     }
 
     @Override

@@ -5,14 +5,14 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.registration.RegistrationPresenter" />
+            type="net.project.studyez.registration.pageOne.RegContinuedPageOnePresenter" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_color"
-    tools:context=".registration.RegistrationContinuedPageOne" >
+    tools:context=".registration.pageOne.RegContinuedPageOneFragment" >
 
     <ImageView
         android:id="@+id/imageWhiteLine3"
@@ -50,7 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="414dp"
+        android:layout_marginTop="286dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="413dp"
         android:text="Great, We're Almost Finished. Just a Few More Questions!"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/registrationPage1NextButton"

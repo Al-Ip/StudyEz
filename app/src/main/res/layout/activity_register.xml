@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.registration.RegistrationPresenter" />
+            type="net.project.studyez.registration.main.RegistrationPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:background="@drawable/background_color"
         app:layout_constraintEnd_toStartOf="@+id/editTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        tools:context=".registration.RegisterActivity">
+        tools:context=".registration.main.RegisterActivity">
 
         <ImageView
             android:id="@+id/imageWhiteLine"

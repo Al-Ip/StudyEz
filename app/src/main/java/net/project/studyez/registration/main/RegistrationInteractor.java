@@ -1,4 +1,4 @@
-package net.project.studyez.registration;
+package net.project.studyez.registration.main;
 
 import android.app.Activity;
 

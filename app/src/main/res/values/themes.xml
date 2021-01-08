@@ -23,4 +23,10 @@
     <style name="Theme.StudyEz.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.StudyEz.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="DatePickerSpinner">
+        <item name="android:textSize">22dp</item>
+        <item name="android:textColorPrimary">@color/defualt_blue</item>
+        <item name="android:colorControlNormal" tools:targetApi="1">?attr/colorPrimaryVariant</item>
+    </style>
 </resources>

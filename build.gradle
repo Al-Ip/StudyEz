@@ -18,6 +18,8 @@ allprojects {
         google()
         jcenter()
 
+        maven { url "https://jitpack.io" }
+
         def githubProperties = new Properties()
         githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
         repositories {

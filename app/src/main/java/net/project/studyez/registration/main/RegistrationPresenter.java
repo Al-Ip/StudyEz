@@ -1,8 +1,7 @@
-package net.project.studyez.registration;
+package net.project.studyez.registration.main;
 
 import android.app.Activity;
 import android.util.Log;
-import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
@@ -22,12 +21,12 @@ public class RegistrationPresenter implements RegistrationContract.Presenter, Re
     }
 
     @Override
-    public void setFragment(Fragment fragment, int id) {
+    public void doChangeFragment(Fragment fragment, int id) {
         mView.changeFragment(fragment, id);
     }
 
     @Override
-    public void clickAnimatedNextButton(View view) {
+    public void clickAnimatedNextButton(android.view.View view) {
         mView.onNextAnimatedButtonClick();
     }
 

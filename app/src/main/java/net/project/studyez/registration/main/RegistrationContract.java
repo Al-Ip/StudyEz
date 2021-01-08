@@ -1,4 +1,4 @@
-package net.project.studyez.registration;
+package net.project.studyez.registration.main;
 
 import android.app.Activity;
 import androidx.fragment.app.Fragment;
@@ -28,7 +28,7 @@ public interface RegistrationContract {
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
-        void setFragment(Fragment fragment, int id);
+        void doChangeFragment(Fragment fragment, int id);
         void clickAnimatedNextButton(android.view.View view);
         void toggleAnimatedTextButtonVisibility(String email, String password);
         void addEmailAndPasswordToDatabase(Activity activity, String email, String password);

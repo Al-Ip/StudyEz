@@ -10,13 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyEz">
         <activity
-            android:name=".registration.RegisterActivity"
+            android:name=".registration.main.RegisterActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.MainActivity"
@@ -25,7 +20,11 @@
         <activity
             android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data

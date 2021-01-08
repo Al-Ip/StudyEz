@@ -5,14 +5,14 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.registration.RegistrationPresenter" />
+            type="net.project.studyez.registration.pageTwo.RegContinuedPageTwoPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_color"
-        tools:context=".registration.RegistrationContinuedPageOne" >
+        tools:context=".registration.pageOne.RegContinuedPageOneFragment" >
 
         <ImageView
             android:id="@+id/imageWhiteLine3"
@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/registrationPage1NextButton"
+            android:id="@+id/registrationPage2NextButton"
             android:layout_width="98dp"
             android:layout_height="91dp"
             android:layout_marginEnd="8dp"
@@ -60,7 +60,7 @@
             app:lottie_rawRes="@raw/arrow_right3" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="133dp"
@@ -68,15 +68,17 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="@{presenter.clickMaleImage}"
             app:layout_constraintBottom_toTopOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.333"
             app:layout_constraintStart_toStartOf="parent"
+            android:alpha=".2"
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             app:srcCompat="@drawable/sex_male" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="133dp"
@@ -84,6 +86,8 @@
             android:layout_marginBottom="28dp"
             android:clickable="true"
             android:focusable="true"
+            android:alpha=".2"
+            android:onClick="@{presenter.clickFemaleImage}"
             app:layout_constraintBottom_toTopOf="@+id/textView10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +95,7 @@
             app:srcCompat="@drawable/sex_female" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imageOther"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="133dp"
@@ -99,6 +103,8 @@
             android:layout_marginBottom="140dp"
             android:clickable="true"
             android:focusable="true"
+            android:alpha=".2"
+            android:onClick="@{presenter.clickOtherImage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +120,7 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintBottom_toTopOf="@+id/imageMale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3" />
@@ -128,10 +134,10 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            app:layout_constraintBottom_toTopOf="@+id/imageFemale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageMale" />
 
         <TextView
             android:id="@+id/textView10"
@@ -142,9 +148,9 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView4"
+            app:layout_constraintBottom_toTopOf="@+id/imageOther"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintTop_toBottomOf="@+id/imageFemale" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

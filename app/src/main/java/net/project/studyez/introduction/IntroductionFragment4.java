@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentIntro4Binding;
-import net.project.studyez.registration.RegisterActivity;
+import net.project.studyez.registration.main.RegisterActivity;
 
 public class IntroductionFragment4 extends Fragment implements IntroContract.View{
 
