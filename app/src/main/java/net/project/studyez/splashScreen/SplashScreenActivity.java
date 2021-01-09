@@ -1,29 +1,42 @@
 package net.project.studyez.splashScreen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import net.project.studyez.R;
 import net.project.studyez.adapters.ScreenSlideAdapter;
+import net.project.studyez.introduction.IntroductionFragment1;
+import net.project.studyez.registration.main.RegisterActivity;
+import net.project.studyez.view.MainActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    ImageView animation;
-    TextView appName;
-    ProgressBar progBar;
-
+    private ImageView animation;
+    private TextView appName;
+    private ProgressBar progBar;
     private ViewPager viewPager;
     private ScreenSlideAdapter pagerAdapter;
+    private FirebaseAuth firebaseAuth;
+
     Animation anim;
 
     @Override
@@ -47,34 +60,38 @@ public class SplashScreenActivity extends AppCompatActivity {
         appName.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         progBar.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
 
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                // check if the user is logged in
-//                if(firebaseAuth.getCurrentUser() != null){
-//                    startActivity(new Intent(getApplicationContext(), IntroductionActivity.class));
-//                    finish();
-//                }
-//                else{
-//                    // create new anonymous account if not logged in
-//                    firebaseAuth.signInAnonymously().addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                        @Override
-//                        public void onSuccess(AuthResult authResult) {
-//                            Toast.makeText(SplashScreenActivity.this, "Logged in with Temporary Account!", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(getApplicationContext(), IntroductionActivity.class));
-//                            finish();
-//                        }
-//                    }).addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(SplashScreenActivity.this, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//                            finish();
-//                        }
-//                    });
-//                }
-//            }
-//        }, 4000); //change this back to 4000 ... only testing purposes now
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // check if the user is logged in
+                if(firebaseAuth.getCurrentUser() != null){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+                else{
+                    // create new anonymous account if not logged in
+                    firebaseAuth.signInAnonymously().addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            Toast.makeText(SplashScreenActivity.this, "Logged in with Temporary Account!", Toast.LENGTH_SHORT).show();
+                            Fragment fragment = new IntroductionFragment1();
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SplashScreenActivity.this, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                }
+            }
+        }, 4000); //change this back to 4000 ... only testing purposes now
 
     }
 

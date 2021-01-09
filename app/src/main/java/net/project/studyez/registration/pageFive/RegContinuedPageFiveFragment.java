@@ -6,18 +6,16 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageFiveBinding;
-import net.project.studyez.databinding.FragmentRegistrationContinuedPageFourBinding;
 import net.project.studyez.registration.main.RegisterActivity;
 import net.project.studyez.view.MainActivity;
 
-public class RegContinuedPageFiveActivity extends Fragment implements RegContinuedPageFiveContract.view {
+public class RegContinuedPageFiveFragment extends Fragment implements RegContinuedPageFiveContract.view {
 
     private RegContinuedPageFivePresenter presenter;
 
@@ -44,7 +42,7 @@ public class RegContinuedPageFiveActivity extends Fragment implements RegContinu
 
     @Override
     public void onNextAnimatedButtonClick() {
-        presenter.doChangeFragment(new RegContinuedPageFiveActivity(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegContinuedPageFiveFragment(), R.id.registerLayout);
     }
 
     @Override

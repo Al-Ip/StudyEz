@@ -17,7 +17,7 @@ import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageThreeBinding;
 import net.project.studyez.registration.main.RegisterActivity;
-import net.project.studyez.registration.pageFour.RegContinuedPageFourActivity;
+import net.project.studyez.registration.pageFour.RegContinuedPageFourFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -50,7 +50,7 @@ public class RegContinuedPageThreeFragment extends Fragment implements com.tsong
 
     @Override
     public void onNextAnimatedButtonClick() {
-        presenter.doChangeFragment(new RegContinuedPageFourActivity(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegContinuedPageFourFragment(), R.id.registerLayout);
     }
 
     @Override

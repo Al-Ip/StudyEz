@@ -1,5 +1,6 @@
 package net.project.studyez.view;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
@@ -22,6 +24,7 @@ import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
+import net.project.studyez.splashScreen.SplashScreenActivity;
 
 import java.util.Arrays;
 
@@ -144,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             transaction.replace(R.id.container, aboutUsFragment);
         }
         else if (position == POS_LOGOUT) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), SplashScreenActivity.class));
             finish();
         }
 

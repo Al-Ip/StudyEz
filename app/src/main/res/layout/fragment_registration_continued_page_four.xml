@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
             android:text="Your Occupation?"
@@ -68,13 +68,17 @@
             android:hint="Select an Occupation"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3">
+            app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3"
+            app:layout_constraintVertical_bias="0.44">
 
             <AutoCompleteTextView
                 android:id="@+id/filled_exposed_dropdown"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:editable="false"
+                tools:ignore="Deprecated" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -12,13 +12,9 @@ import androidx.fragment.app.Fragment;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageFourBinding;
 import net.project.studyez.registration.main.RegisterActivity;
-import net.project.studyez.registration.pageFive.RegContinuedPageFiveActivity;
-import net.project.studyez.registration.pageThree.RegContinuedPageThreePresenter;
+import net.project.studyez.registration.pageFive.RegContinuedPageFiveFragment;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-public class RegContinuedPageFourActivity extends Fragment implements RegContinuedPageFourContract.view {
+public class RegContinuedPageFourFragment extends Fragment implements RegContinuedPageFourContract.view {
 
     private RegContinuedPageFourPresenter presenter;
     private ImageView nextButton;
@@ -42,7 +38,7 @@ public class RegContinuedPageFourActivity extends Fragment implements RegContinu
 
     @Override
     public void onNextAnimatedButtonClick() {
-        presenter.doChangeFragment(new RegContinuedPageFiveActivity(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegContinuedPageFiveFragment(), R.id.registerLayout);
     }
 
     @Override
