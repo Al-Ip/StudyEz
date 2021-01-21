@@ -7,5 +7,35 @@
     <color name="pink">#D6766F</color>
     <color name="color2">#96ECC4</color>
     <color name="pinkish">#AB7DCC</color>
-    <color name="defualt_blue">#467A95</color>
+    <color name="default_blue">#467A95</color>
+    <color name="selected_text_tint">#F05B5B</color>
+    <color name="selected_icon_tint">#F05B5B</color>
+
+    <!--  Card colors  -->
+    <color name="silverPink">#D0B8AC</color>
+    <color name="canary">#B6B668</color>
+    <color name="grannySmithApple">#B5D99C</color>
+    <color name="fireOpal">#E65F5C</color>
+    <color name="beige">#D3E8ECB8</color>
+    <color name="babyPink">#EBBAB9</color>
+    <color name="lightStaleGray">#698996</color>
+    <color name="lightPink">#F7B2B7</color>
+    <color name="maximumPurple">#7F0682</color>
+    <color name="azureWebColor">#E5FCFF</color>
+    <color name="maroon">#B8336A</color>
+    <color name="oldRose">#CC8B8C</color>
+    <color name="maximumBluePurple">#ACACDE</color>
+    <color name="uranianBlue">#8DB6D5</color>
+    <color name="champagnePink">#EFD9CE</color>
+    <color name="magicMint">#A5F8D3</color>
+    <color name="purpureus">#995FA3</color>
+    <color name="darkSalmon">#F19C79</color>
+    <color name="teaGreen">#CDCBDFBD</color>
+    <color name="almond">#F1E3D3</color>
+    <color name="deepChampagne">#F2D0A9</color>
+    <color name="opal">#99C1B9</color>
+    <color name="lighCyan">#A1CBF3F0</color>
+    <color name="lavendarFloral">#A390E4</color>
+    <color name="wisteria">#C69DD2</color>
+
 </resources>

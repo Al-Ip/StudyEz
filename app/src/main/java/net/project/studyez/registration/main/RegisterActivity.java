@@ -117,6 +117,8 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
 
     @Override
     public void showPasswordError() {
+        if(!TextUtils.isEmpty(password.getText().toString()) && password.getText().toString().length() < 6)
+            password.setError("Your password must be at least 6 characters");
     }
 
     @Override

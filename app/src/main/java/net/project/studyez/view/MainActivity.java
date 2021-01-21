@@ -15,11 +15,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import net.project.studyez.R;
+import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
@@ -89,10 +92,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     @SuppressWarnings("rawtypes")
     public DrawerItem createItemFor (int position){
         return new SimpleItem(screenIcons[position], screenTitles[position])
-                .withIconTint(color(R.color.defualt_blue))
+                .withIconTint(color(R.color.default_blue))
                 .withTextTint(color(R.color.black))
-                .withSelectedIconTint(color(R.color.defualt_blue))
-                .withSelectedTextTint(color(R.color.defualt_blue));
+                .withSelectedIconTint(color(R.color.selected_icon_tint))
+                .withSelectedTextTint(color(R.color.selected_text_tint));
     }
 
     @ColorInt
@@ -128,23 +131,23 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         if (position == POS_DASHBOARD){
             DashboardFragment dashboardFragment = new DashboardFragment();
-            transaction.replace(R.id.container, dashboardFragment);
+            transaction.replace(R.id.main_container, dashboardFragment);
         }
         else if (position == POS_MY_PROFILE) {
             MyProfileFragment myProfileFragment = new MyProfileFragment();
-            transaction.replace(R.id.container, myProfileFragment);
+            transaction.replace(R.id.main_container, myProfileFragment);
         }
         else if(position == POS_DECKS){
             DecksFragment decksFragment = new DecksFragment();
-            transaction.replace(R.id.container, decksFragment);
+            transaction.replace(R.id.main_container, decksFragment);
         }
         else if (position == POS_SETTINGS){
             SettingsFragment settingsFragment = new SettingsFragment();
-            transaction.replace(R.id.container, settingsFragment);
+            transaction.replace(R.id.main_container, settingsFragment);
         }
         else if (position == POS_ABOUT_US){
             AboutUsFragment aboutUsFragment = new AboutUsFragment();
-            transaction.replace(R.id.container, aboutUsFragment);
+            transaction.replace(R.id.main_container, aboutUsFragment);
         }
         else if (position == POS_LOGOUT) {
             FirebaseAuth.getInstance().signOut();

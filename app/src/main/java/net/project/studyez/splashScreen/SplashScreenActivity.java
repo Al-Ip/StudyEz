@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import net.project.studyez.R;
 import net.project.studyez.adapters.ScreenSlideAdapter;
 import net.project.studyez.introduction.IntroductionFragment1;
-import net.project.studyez.registration.main.RegisterActivity;
 import net.project.studyez.view.MainActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -79,7 +78,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             Toast.makeText(SplashScreenActivity.this, "Logged in with Temporary Account!", Toast.LENGTH_SHORT).show();
                             Fragment fragment = new IntroductionFragment1();
                             FragmentManager fragmentManager = getSupportFragmentManager();
-                            fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+                            fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
