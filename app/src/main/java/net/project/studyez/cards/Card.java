@@ -10,12 +10,21 @@ public class Card {
     //Keep these variable names the same as those in the firebase database
     private String question;
     private String answer;
+    private boolean isStarred;
 
     public Card(){}
 
     public Card(String question, String answer){
         this.question = question;
         this.answer = answer;
+    }
+
+    public boolean isStarred() {
+        return isStarred;
+    }
+
+    public void setStarred(boolean starred) {
+        isStarred = starred;
     }
 
     public String getQuestion() {

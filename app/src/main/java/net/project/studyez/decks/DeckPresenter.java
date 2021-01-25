@@ -28,12 +28,12 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
 
     @Override
     public void refreshDecks() {
-
     }
 
     @Override
     public void onSuccess(String message) {
         mView.onDeckCreationSuccess(message);
+        mView.hideEmptyDeckMessage();
     }
 
     @Override

@@ -14,7 +14,7 @@
         tools:context=".registration.pageOne.RegContinuedPageOneFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cardRecycler"
+            android:id="@+id/deckRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/emptyDecksImage"
             android:layout_width="0dp"
             android:layout_height="314dp"
             android:layout_marginStart="32dp"

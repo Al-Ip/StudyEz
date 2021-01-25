@@ -11,6 +11,8 @@ public interface DeckContract {
 
     interface view{
         void displayAllDecks();
+        void displayEmptyDeckMessage();
+        void hideEmptyDeckMessage();
         void displayCreateDeckPopupWindow();
         void onDeckCreationSuccess(String message);
         void onDeckCreationFailure(String message);

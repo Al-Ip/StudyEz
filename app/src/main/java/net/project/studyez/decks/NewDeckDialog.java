@@ -11,13 +11,12 @@ import androidx.fragment.app.DialogFragment;
 
 import net.project.studyez.R;
 
-public class NewDeckDialog extends DialogFragment implements DeckContract.view  {
+public class NewDeckDialog extends DialogFragment {
 
-    private DeckPresenter deckPresenter;
-    EditText editText;
+    private EditText deckName;
 
     public NewDeckDialog(){
-        deckPresenter = new DeckPresenter(this);
+
     }
 
     @Override
@@ -30,9 +29,8 @@ public class NewDeckDialog extends DialogFragment implements DeckContract.view  
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText editText = (EditText) getDialog().findViewById(R.id.newDeckNameEditTextField);
-                ((DecksFragment)getParentFragment()).getDeckNameFromDialog(editText.getText().toString());
-                //deckPresenter.enterDeckName(getActivity(), editText.getText().toString());
+                deckName = getDialog().findViewById(R.id.newDeckNameEditTextField);
+                ((DecksFragment)getParentFragment()).getDeckNameFromDialog(deckName.getText().toString());
             }
         });
         builder.setNegativeButton("Cancel", null);
@@ -40,24 +38,4 @@ public class NewDeckDialog extends DialogFragment implements DeckContract.view  
         return builder.create();
     }
 
-    @Override
-    public void displayAllDecks() {
-
-    }
-
-    @Override
-    public void displayCreateDeckPopupWindow() {
-
-    }
-
-    @Override
-    public void onDeckCreationSuccess(String message) {
-
-    }
-
-
-    @Override
-    public void onDeckCreationFailure(String message) {
-
-    }
 }
