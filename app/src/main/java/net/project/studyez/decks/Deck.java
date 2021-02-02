@@ -1,8 +1,10 @@
 package net.project.studyez.decks;
 
+
 import net.project.studyez.cards.Card;
 
 import java.util.ArrayList;
+
 
 public class Deck {
 
@@ -11,11 +13,13 @@ public class Deck {
     private String id;
     private String creator;
     private String image;
+    private String dateTimeCreated;
 
     public Deck() {}
 
-    public Deck(String name) {
+    public Deck(String name, String dateTimeCreated) {
         this.name = name;
+        this.dateTimeCreated = dateTimeCreated;
     }
 
     public Deck(String name, ArrayList<Card> cards) {
@@ -61,5 +65,13 @@ public class Deck {
 
     public void setImage(String creatorImage) {
         this.image = creatorImage;
+    }
+
+    public String getDateTimeCreated() {
+        return dateTimeCreated;
+    }
+
+    public void setDateTimeCreated(String dateTimeCreated) {
+        this.dateTimeCreated = dateTimeCreated;
     }
 }

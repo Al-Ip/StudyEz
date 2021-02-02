@@ -3,9 +3,11 @@ package net.project.studyez.decks;
 import android.app.Activity;
 import android.view.View;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.type.Date;
+import com.google.type.DateTime;
 
-public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener {
+public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener, DeckContract.onDeckDeletionListener {
 
     // to keep reference to view
     private final DeckContract.view mView;
@@ -13,7 +15,7 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
 
     public DeckPresenter(DeckContract.view view){
         mView = view;
-        mInteractor = new DeckInteractor(this);
+        mInteractor = new DeckInteractor(this, this);
     }
 
     @Override
@@ -22,22 +24,48 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void enterDeckName(Activity activity, String name) {
-        mInteractor.addNewDeckToFirebase(activity, name);
+    public void enterDeckName(String name, String dateTime) {
+        mInteractor.addNewDeckToFirebase(name, dateTime);
     }
 
     @Override
-    public void refreshDecks() {
+    public FirestoreRecyclerOptions getDecks(Activity activity) {
+        return mInteractor.getDecksFromFirebase(activity);
     }
 
     @Override
-    public void onSuccess(String message) {
+    public void deleteDeckFromFirebase(String docID) {
+        mInteractor.deleteDeck(docID);
+    }
+
+    @Override
+    public void longPressOnDeck() {
+        mView.displayDeleteDeckPopupWindow();
+    }
+
+    @Override
+    public void shortPressOnDeck() {
+
+    }
+
+    @Override
+    public void onCreateSuccess(String message) {
         mView.onDeckCreationSuccess(message);
         mView.hideEmptyDeckMessage();
     }
 
     @Override
-    public void onFailure(String message) {
+    public void onCreateFailure(String message) {
         mView.onDeckCreationFailure(message);
+    }
+
+    @Override
+    public void onDeleteSuccess(String message) {
+        mView.onDeckDeletionSuccess(message);
+    }
+
+    @Override
+    public void onDeleteFailure(String message) {
+        mView.onDeckDeletionFailure(message);
     }
 }

@@ -9,11 +9,17 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.type.Date;
+import com.google.type.DateTime;
+
 import net.project.studyez.R;
+
+import java.util.Calendar;
 
 public class NewDeckDialog extends DialogFragment {
 
     private EditText deckName;
+    private String dateTime;
 
     public NewDeckDialog(){
 
@@ -30,7 +36,9 @@ public class NewDeckDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 deckName = getDialog().findViewById(R.id.newDeckNameEditTextField);
-                ((DecksFragment)getParentFragment()).getDeckNameFromDialog(deckName.getText().toString());
+                dateTime = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+                assert getParentFragment() != null;
+                ((DecksFragment)getParentFragment()).getDeckNameFromDialog(deckName.getText().toString(), dateTime);
             }
         });
         builder.setNegativeButton("Cancel", null);
