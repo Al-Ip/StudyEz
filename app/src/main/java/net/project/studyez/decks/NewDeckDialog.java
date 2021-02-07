@@ -37,7 +37,6 @@ public class NewDeckDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 deckName = getDialog().findViewById(R.id.newDeckNameEditTextField);
                 dateTime = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
-                assert getParentFragment() != null;
                 ((DecksFragment)getParentFragment()).getDeckNameFromDialog(deckName.getText().toString(), dateTime);
             }
         });

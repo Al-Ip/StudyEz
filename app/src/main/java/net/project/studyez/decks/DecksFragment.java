@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,24 +23,18 @@ import com.google.type.DateTime;
 
 import net.project.studyez.ItemClickSupport;
 import net.project.studyez.R;
+import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
+import net.project.studyez.registration.main.RegisterActivity;
+import net.project.studyez.registration.pageThree.RegContinuedPageThreeFragment;
+import net.project.studyez.view.MainActivity;
 
 public class DecksFragment extends Fragment implements DeckContract.view{
 
-    public static final long VIBRATE_TIME = 70;
-    public static final int PINK_RED = 255;
-    public static final int PINK_GREEN = 105;
-    public static final int PINK_BLUE = 180;
-    public static final String USERS = "users";
-    public static final String DECKS = "myDecks";
-    public static final String FAVORITES = "favorites";
     public String docID;
 
     private DeckPresenter deckPresenter;
     private RecyclerView deckRecyclerView;
-    private DatabaseReference rootRef;
-    private DatabaseReference deckRef;
-    private DatabaseReference userRef;
     private ImageView emptyDeck;
 
     private FirebaseFirestore fStore;
@@ -85,6 +80,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             //Toast.makeText(getContext(), "Tapped on item in recycler list", Toast.LENGTH_SHORT).show();
+            deckPresenter.shortPressOnDeck(new CardsFragment(), R.id.main_container);
         });
         // Long press to delete Deck
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
@@ -104,6 +100,14 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     @Override
     public void deleteDeckDialogConfirm(){
         deckPresenter.deleteDeckFromFirebase(docID);
+    }
+
+    @Override
+    public void changeFragment(Fragment fragment, int id) {
+        ((MainActivity) getActivity()).changeFragment(fragment, id);
+//        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+//        ft.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
+//        ft.replace(id, fragment, "new").commit();
     }
 
     @Override
@@ -160,4 +164,5 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         super.onStop();
         deckAdapter.stopListening();
     }
+
 }

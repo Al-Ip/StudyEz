@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/deckLayout"
+    android:id="@+id/cardLayout"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.decks.DeckPresenter" />
+            type="net.project.studyez.cards.CardPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".decks.DecksFragment">
+        tools:context=".cards.CardsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/deckRecycler"
+            android:id="@+id/cardsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -23,32 +23,20 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/emptyDecksImage"
-            android:layout_width="0dp"
-            android:layout_height="314dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/empty_decks" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/DeckFAB"
+            android:id="@+id/cardsFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="@{presenter::clickFab}"
-            app:backgroundTint="@color/default_blue"
+            app:backgroundTint="@color/babyPink"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="40dp"
             app:rippleColor="#00FFFFFF"
-            app:srcCompat="@drawable/ic_round_add_24_white"
-            android:focusable="true" />
+            app:srcCompat="@drawable/ic_round_add_24_white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

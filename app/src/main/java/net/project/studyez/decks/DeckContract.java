@@ -3,6 +3,8 @@ package net.project.studyez.decks;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.type.Date;
 import com.google.type.DateTime;
@@ -20,6 +22,7 @@ public interface DeckContract {
         void onDeckDeletionFailure(String message);
         void getDeckNameFromDialog(String name, String dateTime);
         void deleteDeckDialogConfirm();
+        void changeFragment(Fragment fragment, int id);
     }
 
     interface presenter{
@@ -28,7 +31,7 @@ public interface DeckContract {
         FirestoreRecyclerOptions getDecks(Activity activity);
         void deleteDeckFromFirebase(String docID);
         void longPressOnDeck();
-        void shortPressOnDeck();
+        void shortPressOnDeck(Fragment fragment, int id);
     }
 
     interface Interactor{

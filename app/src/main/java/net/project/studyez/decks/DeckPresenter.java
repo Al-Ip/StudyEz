@@ -3,6 +3,8 @@ package net.project.studyez.decks;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.type.Date;
 import com.google.type.DateTime;
@@ -44,8 +46,8 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void shortPressOnDeck() {
-
+    public void shortPressOnDeck(Fragment fragment, int id) {
+        mView.changeFragment(fragment, id);
     }
 
     @Override
