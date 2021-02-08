@@ -7,16 +7,35 @@ import java.util.List;
 import java.util.Random;
 
 public class Card {
+
     //Keep these variable names the same as those in the firebase database
+    private String deckName;
     private String question;
     private String answer;
     private boolean isStarred;
+    private String dateTimeCreated;
 
     public Card(){}
+
+    public Card(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
+        this.deckName = deckName;
+        this.question = question;
+        this.answer = answer;
+        this.dateTimeCreated = dateTimeCreated;
+        this.isStarred = isStarred;
+    }
 
     public Card(String question, String answer){
         this.question = question;
         this.answer = answer;
+    }
+
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
     }
 
     public boolean isStarred() {
@@ -41,6 +60,14 @@ public class Card {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getDateTimeCreated() {
+        return dateTimeCreated;
+    }
+
+    public void setDateTimeCreated(String dateTimeCreated) {
+        this.dateTimeCreated = dateTimeCreated;
     }
 
     public static int getRandomCardColor(){

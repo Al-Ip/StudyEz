@@ -1,6 +1,7 @@
 package net.project.studyez.decks;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,7 @@ public class DeckInteractor implements DeckContract.Interactor{
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
-    Deck deck;
+    public static Deck deck;
     DocumentReference docRef;
     FirestoreRecyclerOptions<Deck> allDecks;
     Query query;
@@ -41,7 +42,11 @@ public class DeckInteractor implements DeckContract.Interactor{
     @Override
     public void addNewDeckToFirebase(String deckName, String dateTime) {
         deck = new Deck(deckName, dateTime);
-        docRef = fStore.collection("Decks").document(fUser.getUid()).collection("myDecks").document();
+        docRef = fStore
+                .collection("Decks")
+                .document(fUser.getEmail())
+                .collection("myDecks")
+                .document(deck.getName());
         docRef.set(deck).addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
                 onDeckCreationListener.onCreateFailure(task.getException().getMessage());
@@ -54,7 +59,11 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public FirestoreRecyclerOptions getDecksFromFirebase(Activity activity) {
-        query = fStore.collection("Decks").document(fUser.getUid()).collection("myDecks").orderBy("dateTimeCreated", Query.Direction.DESCENDING);
+        query = fStore
+                .collection("Decks")
+                .document(fUser.getEmail())
+                .collection("myDecks")
+                .orderBy("dateTimeCreated", Query.Direction.DESCENDING);
         allDecks = new FirestoreRecyclerOptions.Builder<Deck>()
                 .setQuery(query, Deck.class)
                 .build();
@@ -63,7 +72,11 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public void deleteDeck(String docID) {
-        docRef = fStore.collection("Decks").document(fUser.getUid()).collection("myDecks").document(docID);
+        docRef = fStore
+                .collection("Decks")
+                .document(fUser.getEmail())
+                .collection("myDecks")
+                .document(docID);
         docRef.delete().addOnCompleteListener(task -> {
             if(!task.isComplete()){
                 onDeckDeletionListener.onDeleteFailure(task.getException().getMessage());

@@ -7,40 +7,31 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.type.DateTime;
 
 import net.project.studyez.ItemClickSupport;
 import net.project.studyez.R;
 import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
-import net.project.studyez.registration.main.RegisterActivity;
-import net.project.studyez.registration.pageThree.RegContinuedPageThreeFragment;
 import net.project.studyez.view.MainActivity;
 
 public class DecksFragment extends Fragment implements DeckContract.view{
 
-    public String docID;
+    public int docID;
 
     private DeckPresenter deckPresenter;
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;
 
-    private FirebaseFirestore fStore;
-    private FirebaseUser user;
-    private FirebaseAuth fAuth;
-    private FirestoreRecyclerAdapter<Deck, DeckViewHolder> deckAdapter;
+    private DeckAdapter deckAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,27 +46,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
         emptyDeck = view.findViewById(R.id.emptyDecksImage);
         deckRecyclerView = view.findViewById(R.id.deckRecycler);
-        fStore = FirebaseFirestore.getInstance();
-        fAuth = FirebaseAuth.getInstance();
-        user = fAuth.getCurrentUser();
 
-        deckAdapter = new FirestoreRecyclerAdapter<Deck, DeckViewHolder>(deckPresenter.getDecks(getActivity())) {
-            @NonNull
-            @Override
-            public DeckViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list, parent, false);
-                return new DeckViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull DeckViewHolder deckViewHolder, int i, @NonNull Deck deck) {
-                deckViewHolder.deckName.setText(deck.getName());
-                deckViewHolder.creatorText.setText(deck.getCreator());
-                docID = deckAdapter.getSnapshots().getSnapshot(i).getId();
-            }
-        };
-        deckRecyclerView.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-        deckRecyclerView.setAdapter(deckAdapter);
+        setUpRecyclerView(deckPresenter.getDecks(getActivity()));
 
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
@@ -86,10 +58,18 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
             //Toast.makeText(getContext(), "LONG press on item in recycler list", Toast.LENGTH_SHORT).show();
             deckPresenter.longPressOnDeck();
+            docID = position;
             return true;
         });
 
         return view;
+    }
+
+    private void setUpRecyclerView(FirestoreRecyclerOptions<Deck> options){
+        deckAdapter = new DeckAdapter(options);
+        deckRecyclerView.setHasFixedSize(true);
+        deckRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        deckRecyclerView.setAdapter(deckAdapter);
     }
 
     @Override
@@ -99,7 +79,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void deleteDeckDialogConfirm(){
-        deckPresenter.deleteDeckFromFirebase(docID);
+        deckPresenter.deleteDeckFromFirebase(deckAdapter.getSnapshots().getSnapshot(docID).getId());
     }
 
     @Override
@@ -135,6 +115,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     @Override
     public void onDeckCreationSuccess(String message) {
         Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        deckAdapter.notifyDataSetChanged();
     }
 
     @Override
