@@ -27,13 +27,13 @@ public interface CardContract {
         void clickRemoveImage(View view);
         FirestoreRecyclerOptions getCardsFromDeck(Activity activity, String deckName);
         void getCardDetails(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
-        void deleteCardFromFirebase(String docID);
+        void deleteCardFromFirebase(String deckName, String docID);
     }
 
     interface Interactor{
         void addNewCardToFirebase(String deckName, String question, String answer, String dateCreated, boolean isStarred);
         FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName);
-        void deleteCard(String docID);
+        void deleteCard(String deckName, String docID);
     }
 
     interface onCardCreationListener{

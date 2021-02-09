@@ -42,9 +42,9 @@ public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.Card
         cardHolder.deleteCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.clickRemoveImage(v);
                 cardID = getSnapshots().getSnapshot(i).getId();
-                Log.e("Bind: ", cardID);
+                presenter.clickRemoveImage(v.getRootView());
+                //Log.e("Bind: ", cardID);
             }
         });
 

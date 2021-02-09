@@ -84,7 +84,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
 
     @Override
     public void deleteCardDialogConfirm() {
-        cardPresenter.deleteCardFromFirebase(cardAdapter.cardID);
+        cardPresenter.deleteCardFromFirebase(getDeckNameFromDecksFragment(), cardAdapter.cardID);
     }
 
     @Override

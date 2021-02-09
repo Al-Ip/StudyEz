@@ -29,12 +29,13 @@ public class NewCardDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_new_card, null);
-        builder.setTitle("Create new Deck");
+        builder.setTitle("Create new Card");
         builder.setIcon(R.drawable.add_deck);
         builder.setCancelable(false);
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                assert getParentFragment() != null;
                 deckName = ((CardsFragment)getParentFragment()).getDeckNameFromDecksFragment();
                 question = getDialog().findViewById(R.id.frontEditText);
                 answer = getDialog().findViewById(R.id.backEditText);

@@ -44,8 +44,8 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     }
 
     @Override
-    public void deleteCardFromFirebase(String docID) {
-        mInteractor.deleteCard(docID);
+    public void deleteCardFromFirebase(String deckName, String docID) {
+        mInteractor.deleteCard(deckName, docID);
     }
 
     @Override

@@ -67,12 +67,12 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void deleteCard(String docID) {
+    public void deleteCard(String deckName, String docID) {
         docRef = fStore
                 .collection("Decks")
                 .document(fUser.getEmail())
                 .collection("myDecks")
-                .document(card.getDeckName())
+                .document(deckName)
                 .collection("Cards")
                 .document(docID);
         docRef.delete().addOnCompleteListener(task -> {

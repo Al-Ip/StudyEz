@@ -19,9 +19,9 @@ public class DeleteCardDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Warning: Deleting Deck!");
+        builder.setTitle("Warning: Deleting Card!");
         builder.setIcon(R.drawable.ic_baseline_delete_forever_24);
-        builder.setMessage("Pressing Delete will erase this deck and all the cards contained within it");
+        builder.setMessage("Pressing Delete will erase this card!");
         builder.setCancelable(false);
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
