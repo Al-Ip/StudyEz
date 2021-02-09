@@ -46,7 +46,4 @@ public interface CardContract {
         void onDeleteFailure(String message);
     }
 
-    interface OnItemRemovedListener {
-        void itemRemoved(int position);
-    }
 }

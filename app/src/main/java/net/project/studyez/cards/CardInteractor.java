@@ -1,7 +1,6 @@
 package net.project.studyez.cards;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -9,13 +8,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import net.project.studyez.decks.Deck;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static net.project.studyez.decks.DeckInteractor.deck;
 
 public class CardInteractor implements CardContract.Interactor{
 
@@ -80,7 +72,7 @@ public class CardInteractor implements CardContract.Interactor{
                 .collection("Decks")
                 .document(fUser.getEmail())
                 .collection("myDecks")
-                .document("11111")
+                .document(card.getDeckName())
                 .collection("Cards")
                 .document(docID);
         docRef.delete().addOnCompleteListener(task -> {
@@ -92,4 +84,5 @@ public class CardInteractor implements CardContract.Interactor{
             }
         });
     }
+
 }

@@ -1,6 +1,7 @@
 package net.project.studyez.decks;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import net.project.studyez.view.MainActivity;
 public class DecksFragment extends Fragment implements DeckContract.view{
 
     public int docID;
+    public static String deckName;
 
     private DeckPresenter deckPresenter;
     private RecyclerView deckRecyclerView;
@@ -35,10 +37,6 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.decks_fragment, container, false);
-//        return root;
-
-        //Stuff to initialize
         FragmentDecksBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_decks, container, false);
         View view = binding.getRoot();
         deckPresenter = new DeckPresenter(this);
@@ -52,13 +50,15 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             //Toast.makeText(getContext(), "Tapped on item in recycler list", Toast.LENGTH_SHORT).show();
+            docID = position;
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             deckPresenter.shortPressOnDeck(new CardsFragment(), R.id.main_container);
         });
         // Long press to delete Deck
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
             //Toast.makeText(getContext(), "LONG press on item in recycler list", Toast.LENGTH_SHORT).show();
-            deckPresenter.longPressOnDeck();
             docID = position;
+            deckPresenter.longPressOnDeck();
             return true;
         });
 

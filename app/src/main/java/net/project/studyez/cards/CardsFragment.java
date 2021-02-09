@@ -15,21 +15,14 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.project.studyez.R;
-import net.project.studyez.databinding.CardListBinding;
 import net.project.studyez.databinding.FragementCardsBinding;
-import net.project.studyez.decks.DeckAdapter;
-import net.project.studyez.decks.DeckContract;
-import net.project.studyez.decks.DeckPresenter;
 
-import java.util.ArrayList;
-
-import static net.project.studyez.decks.DeckInteractor.deck;
+import static net.project.studyez.decks.DecksFragment.deckName;
 
 public class CardsFragment extends Fragment implements CardContract.view {
 
     private int docID;
-
-    private ArrayList<Card> cards;
+    private String deckNameAssociatedWithCards;
     private CardPresenter cardPresenter;
     private FloatingActionButton addCard;
     private RecyclerView cardRecycler;
@@ -46,10 +39,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
         addCard = view.findViewById(R.id.cardsFAB);
         cardRecycler = view.findViewById(R.id.cardsRecycler);
 
-        // STOPPED HERE
-        //
-        // Trying to get why its displaying only the cards from newly created deck and not the others
-        setUpRecyclerView(cardPresenter.getCardsFromDeck(getActivity(), ));
+        setUpRecyclerView(cardPresenter.getCardsFromDeck(getActivity(), getDeckNameFromDecksFragment()));
 
         return view;
     }
@@ -59,6 +49,10 @@ public class CardsFragment extends Fragment implements CardContract.view {
         cardRecycler.setHasFixedSize(true);
         cardRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         cardRecycler.setAdapter(cardAdapter);
+    }
+
+    public String getDeckNameFromDecksFragment(){
+        return deckNameAssociatedWithCards = deckName;
     }
 
     @Override

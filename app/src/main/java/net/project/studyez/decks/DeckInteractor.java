@@ -26,7 +26,7 @@ public class DeckInteractor implements DeckContract.Interactor{
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     FirebaseUser fUser;
-    public static Deck deck;
+    Deck deck;
     DocumentReference docRef;
     FirestoreRecyclerOptions<Deck> allDecks;
     Query query;

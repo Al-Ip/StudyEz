@@ -5,11 +5,6 @@ import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import net.project.studyez.decks.DeckContract;
-import net.project.studyez.decks.DeckInteractor;
-
-import static net.project.studyez.decks.DeckInteractor.deck;
-
 
 public class CardPresenter implements CardContract.presenter, CardContract.onCardCreationListener, CardContract.onCardDeletionListener {
 
