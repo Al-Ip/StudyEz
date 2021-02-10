@@ -6,7 +6,7 @@ import android.view.View;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
-public class CardPresenter implements CardContract.presenter, CardContract.onCardCreationListener, CardContract.onCardDeletionListener {
+public class CardPresenter implements CardContract.presenter, CardContract.onCardCreationListener, CardContract.onCardDeletionListener, CardContract.onCardEditListener {
 
     // to keep reference to view
     private final CardContract.view mView;
@@ -14,7 +14,7 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
 
     public CardPresenter(CardContract.view view){
         mView = view;
-        mInteractor = new CardInteractor(this,this);
+        mInteractor = new CardInteractor(this,this, this);
     }
 
     @Override
@@ -24,8 +24,8 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
 
 
     @Override
-    public void clickEditImage(View view) {
-        mView.displayEditCardPopupWindow();
+    public void clickEditImage(View view, String question, String answer) {
+        mView.displayEditCardPopupWindow(question, answer);
     }
 
     @Override
@@ -44,8 +44,13 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     }
 
     @Override
+    public void editCardDetails(String deckName, String question, String answer, String docID) {
+        mInteractor.editCardFromFirebase(deckName, question, answer, docID);
+    }
+
+    @Override
     public void deleteCardFromFirebase(String deckName, String docID) {
-        mInteractor.deleteCard(deckName, docID);
+        mInteractor.deleteCardFromFirebase(deckName, docID);
     }
 
     @Override
@@ -66,5 +71,15 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     @Override
     public void onDeleteFailure(String message) {
         mView.onCardDeletionFailure(message);
+    }
+
+    @Override
+    public void onEditSuccess(String message) {
+        mView.onCardEditSuccess(message);
+    }
+
+    @Override
+    public void onEditFailure(String message) {
+        onEditFailure(message);
     }
 }

@@ -9,11 +9,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CardInteractor implements CardContract.Interactor{
 
     private static final String TAG = CardInteractor.class.getSimpleName();
     private final CardContract.onCardCreationListener onCardCreationListener;
     private final CardContract.onCardDeletionListener onCardDeletionListener;
+    private final CardContract.onCardEditListener onCardEditListener;
 
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
@@ -23,9 +27,10 @@ public class CardInteractor implements CardContract.Interactor{
     FirestoreRecyclerOptions<Card> allCards;
     Query query;
 
-    public CardInteractor(CardContract.onCardCreationListener onCardCreationListener, CardContract.onCardDeletionListener onCardDeletionListener){
+    public CardInteractor(CardContract.onCardCreationListener onCardCreationListener, CardContract.onCardDeletionListener onCardDeletionListener, CardContract.onCardEditListener onCardEditListener){
         this.onCardCreationListener = onCardCreationListener;
         this.onCardDeletionListener = onCardDeletionListener;
+        this.onCardEditListener = onCardEditListener;
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -67,7 +72,7 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void deleteCard(String deckName, String docID) {
+    public void deleteCardFromFirebase(String deckName, String docID) {
         docRef = fStore
                 .collection("Decks")
                 .document(fUser.getEmail())
@@ -81,6 +86,28 @@ public class CardInteractor implements CardContract.Interactor{
             }
             else{
                 onCardDeletionListener.onDeleteSuccess("Successfully Deleted Card!");
+            }
+        });
+    }
+
+    @Override
+    public void editCardFromFirebase(String deckName, String question, String answer, String docID) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("answer", answer);
+        map.put("question", question);
+        docRef = fStore
+                .collection("Decks")
+                .document(fUser.getEmail())
+                .collection("myDecks")
+                .document(deckName)
+                .collection("Cards")
+                .document(docID);
+        docRef.update(map).addOnCompleteListener(task -> {
+            if(!task.isComplete()){
+                onCardEditListener.onEditFailure(task.getException().getMessage());
+            }
+            else{
+                onCardEditListener.onEditSuccess("Successfully Updated Card!");
             }
         });
     }

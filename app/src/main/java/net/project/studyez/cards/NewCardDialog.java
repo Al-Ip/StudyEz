@@ -37,13 +37,13 @@ public class NewCardDialog extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 assert getParentFragment() != null;
                 deckName = ((CardsFragment)getParentFragment()).getDeckNameFromDecksFragment();
-                question = getDialog().findViewById(R.id.frontEditText);
-                answer = getDialog().findViewById(R.id.backEditText);
+                question = view.findViewById(R.id.frontEditText);
+                answer = view.findViewById(R.id.backEditText);
                 dateTime = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
                 isStarred = false;
 
                 if (!question.getText().toString().isEmpty() && !answer.getText().toString().isEmpty()) {
-                    ((CardsFragment)getParentFragment()).frontAndBackOfCardText(deckName, question.getText().toString(), answer.getText().toString(), dateTime, isStarred);
+                    ((CardsFragment)getParentFragment()).createCardDialogConfirm(deckName, question.getText().toString(), answer.getText().toString(), dateTime, isStarred);
                     dialog.dismiss();
                 } else {
                     Toast.makeText(view.getContext(), "Please enter both a front and back for the card.", Toast.LENGTH_LONG).show();

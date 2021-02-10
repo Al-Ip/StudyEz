@@ -56,6 +56,16 @@ public class CardsFragment extends Fragment implements CardContract.view {
     }
 
     @Override
+    public void createCardDialogConfirm(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
+        cardPresenter.getCardDetails(deckName, question, answer, dateTimeCreated, isStarred);
+    }
+
+    @Override
+    public void frontAndBackOfCardText(String question, String answer) {
+        cardPresenter.editCardDetails(getDeckNameFromDecksFragment(), question, answer, cardAdapter.cardID);
+    }
+
+    @Override
     public void displayEmptyCardsMessage() {
 
     }
@@ -78,8 +88,9 @@ public class CardsFragment extends Fragment implements CardContract.view {
     }
 
     @Override
-    public void displayEditCardPopupWindow() {
-
+    public void displayEditCardPopupWindow(String question, String answer) {
+        EditCardDialog editCardDialog = new EditCardDialog(question, answer);
+        editCardDialog.show(getChildFragmentManager(), "Edit Card Dialog");
     }
 
     @Override
@@ -110,8 +121,13 @@ public class CardsFragment extends Fragment implements CardContract.view {
     }
 
     @Override
-    public void frontAndBackOfCardText(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
-        cardPresenter.getCardDetails(deckName, question, answer, dateTimeCreated, isStarred);
+    public void onCardEditSuccess(String message) {
+        Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCardEditFailure(String message) {
+        Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

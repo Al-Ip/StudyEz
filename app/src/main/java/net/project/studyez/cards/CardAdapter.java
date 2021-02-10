@@ -21,7 +21,8 @@ import net.project.studyez.decks.DecksFragment;
 public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.CardHolder> {
 
     String cardID;
-    public CardPresenter presenter;
+    CardPresenter presenter;
+    String question, answer;
 
     public CardAdapter(@NonNull FirestoreRecyclerOptions<Card> options, CardPresenter presenter) {
         super(options);
@@ -39,13 +40,16 @@ public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.Card
     protected void onBindViewHolder(@NonNull CardHolder cardHolder, int i, @NonNull Card card) {
         cardHolder.frontText.setText(card.getQuestion());
         cardHolder.backText.setText(card.getAnswer());
-        cardHolder.deleteCardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardID = getSnapshots().getSnapshot(i).getId();
-                presenter.clickRemoveImage(v.getRootView());
-                //Log.e("Bind: ", cardID);
-            }
+        cardHolder.deleteCardButton.setOnClickListener(v -> {
+            cardID = getSnapshots().getSnapshot(i).getId();
+            presenter.clickRemoveImage(v.getRootView());
+            //Log.e("Bind: ", cardID);
+        });
+        cardHolder.editCardButton.setOnClickListener(v -> {
+            cardID = getSnapshots().getSnapshot(i).getId();
+            question = cardHolder.frontText.getText().toString();
+            answer = cardHolder.backText.getText().toString();
+            presenter.clickEditImage(v.getRootView(), question, answer);
         });
 
     }
