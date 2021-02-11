@@ -3,6 +3,8 @@ package net.project.studyez.cards;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
@@ -20,6 +22,11 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     @Override
     public void clickFab(View view) {
         mView.displayCreateCardPopupWindow();
+    }
+
+    @Override
+    public void toolbarBackArrowPress(Fragment fragment, int id) {
+        mView.changeFragment(fragment, id);
     }
 
 
@@ -51,6 +58,16 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     @Override
     public void deleteCardFromFirebase(String deckName, String docID) {
         mInteractor.deleteCardFromFirebase(deckName, docID);
+    }
+
+    @Override
+    public void showEmptyCardsMessage() {
+        mView.displayEmptyCardsMessage();
+    }
+
+    @Override
+    public void hideEmptyCardsMessage() {
+        mView.hideEmptyCardsMessage();
     }
 
     @Override

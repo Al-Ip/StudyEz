@@ -51,9 +51,18 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
+    public void showEmptyDeckMessage() {
+        mView.displayEmptyDeckMessage();
+    }
+
+    @Override
+    public void hideEmptyDeckMessage() {
+        mView.hideEmptyDeckMessage();
+    }
+
+    @Override
     public void onCreateSuccess(String message) {
         mView.onDeckCreationSuccess(message);
-        mView.hideEmptyDeckMessage();
     }
 
     @Override

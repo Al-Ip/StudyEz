@@ -25,7 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import net.project.studyez.R;
 import net.project.studyez.adapters.ScreenSlideAdapter;
 import net.project.studyez.introduction.IntroductionFragment1;
-import net.project.studyez.view.MainActivity;
+import net.project.studyez.MainActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

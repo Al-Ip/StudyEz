@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageFiveBinding;
 import net.project.studyez.registration.main.RegisterActivity;
-import net.project.studyez.view.MainActivity;
+import net.project.studyez.MainActivity;
 
 public class RegContinuedPageFiveFragment extends Fragment implements RegContinuedPageFiveContract.view {
 

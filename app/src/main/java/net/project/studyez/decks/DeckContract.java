@@ -32,6 +32,8 @@ public interface DeckContract {
         void deleteDeckFromFirebase(String docID);
         void longPressOnDeck();
         void shortPressOnDeck(Fragment fragment, int id);
+        void showEmptyDeckMessage();
+        void hideEmptyDeckMessage();
     }
 
     interface Interactor{

@@ -1,5 +1,6 @@
 package net.project.studyez.decks;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,21 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.project.studyez.ItemClickSupport;
 import net.project.studyez.R;
 import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
-import net.project.studyez.view.MainActivity;
+import net.project.studyez.MainActivity;
 
 public class DecksFragment extends Fragment implements DeckContract.view{
 
@@ -32,6 +32,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     private DeckPresenter deckPresenter;
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;
+    private Toolbar toolbar;
 
     private DeckAdapter deckAdapter;
 
@@ -42,6 +43,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         deckPresenter = new DeckPresenter(this);
         binding.setPresenter(deckPresenter);
 
+        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.toolbar_decks);
         emptyDeck = view.findViewById(R.id.emptyDecksImage);
         deckRecyclerView = view.findViewById(R.id.deckRecycler);
 
@@ -49,14 +52,12 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
-            //Toast.makeText(getContext(), "Tapped on item in recycler list", Toast.LENGTH_SHORT).show();
             docID = position;
             deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             deckPresenter.shortPressOnDeck(new CardsFragment(), R.id.main_container);
         });
         // Long press to delete Deck
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
-            //Toast.makeText(getContext(), "LONG press on item in recycler list", Toast.LENGTH_SHORT).show();
             docID = position;
             deckPresenter.longPressOnDeck();
             return true;
@@ -66,7 +67,16 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     }
 
     private void setUpRecyclerView(FirestoreRecyclerOptions<Deck> options){
-        deckAdapter = new DeckAdapter(options);
+        deckAdapter = new DeckAdapter(options){
+            @Override
+            public void onDataChanged() {
+                super.onDataChanged();
+                if(deckAdapter.getItemCount() == 0)
+                    deckPresenter.showEmptyDeckMessage();
+                else
+                    deckPresenter.hideEmptyDeckMessage();
+            }
+        };
         deckRecyclerView.setHasFixedSize(true);
         deckRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         deckRecyclerView.setAdapter(deckAdapter);
@@ -85,9 +95,6 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     @Override
     public void changeFragment(Fragment fragment, int id) {
         ((MainActivity) getActivity()).changeFragment(fragment, id);
-//        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-//        ft.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
-//        ft.replace(id, fragment, "new").commit();
     }
 
     @Override
@@ -97,7 +104,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void hideEmptyDeckMessage() {
-        emptyDeck.setVisibility(View.GONE);
+        emptyDeck.setVisibility(View.INVISIBLE);
     }
 
     @Override

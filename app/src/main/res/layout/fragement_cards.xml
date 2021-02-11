@@ -14,14 +14,32 @@
         android:layout_height="match_parent"
         tools:context=".cards.CardsFragment">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/cardAppBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/default_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/cardToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/default_blue"
+                android:titleTextColor="@color/white" />
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cardsRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/cardAppBarLayout" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/cardsFAB"
@@ -38,5 +56,41 @@
             app:maxImageSize="40dp"
             app:rippleColor="#00FFFFFF"
             app:srcCompat="@drawable/ic_round_add_24_white" />
+
+        <TextView
+            android:id="@+id/empty_cards_text"
+            android:layout_width="0dp"
+            android:layout_height="197dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="268dp"
+            android:layout_marginEnd="50dp"
+            android:fontFamily="@font/shadows_into_light_two"
+            android:text="Uh Oh! No Cards Found, try adding new ones here!"
+            android:textSize="45sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardAppBarLayout" />
+
+        <ImageView
+            android:id="@+id/empty_cards_arrow"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
+            android:alpha="0.5"
+            android:contentDescription="TODO"
+            android:rotation="-30"
+            android:src="@drawable/empty_card_arrow"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cardsFAB"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/empty_cards_text"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

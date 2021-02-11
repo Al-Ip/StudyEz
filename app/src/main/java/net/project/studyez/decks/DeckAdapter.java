@@ -1,6 +1,5 @@
 package net.project.studyez.decks;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,16 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.R;
 
+import java.util.List;
+
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
+
+    private List<Deck> deckList;
+    private FirestoreRecyclerOptions<Deck> options;
 
     public DeckAdapter(@NonNull FirestoreRecyclerOptions<Deck> options) {
         super(options);
+        this.options = options;
     }
 
     @Override
@@ -35,6 +40,13 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
     public DeckHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list, parent, false);
         return new DeckHolder(view);
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        final int count = options.getSnapshots().size();
+        return count;
     }
 
     static class DeckHolder extends RecyclerView.ViewHolder{

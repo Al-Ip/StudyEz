@@ -1,10 +1,9 @@
-package net.project.studyez.view;
+package net.project.studyez;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -20,13 +19,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
-import net.project.studyez.R;
 import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
 import net.project.studyez.splashScreen.SplashScreenActivity;
+import net.project.studyez.view.AboutUsFragment;
+import net.project.studyez.view.DashboardFragment;
+import net.project.studyez.view.MyProfileFragment;
+import net.project.studyez.view.SettingsFragment;
 
 import java.util.Arrays;
 
@@ -44,15 +46,14 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private Drawable[] screenIcons;
 
     private SlidingRootNav slidingRootNav;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initToolbar();
 
         slidingRootNav = new SlidingRootNavBuilder(this)
                 .withDragDistance(180)
@@ -86,6 +87,13 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         list.setAdapter(adapter);
 
         adapter.setSelected(POS_DASHBOARD);
+    }
+
+    public void initToolbar(){
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.toolbar_dashboard);
+        toolbar.setTitleTextColor(color(R.color.white));
+        setSupportActionBar(toolbar);
     }
 
     @SuppressWarnings("rawtypes")
@@ -137,22 +145,27 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         if (position == POS_DASHBOARD){
+            toolbar.setTitle(R.string.toolbar_dashboard);
             DashboardFragment dashboardFragment = new DashboardFragment();
             transaction.replace(R.id.main_container, dashboardFragment);
         }
         else if (position == POS_MY_PROFILE) {
+            toolbar.setTitle(R.string.toolbar_profile);
             MyProfileFragment myProfileFragment = new MyProfileFragment();
             transaction.replace(R.id.main_container, myProfileFragment);
         }
         else if(position == POS_DECKS){
+            toolbar.setTitle(R.string.toolbar_decks);
             DecksFragment decksFragment = new DecksFragment();
             transaction.replace(R.id.main_container, decksFragment);
         }
         else if (position == POS_SETTINGS){
+            toolbar.setTitle(R.string.toolbar_settings);
             SettingsFragment settingsFragment = new SettingsFragment();
             transaction.replace(R.id.main_container, settingsFragment);
         }
         else if (position == POS_ABOUT_US){
+            toolbar.setTitle(R.string.toolbar_about);
             AboutUsFragment aboutUsFragment = new AboutUsFragment();
             transaction.replace(R.id.main_container, aboutUsFragment);
         }

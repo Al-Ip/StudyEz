@@ -1,11 +1,19 @@
 package net.project.studyez.cards;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragementCardsBinding;
+import net.project.studyez.decks.DecksFragment;
 
 import static net.project.studyez.decks.DecksFragment.deckName;
 
@@ -27,6 +37,9 @@ public class CardsFragment extends Fragment implements CardContract.view {
     private FloatingActionButton addCard;
     private RecyclerView cardRecycler;
     private CardAdapter cardAdapter;
+    private Toolbar toolbar;
+    private TextView emptyCardText;
+    private ImageView emptyCardArrow;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,16 +49,43 @@ public class CardsFragment extends Fragment implements CardContract.view {
         cardPresenter = new CardPresenter(this);
         binding.setPresenter(cardPresenter);
 
+        emptyCardText= view.findViewById(R.id.empty_cards_text);
+        emptyCardArrow = view.findViewById(R.id.empty_cards_arrow);
+        toolbar = view.findViewById(R.id.cardToolbar);
         addCard = view.findViewById(R.id.cardsFAB);
         cardRecycler = view.findViewById(R.id.cardsRecycler);
 
+        initToolbar();
         setUpRecyclerView(cardPresenter.getCardsFromDeck(getActivity(), getDeckNameFromDecksFragment()));
 
         return view;
     }
 
+    private void initToolbar(){
+        toolbar.setTitle(getDeckNameFromDecksFragment());
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setTitleTextColor(color(R.color.white));
+        toolbar.setNavigationOnClickListener(v -> {
+            cardPresenter.toolbarBackArrowPress(new DecksFragment(), R.id.main_container);
+        });
+    }
+
+    @ColorInt
+    public int color(@ColorRes int res){
+        return ContextCompat.getColor(getContext(), res);
+    }
+
     private void setUpRecyclerView(FirestoreRecyclerOptions<Card> options){
-        cardAdapter = new CardAdapter(options, cardPresenter);
+        cardAdapter = new CardAdapter(options, cardPresenter){
+            @Override
+            public void onDataChanged() {
+                super.onDataChanged();
+                if(cardAdapter.getItemCount() == 0)
+                    cardPresenter.showEmptyCardsMessage();
+                else
+                    cardPresenter.hideEmptyCardsMessage();
+            }
+        };
         cardRecycler.setHasFixedSize(true);
         cardRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         cardRecycler.setAdapter(cardAdapter);
@@ -61,18 +101,25 @@ public class CardsFragment extends Fragment implements CardContract.view {
     }
 
     @Override
+    public void changeFragment(Fragment fragment, int id) {
+        ((MainActivity) getActivity()).changeFragment(fragment, id);
+    }
+
+    @Override
     public void frontAndBackOfCardText(String question, String answer) {
         cardPresenter.editCardDetails(getDeckNameFromDecksFragment(), question, answer, cardAdapter.cardID);
     }
 
     @Override
     public void displayEmptyCardsMessage() {
-
+        emptyCardText.setVisibility(View.VISIBLE);
+        emptyCardArrow.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideEmptyCardsMessage() {
-
+        emptyCardText.setVisibility(View.GONE);
+        emptyCardArrow.setVisibility(View.GONE);
     }
 
     @Override
@@ -134,11 +181,13 @@ public class CardsFragment extends Fragment implements CardContract.view {
     public void onStart() {
         super.onStart();
         cardAdapter.startListening();
+        ((MainActivity)getActivity()).getSupportActionBar().hide();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         cardAdapter.stopListening();
+        ((MainActivity)getActivity()).getSupportActionBar().show();
     }
 }

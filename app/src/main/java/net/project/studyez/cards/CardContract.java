@@ -3,12 +3,15 @@ package net.project.studyez.cards;
 import android.app.Activity;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public interface CardContract {
 
     interface view{
         void createCardDialogConfirm(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
+        void changeFragment(Fragment fragment, int id);
         void frontAndBackOfCardText(String question, String answer);
         void displayEmptyCardsMessage();
         void hideEmptyCardsMessage();
@@ -26,12 +29,15 @@ public interface CardContract {
 
     interface presenter{
         void clickFab(View view);
+        void toolbarBackArrowPress(Fragment fragment, int id);
         void clickEditImage(View view, String question, String answer);
         void clickRemoveImage(View view);
         FirestoreRecyclerOptions getCardsFromDeck(Activity activity, String deckName);
         void getCardDetails(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
         void editCardDetails(String deckName, String question, String answer, String docID);
         void deleteCardFromFirebase(String deckName, String docID);
+        void showEmptyCardsMessage();
+        void hideEmptyCardsMessage();
     }
 
     interface Interactor{

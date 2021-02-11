@@ -1,13 +1,10 @@
 package net.project.studyez.cards;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,16 +13,17 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.R;
-import net.project.studyez.decks.DecksFragment;
 
 public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.CardHolder> {
 
+    private FirestoreRecyclerOptions<Card> options;
     String cardID;
     CardPresenter presenter;
     String question, answer;
 
     public CardAdapter(@NonNull FirestoreRecyclerOptions<Card> options, CardPresenter presenter) {
         super(options);
+        this.options = options;
         this.presenter = presenter;
     }
 
@@ -43,7 +41,6 @@ public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.Card
         cardHolder.deleteCardButton.setOnClickListener(v -> {
             cardID = getSnapshots().getSnapshot(i).getId();
             presenter.clickRemoveImage(v.getRootView());
-            //Log.e("Bind: ", cardID);
         });
         cardHolder.editCardButton.setOnClickListener(v -> {
             cardID = getSnapshots().getSnapshot(i).getId();
@@ -52,6 +49,13 @@ public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.Card
             presenter.clickEditImage(v.getRootView(), question, answer);
         });
 
+    }
+
+    @Override
+    public int getItemCount()
+    {
+        final int count = options.getSnapshots().size();
+        return count;
     }
 
     static class CardHolder extends RecyclerView.ViewHolder {
