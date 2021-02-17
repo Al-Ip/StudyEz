@@ -1,9 +1,7 @@
 package net.project.studyez.cards;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -25,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragementCardsBinding;
-import net.project.studyez.decks.DecksFragment;
 
 import static net.project.studyez.decks.DecksFragment.deckName;
 
@@ -65,9 +62,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
         toolbar.setTitle(getDeckNameFromDecksFragment());
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         toolbar.setTitleTextColor(color(R.color.white));
-        toolbar.setNavigationOnClickListener(v -> {
-            cardPresenter.toolbarBackArrowPress(new DecksFragment(), R.id.main_container);
-        });
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
     @ColorInt

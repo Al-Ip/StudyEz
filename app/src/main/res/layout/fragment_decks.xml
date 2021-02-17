@@ -12,16 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F3F3F3"
         tools:context=".decks.DecksFragment">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/deckRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/emptyDecksImage"
@@ -36,6 +28,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/empty_decks" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/deckRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/DeckFAB"
             android:layout_width="wrap_content"
@@ -43,13 +44,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
+            android:focusable="true"
             android:onClick="@{presenter::clickFab}"
             app:backgroundTint="@color/default_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="40dp"
             app:rippleColor="#00FFFFFF"
-            app:srcCompat="@drawable/ic_round_add_24_white"
-            android:focusable="true" />
+            app:srcCompat="@drawable/ic_round_add_24_white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

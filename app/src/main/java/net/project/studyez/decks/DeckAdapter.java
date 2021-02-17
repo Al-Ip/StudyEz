@@ -22,7 +22,7 @@ import java.util.List;
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
     private List<Deck> deckList;
-    private FirestoreRecyclerOptions<Deck> options;
+    private final FirestoreRecyclerOptions<Deck> options;
 
     public DeckAdapter(@NonNull FirestoreRecyclerOptions<Deck> options) {
         super(options);
@@ -38,7 +38,7 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
     @NonNull
     @Override
     public DeckHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list_transparent, parent, false);
         return new DeckHolder(view);
     }
 

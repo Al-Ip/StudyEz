@@ -11,7 +11,8 @@
         android:theme="@style/Theme.StudyEz">
         <activity
             android:name=".registration.main.RegisterActivity"
-            android:theme="@style/Theme.StudyEz.NoActionBar">
+            android:theme="@style/Theme.StudyEz.NoActionBar"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".MainActivity"
@@ -24,8 +25,9 @@
         </activity>
         <activity
             android:name=".splashScreen.SplashScreenActivity"
-            android:theme="@style/Theme.StudyEz.NoActionBar"></activity>
-
+            android:theme="@style/Theme.StudyEz.NoActionBar"
+            android:noHistory="true">
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

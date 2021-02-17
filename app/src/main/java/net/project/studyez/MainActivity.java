@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
+import net.project.studyez.dashboard.DashboardFragment;
 import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
@@ -26,7 +28,6 @@ import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
 import net.project.studyez.splashScreen.SplashScreenActivity;
 import net.project.studyez.view.AboutUsFragment;
-import net.project.studyez.view.DashboardFragment;
 import net.project.studyez.view.MyProfileFragment;
 import net.project.studyez.view.SettingsFragment;
 
@@ -133,8 +134,12 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         if (count == 0) {
             super.onBackPressed();
-            //additional code
-        } else {
+            finish();
+        }else if(count == 1){
+            super.onBackPressed();
+            Toast.makeText(this, "Warning: Closing Application on Next Back Press", Toast.LENGTH_LONG).show();
+        }
+        else {
             getSupportFragmentManager().popBackStack();
         }
 

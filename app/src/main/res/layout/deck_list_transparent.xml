@@ -22,7 +22,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/layout_card_background">
+            android:alpha="0.8"
+            android:background="@drawable/layout_card_background_transparent">
 
             <ImageButton
                 android:id="@+id/favoriteButton"
@@ -40,26 +41,28 @@
             <TextView
                 android:id="@+id/creatorText"
                 android:layout_width="wrap_content"
-                android:layout_height="18dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="0dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Creator"
+                android:textColor="#000000"
                 android:textStyle="italic"
                 app:layout_constraintLeft_toRightOf="@+id/imageWrapper"
                 app:layout_constraintTop_toBottomOf="@+id/deckName" />
 
             <TextView
                 android:id="@+id/deckName"
-                android:layout_width="288dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="Deck Name"
+                android:textColor="#000000"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/favoriteButton"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -71,6 +74,7 @@
                 android:layout_marginRight="8dp"
                 android:text="0"
                 android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintLeft_toRightOf="@+id/favoriteButton"
                 app:layout_constraintRight_toRightOf="parent"
@@ -79,11 +83,10 @@
             <TextView
                 android:id="@+id/deckSize"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginStart="8dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:text="# Cards"
+                android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="italic"
                 app:layout_constraintLeft_toRightOf="@+id/dividerLine"
