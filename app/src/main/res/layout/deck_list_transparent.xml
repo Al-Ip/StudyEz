@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
-                android:text="# Cards"
+                android:text="#0 Cards"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:textStyle="italic"

@@ -11,6 +11,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CardInteractor implements CardContract.Interactor{
 
@@ -23,6 +24,7 @@ public class CardInteractor implements CardContract.Interactor{
     FirebaseAuth fAuth;
     FirebaseUser fUser;
     Card card;
+    AtomicInteger counter;
     DocumentReference docRef;
     FirestoreRecyclerOptions<Card> allCards;
     Query query;
@@ -110,6 +112,18 @@ public class CardInteractor implements CardContract.Interactor{
                 onCardEditListener.onEditSuccess("Successfully Updated Card!");
             }
         });
+    }
+
+    @Override
+    public void updateNumberOfCardsFromFirebase(String deckName, int numCards) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("numCards", numCards);
+        docRef = fStore
+                .collection("Decks")
+                .document(fUser.getEmail())
+                .collection("myDecks")
+                .document(deckName);
+        docRef.update(map);
     }
 
 }

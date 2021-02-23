@@ -3,8 +3,6 @@ package net.project.studyez.decks;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,11 +15,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.R;
 
-import java.util.List;
-
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
-    private List<Deck> deckList;
     private final FirestoreRecyclerOptions<Deck> options;
 
     public DeckAdapter(@NonNull FirestoreRecyclerOptions<Deck> options) {
@@ -33,6 +28,7 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
         deckHolder.deckName.setText(deck.getName());
         deckHolder.creatorText.setText(deck.getCreator());
+        deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
     }
 
     @NonNull
@@ -56,12 +52,6 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
         TextView deckSize;
         TextView creatorText;
         TextView favoriteText;
-        Button renameButton;
-        Button editButton;
-        Button deleteButton;
-        Button createButton;
-        Button cancelButton;
-        EditText nameEditText;
         ImageView userImage;
         ImageButton favoriteButton;
 

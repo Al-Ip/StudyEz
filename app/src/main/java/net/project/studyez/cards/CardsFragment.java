@@ -77,8 +77,10 @@ public class CardsFragment extends Fragment implements CardContract.view {
                 super.onDataChanged();
                 if(cardAdapter.getItemCount() == 0)
                     cardPresenter.showEmptyCardsMessage();
-                else
+                else{
                     cardPresenter.hideEmptyCardsMessage();
+                    cardPresenter.getNumberOfCards(getDeckNameFromDecksFragment(), cardAdapter.getItemCount());
+                }
             }
         };
         cardRecycler.setHasFixedSize(true);

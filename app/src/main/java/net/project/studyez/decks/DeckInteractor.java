@@ -1,21 +1,13 @@
 package net.project.studyez.decks;
 
 import android.app.Activity;
-import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.type.Date;
-import com.google.type.DateTime;
 
 public class DeckInteractor implements DeckContract.Interactor{
 
@@ -40,8 +32,9 @@ public class DeckInteractor implements DeckContract.Interactor{
     }
 
     @Override
-    public void addNewDeckToFirebase(String deckName, String dateTime) {
-        deck = new Deck(deckName, dateTime);
+    public void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards) {
+        creator = fUser.getEmail();
+        deck = new Deck(deckName, dateTime, creator, numCards);
         docRef = fStore
                 .collection("Decks")
                 .document(fUser.getEmail())

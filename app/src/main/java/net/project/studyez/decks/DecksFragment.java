@@ -27,6 +27,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     public static String deckName;
 
     private DeckPresenter deckPresenter;
+
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;
     private Toolbar toolbar;
@@ -80,8 +81,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     }
 
     @Override
-    public void getDeckNameFromDialog(String name, String dateTime){
-        deckPresenter.enterDeckName(name, dateTime);
+    public void getDetailsFromDeckDialog(String deckName, String dateTime, String creator, int numCards){
+        deckPresenter.creatingNewDeck(deckName, dateTime, creator, numCards);
     }
 
     @Override
@@ -92,6 +93,11 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     @Override
     public void changeFragment(Fragment fragment, int id) {
         ((MainActivity) getActivity()).changeFragment(fragment, id);
+    }
+
+    @Override
+    public void displayNumOfCardsInDeck(int numCards) {
+        Toast.makeText(getContext(), "In Deck Now... " + numCards + " Total cards in this deck!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

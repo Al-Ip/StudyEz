@@ -1,12 +1,13 @@
 package net.project.studyez.cards;
 
 import net.project.studyez.R;
+import net.project.studyez.decks.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Card {
+public class Card extends Deck {
 
     //Keep these variable names the same as those in the firebase database
     private String deckName;

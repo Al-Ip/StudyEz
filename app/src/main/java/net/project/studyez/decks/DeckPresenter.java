@@ -6,8 +6,6 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.type.Date;
-import com.google.type.DateTime;
 
 public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener, DeckContract.onDeckDeletionListener {
 
@@ -26,8 +24,8 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void enterDeckName(String name, String dateTime) {
-        mInteractor.addNewDeckToFirebase(name, dateTime);
+    public void creatingNewDeck(String deckName, String dateTime, String creator, int numCards) {
+        mInteractor.addNewDeckToFirebase(deckName, dateTime, creator, numCards);
     }
 
     @Override

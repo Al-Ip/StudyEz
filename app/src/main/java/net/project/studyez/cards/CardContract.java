@@ -31,6 +31,7 @@ public interface CardContract {
         void clickFab(View view);
         void toolbarBackArrowPress(Fragment fragment, int id);
         void clickEditImage(View view, String question, String answer);
+        void getNumberOfCards(String deckName, int numCards);
         void clickRemoveImage(View view);
         FirestoreRecyclerOptions getCardsFromDeck(Activity activity, String deckName);
         void getCardDetails(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
@@ -45,6 +46,7 @@ public interface CardContract {
         FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName);
         void deleteCardFromFirebase(String deckName, String docID);
         void editCardFromFirebase(String deckName, String question, String answer, String docID);
+        void updateNumberOfCardsFromFirebase(String deckName, int numCards);
     }
 
     interface onCardCreationListener{

@@ -14,12 +14,15 @@ public class Deck {
     private String creator;
     private String image;
     private String dateTimeCreated;
+    private int numCards;
 
     public Deck() {}
 
-    public Deck(String name, String dateTimeCreated) {
+    public Deck(String name, String dateTimeCreated, String creator, int numCards) {
         this.name = name;
         this.dateTimeCreated = dateTimeCreated;
+        this.creator = creator;
+        this.numCards = numCards;
     }
 
     public Deck(String name, ArrayList<Card> cards) {
@@ -73,5 +76,13 @@ public class Deck {
 
     public void setDateTimeCreated(String dateTimeCreated) {
         this.dateTimeCreated = dateTimeCreated;
+    }
+
+    public int getNumCards() {
+        return numCards;
+    }
+
+    public void setNumCards(int numCards) {
+        this.numCards = numCards;
     }
 }

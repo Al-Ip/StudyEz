@@ -36,6 +36,11 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     }
 
     @Override
+    public void getNumberOfCards(String deckName, int numCards) {
+        mInteractor.updateNumberOfCardsFromFirebase(deckName, numCards);
+    }
+
+    @Override
     public void clickRemoveImage(View view) {
         mView.displayDeleteCardPopupWindow();
     }

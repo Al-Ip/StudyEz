@@ -6,12 +6,11 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.type.Date;
-import com.google.type.DateTime;
 
 public interface DeckContract {
 
     interface view{
+        void displayNumOfCardsInDeck(int numCards);
         void displayEmptyDeckMessage();
         void hideEmptyDeckMessage();
         void displayCreateDeckPopupWindow();
@@ -20,14 +19,14 @@ public interface DeckContract {
         void onDeckCreationFailure(String message);
         void onDeckDeletionSuccess(String message);
         void onDeckDeletionFailure(String message);
-        void getDeckNameFromDialog(String name, String dateTime);
+        void getDetailsFromDeckDialog(String deckName, String dateTime, String creator, int numCards);
         void deleteDeckDialogConfirm();
         void changeFragment(Fragment fragment, int id);
     }
 
     interface presenter{
         void clickFab(View view);
-        void enterDeckName(String name, String dateTime);
+        void creatingNewDeck(String deckName, String dateTime, String creator, int numCards);
         FirestoreRecyclerOptions getDecks(Activity activity);
         void deleteDeckFromFirebase(String docID);
         void longPressOnDeck();
@@ -37,7 +36,7 @@ public interface DeckContract {
     }
 
     interface Interactor{
-        void addNewDeckToFirebase(String deckName, String dateTime);
+        void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards);
         FirestoreRecyclerOptions getDecksFromFirebase(Activity activity);
         void deleteDeck(String docID);
     }
