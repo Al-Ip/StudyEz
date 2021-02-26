@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private Drawable[] screenIcons;
 
     private SlidingRootNav slidingRootNav;
-    private Toolbar toolbar;
+    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

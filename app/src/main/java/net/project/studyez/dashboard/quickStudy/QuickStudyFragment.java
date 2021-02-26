@@ -21,18 +21,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import net.project.studyez.ItemClickSupport;
+import net.project.studyez.MainActivity;
 import net.project.studyez.R;
+import net.project.studyez.cards.Card;
+import net.project.studyez.dashboard.DeckViewerFragment;
 import net.project.studyez.databinding.FragmentQuickStudyBinding;
 import net.project.studyez.decks.Deck;
 import net.project.studyez.decks.DeckAdapter;
 
+import java.util.ArrayList;
+
 public class QuickStudyFragment extends Fragment implements QuickStudyContract.view {
+
+    public int docID;
+    public static String deckName;
 
     private RecyclerView deckRecyclerView;
     private Toolbar toolbar;
     private TextView emptyDeckText;
     private QuickStudyPresenter presenter;
     private DeckAdapter deckAdapter;
+
+    private ArrayList<Card> cards;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +61,12 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
 
         initToolbar();
         setUpRecyclerView(presenter.getDecks(getActivity()));
+        // Single Click support
+        ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
+            docID = position;
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
+            presenter.shortPressOnDeck(new DeckViewerFragment(), R.id.main_container);
+        });
 
         return view;
     }
@@ -144,6 +161,6 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
 
     @Override
     public void changeFragment(Fragment fragment, int id) {
-
+        ((MainActivity) getActivity()).changeFragment(fragment, id);
     }
 }

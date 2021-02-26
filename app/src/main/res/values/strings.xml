@@ -17,4 +17,8 @@
 
     <!-- Toolbar Sub Titles -->
     <string name="toolbar_quickStudy">Quick Study</string>
+
+    <!-- Component ID's -->
+    <string name="Deck_Fab">DeckFAB</string>
+    <string name="Deck_Fab_Clicked">Create New Deck FAB Clicked</string>
 </resources>

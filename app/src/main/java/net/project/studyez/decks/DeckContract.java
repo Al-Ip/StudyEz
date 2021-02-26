@@ -42,8 +42,8 @@ public interface DeckContract {
     }
 
     interface onDeckCreationListener{
-        void onCreateSuccess(String message);
-        void onCreateFailure(String message);
+        void onDeckCreateSuccess(String message);
+        void onDeckCreateFailure(String message);
     }
 
     interface onDeckDeletionListener{

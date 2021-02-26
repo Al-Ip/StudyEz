@@ -2,6 +2,8 @@ package net.project.studyez.dashboard.quickStudy;
 
 import android.app.Activity;
 
+import androidx.fragment.app.Fragment;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class QuickStudyPresenter implements QuickStudyContract.presenter{
@@ -20,8 +22,8 @@ public class QuickStudyPresenter implements QuickStudyContract.presenter{
     }
 
     @Override
-    public void longPressOnDeck() {
-
+    public void shortPressOnDeck(Fragment fragment, int id) {
+        mView.changeFragment(fragment, id);
     }
 
     @Override

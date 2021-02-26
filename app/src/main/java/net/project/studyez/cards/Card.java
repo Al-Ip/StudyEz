@@ -1,5 +1,8 @@
 package net.project.studyez.cards;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import net.project.studyez.R;
 import net.project.studyez.decks.Deck;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Card extends Deck {
+public class Card extends Deck implements Parcelable {
 
     //Keep these variable names the same as those in the firebase database
     private String deckName;
@@ -71,6 +74,10 @@ public class Card extends Deck {
         this.dateTimeCreated = dateTimeCreated;
     }
 
+    public void toggleStarred() {
+        isStarred = !isStarred;
+    }
+
     public static int getRandomCardColor(){
         List<Integer> colorCode = new ArrayList<>();
         colorCode.add(R.color.silverPink);
@@ -103,5 +110,37 @@ public class Card extends Deck {
         int number = randomColor.nextInt(colorCode.size());
         return colorCode.get(number);
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(question);
+        dest.writeString(answer);
+        dest.writeByte((byte) (isStarred ? 1 : 0));
+    }
+
+    protected Card(Parcel in) {
+        question = in.readString();
+        answer = in.readString();
+        isStarred = in.readByte() != 0;
+    }
+
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
+        @Override
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
+        }
+
+        @Override
+        public Card[] newArray(int size) {
+            return new Card[size];
+        }
+    };
+
 
 }

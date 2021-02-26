@@ -7,11 +7,18 @@ import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import net.project.studyez.dependencyInjector.DependencyInjector;
+
 public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener, DeckContract.onDeckDeletionListener {
 
     // to keep reference to view
     private final DeckContract.view mView;
     private final DeckContract.Interactor mInteractor;
+
+    public DeckPresenter(DeckContract.view view, DependencyInjector.DeckDependencyInjector dependencyInjector){
+        mView = view;
+        mInteractor = dependencyInjector.deckInteractor();
+    }
 
     public DeckPresenter(DeckContract.view view){
         mView = view;
@@ -59,12 +66,12 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void onCreateSuccess(String message) {
+    public void onDeckCreateSuccess(String message) {
         mView.onDeckCreationSuccess(message);
     }
 
     @Override
-    public void onCreateFailure(String message) {
+    public void onDeckCreateFailure(String message) {
         mView.onDeckCreationFailure(message);
     }
 

@@ -41,8 +41,6 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         deckPresenter = new DeckPresenter(this);
         binding.setPresenter(deckPresenter);
 
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.toolbar_decks);
         emptyDeck = view.findViewById(R.id.emptyDecksImage);
         deckRecyclerView = view.findViewById(R.id.deckRecycler);
 

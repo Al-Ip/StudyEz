@@ -9,19 +9,29 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+
 public class DeckInteractor implements DeckContract.Interactor{
 
     private static final String TAG = DeckInteractor.class.getSimpleName();
-    private final DeckContract.onDeckCreationListener onDeckCreationListener;
-    private final DeckContract.onDeckDeletionListener onDeckDeletionListener;
+    private DeckContract.onDeckCreationListener onDeckCreationListener;
+    private DeckContract.onDeckDeletionListener onDeckDeletionListener;
 
-    FirebaseFirestore fStore;
-    FirebaseAuth fAuth;
-    FirebaseUser fUser;
-    Deck deck;
-    DocumentReference docRef;
-    FirestoreRecyclerOptions<Deck> allDecks;
-    Query query;
+    private FirebaseFirestore fStore;
+    private FirebaseAuth fAuth;
+    private FirebaseUser fUser;
+    private Deck deck;
+    private DocumentReference docRef;
+    private FirestoreRecyclerOptions<Deck> allDecks;
+    private Query query;
+
+    public DeckInteractor(){
+    }
+
+    public DeckInteractor(FirebaseFirestore firebaseFirestore){
+        fStore = firebaseFirestore;
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+    }
 
     public DeckInteractor(DeckContract.onDeckCreationListener onDeckCreationListener, DeckContract.onDeckDeletionListener onDeckDeletionListener){
         this.onDeckCreationListener = onDeckCreationListener;
@@ -42,10 +52,10 @@ public class DeckInteractor implements DeckContract.Interactor{
                 .document(deck.getName());
         docRef.set(deck).addOnCompleteListener(task -> {
             if(!task.isSuccessful()){
-                onDeckCreationListener.onCreateFailure(task.getException().getMessage());
+                onDeckCreationListener.onDeckCreateFailure(task.getException().getMessage());
             }
             else{
-                onDeckCreationListener.onCreateSuccess("Successfully Created " + deck.getName() + " Deck!");
+                onDeckCreationListener.onDeckCreateSuccess("Successfully Created " + deck.getName() + " Deck!");
             }
         });
     }

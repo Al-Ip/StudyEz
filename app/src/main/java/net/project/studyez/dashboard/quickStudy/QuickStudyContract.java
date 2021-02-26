@@ -16,7 +16,7 @@ public interface QuickStudyContract {
 
     interface presenter{
         FirestoreRecyclerOptions getDecks(Activity activity);
-        void longPressOnDeck();
+        void shortPressOnDeck(Fragment fragment, int id);
         void showNoDeckMessage();
         void hideNoDeckMessage();
     }
