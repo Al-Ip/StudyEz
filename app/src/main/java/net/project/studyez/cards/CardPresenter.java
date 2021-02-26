@@ -14,6 +14,11 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     private final CardContract.view mView;
     private final CardContract.Interactor mInteractor;
 
+    public CardPresenter(CardContract.view view, CardContract.Interactor cardInteractor){
+        mView = view;
+        mInteractor = cardInteractor;
+    }
+
     public CardPresenter(CardContract.view view){
         mView = view;
         mInteractor = new CardInteractor(this,this, this);

@@ -21,12 +21,15 @@ import net.project.studyez.R;
 import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
 
+import javax.inject.Inject;
+
 public class DecksFragment extends Fragment implements DeckContract.view{
 
     public int docID;
     public static String deckName;
 
-    private DeckPresenter deckPresenter;
+    @Inject
+    public DeckPresenter deckPresenter;
 
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;

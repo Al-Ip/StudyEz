@@ -1,8 +1,10 @@
 package net.project.studyez.decks;
 
+import android.content.Context;
+
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.android21buttons.fragmenttestrule.FragmentTestRule;
 
@@ -17,9 +19,9 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class DecksFragmentTest {
@@ -27,38 +29,43 @@ public class DecksFragmentTest {
     @Rule
     public FragmentTestRule<?, DecksFragment> fragmentTestRule = FragmentTestRule.create(DecksFragment.class);
 
-//    @Test
-//    public void userHasNoDecksCreated() {
-//        if (getRVcount() < 0) {
-//            //onView(withId(R.id.emptyDecksImage)).check(matches(isCompletelyDisplayed()));
-//            onView(withId(R.id.emptyDecksImage)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-//        }
-//    }
+    @Test
+    public void use_app_context() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("net.project.studyez", appContext.getPackageName());
+    }
 
     @Test
-    public void userHasDecksCreated() {
+    public void check_if_deck_fragment_can_be_instantiated(){
+        fragmentTestRule.getFragment().getActivity().runOnUiThread(() -> {
+            DecksFragment decksFragment = new DecksFragment();
+        });
+        onView(withId(R.id.deckLayout)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void deck_is_present_on_screen() {
         if (getRVcount() > 0) {
             onView(withId(R.id.emptyDecksImage)).check(matches(not(isDisplayed())));
         }
-        else
-            onView(withId(R.id.emptyDecksImage)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-
     }
 
     @Test
-    public void clickOnADeck(){
+    public void click_on_a_deck(){
         if (getRVcount() > 0){
-            onView(withId(R.id.deckRecycler)).perform(actionOnItemAtPosition(0, click()));        }
+            onView(withId(R.id.deckRecycler)).perform(actionOnItemAtPosition(0, click()));
+        }
     }
 
     @Test
-    public void clickCreateNewDeckFab(){
+    public void click_create_new_deck_fab(){
         onView(withId(R.id.DeckFAB)).perform(click());
     }
 
     // Checking recycle view item count
     private int getRVcount(){
-        RecyclerView recyclerView = fragmentTestRule.getActivity().findViewById(R.id.deckRecycler);
+        RecyclerView recyclerView = fragmentTestRule.getFragment().getView().findViewById(R.id.deckRecycler);
         return recyclerView.getAdapter().getItemCount();
     }
 

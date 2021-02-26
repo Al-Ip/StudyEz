@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import net.project.studyez.dependencyInjector.DependencyInjector;
+import javax.inject.Inject;
 
 public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener, DeckContract.onDeckDeletionListener {
 
@@ -15,11 +15,12 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     private final DeckContract.view mView;
     private final DeckContract.Interactor mInteractor;
 
-    public DeckPresenter(DeckContract.view view, DependencyInjector.DeckDependencyInjector dependencyInjector){
+    public DeckPresenter(DeckContract.view view, DeckContract.Interactor interactor){
         mView = view;
-        mInteractor = dependencyInjector.deckInteractor();
+        mInteractor = interactor;
     }
 
+    @Inject
     public DeckPresenter(DeckContract.view view){
         mView = view;
         mInteractor = new DeckInteractor(this, this);

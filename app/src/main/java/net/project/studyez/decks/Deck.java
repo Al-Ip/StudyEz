@@ -5,6 +5,8 @@ import net.project.studyez.cards.Card;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 
 public class Deck {
 
@@ -18,6 +20,7 @@ public class Deck {
 
     public Deck() {}
 
+    @Inject
     public Deck(String name, String dateTimeCreated, String creator, int numCards) {
         this.name = name;
         this.dateTimeCreated = dateTimeCreated;

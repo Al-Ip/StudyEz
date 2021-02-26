@@ -9,6 +9,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import javax.inject.Inject;
+
 
 public class DeckInteractor implements DeckContract.Interactor{
 
@@ -16,21 +18,19 @@ public class DeckInteractor implements DeckContract.Interactor{
     private DeckContract.onDeckCreationListener onDeckCreationListener;
     private DeckContract.onDeckDeletionListener onDeckDeletionListener;
 
-    private FirebaseFirestore fStore;
-    private FirebaseAuth fAuth;
-    private FirebaseUser fUser;
+    private final FirebaseFirestore fStore;
+    private final FirebaseAuth fAuth;
+    private final FirebaseUser fUser;
     private Deck deck;
     private DocumentReference docRef;
     private FirestoreRecyclerOptions<Deck> allDecks;
     private Query query;
 
-    public DeckInteractor(){
-    }
-
-    public DeckInteractor(FirebaseFirestore firebaseFirestore){
+    @Inject
+    public DeckInteractor(FirebaseFirestore firebaseFirestore, FirebaseAuth fAuth){
         fStore = firebaseFirestore;
-        fAuth = FirebaseAuth.getInstance();
-        fUser = fAuth.getCurrentUser();
+        this.fAuth = fAuth;
+        this.fUser = fAuth.getCurrentUser();
     }
 
     public DeckInteractor(DeckContract.onDeckCreationListener onDeckCreationListener, DeckContract.onDeckDeletionListener onDeckDeletionListener){
@@ -43,8 +43,7 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards) {
-        creator = fUser.getEmail();
-        deck = new Deck(deckName, dateTime, creator, numCards);
+        deck = new Deck(deckName, dateTime,  fUser.getEmail(), numCards);
         docRef = fStore
                 .collection("Decks")
                 .document(fUser.getEmail())

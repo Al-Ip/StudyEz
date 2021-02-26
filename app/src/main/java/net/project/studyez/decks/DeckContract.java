@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import dagger.Component;
+
+@Component
 public interface DeckContract {
 
     interface view{
