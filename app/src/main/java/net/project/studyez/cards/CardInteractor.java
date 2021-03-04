@@ -15,10 +15,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CardInteractor implements CardContract.Interactor{
 
-    private static final String TAG = CardInteractor.class.getSimpleName();
-    private final CardContract.onCardCreationListener onCardCreationListener;
-    private final CardContract.onCardDeletionListener onCardDeletionListener;
-    private final CardContract.onCardEditListener onCardEditListener;
+    private CardContract.onCardCreationListener onCardCreationListener;
+    private CardContract.onCardDeletionListener onCardDeletionListener;
+    private CardContract.onCardEditListener onCardEditListener;
 
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
@@ -29,7 +28,15 @@ public class CardInteractor implements CardContract.Interactor{
     FirestoreRecyclerOptions<Card> allCards;
     Query query;
 
-    public CardInteractor(CardContract.onCardCreationListener onCardCreationListener, CardContract.onCardDeletionListener onCardDeletionListener, CardContract.onCardEditListener onCardEditListener){
+    public CardInteractor(){
+        fStore = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        fUser = fAuth.getCurrentUser();
+    }
+
+    public CardInteractor(CardContract.onCardCreationListener onCardCreationListener,
+                          CardContract.onCardDeletionListener onCardDeletionListener,
+                          CardContract.onCardEditListener onCardEditListener){
         this.onCardCreationListener = onCardCreationListener;
         this.onCardDeletionListener = onCardDeletionListener;
         this.onCardEditListener = onCardEditListener;
@@ -125,5 +132,6 @@ public class CardInteractor implements CardContract.Interactor{
                 .document(deckName);
         docRef.update(map);
     }
+
 
 }
