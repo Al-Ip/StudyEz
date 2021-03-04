@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.project.studyez.MainActivity;
 import net.project.studyez.R;
-import net.project.studyez.databinding.FragementCardsBinding;
+import net.project.studyez.databinding.FragementCardBinding;
 
 import static net.project.studyez.decks.DecksFragment.deckName;
 
@@ -40,7 +40,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragementCardsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragement_cards, container, false);
+        FragementCardBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragement_card, container, false);
 
         View view = binding.getRoot();
         cardPresenter = new CardPresenter(this);

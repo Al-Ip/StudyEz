@@ -8,8 +8,8 @@
     <color name="color2">#96ECC4</color>
     <color name="pinkish">#AB7DCC</color>
     <color name="default_blue">#467A95</color>
-    <color name="selected_text_tint">#F05B5B</color>
-    <color name="selected_icon_tint">#F05B5B</color>
+    <color name="selected_text_tint">#A9C0DA</color>
+    <color name="selected_icon_tint">#A9C0DA</color>
 
     <!--  Card colors  -->
     <color name="silverPink">#D0B8AC</color>

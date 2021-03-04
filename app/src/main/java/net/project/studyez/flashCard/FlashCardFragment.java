@@ -1,4 +1,4 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.flashCard;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import net.project.studyez.cards.Card;
 
 import java.util.Locale;
 
-import static net.project.studyez.dashboard.CardContainerFragment.DISTANCE;
-import static net.project.studyez.dashboard.CardContainerFragment.FLIPPED;
+import static net.project.studyez.flashCard.FlashCardContainerFragment.DISTANCE;
+import static net.project.studyez.flashCard.FlashCardContainerFragment.FLIPPED;
 
-public class CardFragment extends Fragment {
+public class FlashCardFragment extends Fragment {
 
     private TextView cardText;
     private ImageButton starButton;
@@ -28,14 +28,14 @@ public class CardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         // Create the card fragment view and get the card object
-        View view = inflater.inflate(R.layout.card_view, container, false);
+        View view = inflater.inflate(R.layout.flashcard_view, container, false);
 
         cardText = view.findViewById(R.id.cardText);
         starButton = view.findViewById(R.id.starButton);
         speakButton = view.findViewById(R.id.speakButton);
 
         final Bundle bundle = this.getArguments();
-        final Card card = bundle.getParcelable(CardPagerAdapter.CARD);
+        final Card card = bundle.getParcelable(FlashCardPagerAdapter.CARD);
 
         boolean cardFlipped = bundle.getByte(FLIPPED) != 0;
 

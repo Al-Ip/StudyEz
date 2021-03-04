@@ -1,7 +1,8 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.flashCard;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,36 +16,32 @@ import net.project.studyez.R;
 import net.project.studyez.cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DeckViewerFragment extends Fragment {
+public class FlashCardViewerFragment extends Fragment implements FlashCardContract.view {
 
+    private FlashCardPresenter flashCardPresenter;
     private ViewPager pager;
-    private CardPagerAdapter pagerAdapter;
+    private FlashCardPagerAdapter pagerAdapter;
     private SeekBar deckSeekBar;
-    public ArrayList<Card> testCardList;
+    public List<Card> testCardList;
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.activity_deck_viewer, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_flashcard_viewer, container, false);
 
-        //testing
         testCardList = new ArrayList<>();
-        Card c1 = new Card("What is my favourite ice cream flavour?", "Mint");
-        Card c2 = new Card("Is the sky blue?", "Yes");
-        Card c3 = new Card("What is my dogs name?", "Bella");
-        Card c4 = new Card("What is 2 + 2?", "4");
-        Card c5 = new Card("Capital of Romania?", "Bucharest");
-        testCardList.add(c1);
-        testCardList.add(c2);
-        testCardList.add(c3);
-        testCardList.add(c4);
-        testCardList.add(c5);
-
-
-        // Creating the ViewPager with the CardAdapter
         pager = root.findViewById(R.id.pager);
-        pagerAdapter = new CardPagerAdapter(getFragmentManager(), testCardList);
-        pager.setAdapter(pagerAdapter);
+
+        flashCardPresenter = new FlashCardPresenter(this);
+        flashCardPresenter.getCardsFromDeck();
+
+        //testCardList = cardInteractor.testGetCardsToDisplay();
+        Log.e("Test Frag", String.valueOf(testCardList.size()));
+
+
+
 
         // Creating the seek bar
         deckSeekBar = root.findViewById(R.id.deckSeekBar);
@@ -127,13 +124,13 @@ public class DeckViewerFragment extends Fragment {
     private void toggleStarred() {
         if (pagerAdapter.isShowingStarred()) {
             pager.setAdapter(null);
-            pagerAdapter = new CardPagerAdapter(getFragmentManager(), testCardList);
+            pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
             pager.setAdapter(pagerAdapter);
         } else {
             ArrayList<Card> starredCards = pagerAdapter.getStarredCards();
             if (starredCards.size() > 0) {
                 pager.setAdapter(null);
-                pagerAdapter = new CardPagerAdapter(getFragmentManager(), starredCards);
+                pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), starredCards);
                 pager.setAdapter(pagerAdapter);
             } else {
                 Toast.makeText(getContext(), "There are no starred cards.", Toast.LENGTH_LONG).show();
@@ -151,7 +148,21 @@ public class DeckViewerFragment extends Fragment {
             card.setQuestion(card.getAnswer());
             card.setAnswer(oldFront);
         }
-        pagerAdapter = new CardPagerAdapter(getFragmentManager(), testCardList);
+        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
         pager.setAdapter(pagerAdapter);
     }
+
+    @Override
+    public void changeFragment(Fragment fragment, int id) {
+
+    }
+
+    @Override
+    public void displayFlashCards(List list) {
+        testCardList = list;
+        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
+        pager.setAdapter(pagerAdapter);
+        Log.e("View", String.valueOf(testCardList.size()));
+    }
+
 }

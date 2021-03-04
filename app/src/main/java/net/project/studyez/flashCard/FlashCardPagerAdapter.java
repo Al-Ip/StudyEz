@@ -1,4 +1,4 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.flashCard;
 
 import android.os.Bundle;
 
@@ -9,16 +9,17 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import net.project.studyez.cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CardPagerAdapter extends FragmentStatePagerAdapter {
+public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
 
     public static final String CARD = "CARD";
     private static final float WIDTH_SCALE = 0.95f;
 
     private final int count;
-    private final ArrayList<Card> testCardList;
+    private final List<Card> testCardList;
 
-    public CardPagerAdapter(FragmentManager fragmentManager, ArrayList<Card> cards) {
+    public FlashCardPagerAdapter(FragmentManager fragmentManager, List<Card> cards) {
         super(fragmentManager);
         this.testCardList = cards;
         this.count = cards.size();
@@ -31,16 +32,16 @@ public class CardPagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public Fragment getItem(int position) {
-        CardContainerFragment cardContainerFragment = new CardContainerFragment();
+        FlashCardContainerFragment flashCardContainerFragment = new FlashCardContainerFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(CARD, testCardList.get(position));
-        cardContainerFragment.setArguments(bundle);
+        flashCardContainerFragment.setArguments(bundle);
 
-        bundle = cardContainerFragment.getArguments();
+        bundle = flashCardContainerFragment.getArguments();
         Card updatedCard = bundle.getParcelable(CARD);
         testCardList.set(position, updatedCard);
 
-        return cardContainerFragment;
+        return flashCardContainerFragment;
     }
 
     @Override

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 
-public class CardPresenter implements CardContract.presenter, CardContract.onCardCreationListener, CardContract.onCardDeletionListener, CardContract.onCardEditListener {
+public class CardPresenter implements CardContract.presenter, CardContract.onCardCreationListener, CardContract.onCardDeletionListener, CardContract.onCardEditListener{
 
     // to keep reference to view
     private final CardContract.view mView;
@@ -21,7 +21,7 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
 
     public CardPresenter(CardContract.view view){
         mView = view;
-        mInteractor = new CardInteractor(this,this, this);
+        mInteractor = new CardInteractor(this, this, this);
     }
 
     @Override
@@ -109,4 +109,5 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     public void onEditFailure(String message) {
         onEditFailure(message);
     }
+
 }

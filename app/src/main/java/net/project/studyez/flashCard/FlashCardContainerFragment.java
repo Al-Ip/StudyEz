@@ -1,4 +1,4 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.flashCard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,23 +9,23 @@ import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 
-public class CardContainerFragment extends Fragment {
+public class FlashCardContainerFragment extends Fragment {
 
     public static final String FLIPPED = "FLIPPED";
     public static final float DISTANCE = 17000;
 
-    private CardFragment frontCardFragment;
-    private CardFragment backCardFragment;
+    private FlashCardFragment frontFlashCardFragment;
+    private FlashCardFragment backFlashCardFragment;
     private boolean cardFlipped;
 
-    public CardContainerFragment() {
+    public FlashCardContainerFragment() {
         setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Create the card fragment view
-        final View rootView = inflater.inflate(R.layout.fragment_card, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_container_flashcard, container, false);
 
         this.cardFlipped = false;
         Bundle bundle = this.getArguments();
@@ -34,18 +34,18 @@ public class CardContainerFragment extends Fragment {
         Bundle frontBundle = (Bundle) bundle.clone();
         Bundle backBundle = (Bundle) bundle.clone();
 
-        frontCardFragment = new CardFragment();
+        frontFlashCardFragment = new FlashCardFragment();
         frontBundle.putByte(FLIPPED, (byte) 0);
-        frontCardFragment.setArguments(frontBundle);
+        frontFlashCardFragment.setArguments(frontBundle);
 
-        backCardFragment = new CardFragment();
+        backFlashCardFragment = new FlashCardFragment();
         backBundle.putByte(FLIPPED, (byte) 1);
-        backCardFragment.setArguments(backBundle);
+        backFlashCardFragment.setArguments(backBundle);
 
         // Set the first viewed fragment to be the the front of the card
         getChildFragmentManager()
                 .beginTransaction()
-                .add(R.id.containerssss, frontCardFragment)
+                .add(R.id.flashcard_Frame, frontFlashCardFragment)
                 .commit();
 
         // Flip the card once touched
@@ -66,9 +66,9 @@ public class CardContainerFragment extends Fragment {
     public void flipCard() {
         Fragment fragment;
         if (cardFlipped) {
-            fragment = frontCardFragment;
+            fragment = frontFlashCardFragment;
         } else {
-            fragment = backCardFragment;
+            fragment = backFlashCardFragment;
         }
 
         getChildFragmentManager()
@@ -78,7 +78,7 @@ public class CardContainerFragment extends Fragment {
                         R.anim.card_flip_left_out,
                         R.anim.card_flip_right_in,
                         R.anim.card_flip_right_out)
-                .replace(R.id.containerssss, fragment)
+                .replace(R.id.flashcard_Frame, fragment)
                 .commit();
 
         cardFlipped = !cardFlipped;

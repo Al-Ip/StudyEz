@@ -4,12 +4,12 @@ import android.app.Activity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import net.project.studyez.model.User;
+import net.project.studyez.account.User;
 
 public class RegistrationInteractor implements RegistrationContract.Interactor {
 
     private static final String TAG = RegistrationInteractor.class.getSimpleName();
-    private RegistrationContract.onRegistrationListener mOnRegistrationListener;
+    private final RegistrationContract.onRegistrationListener mOnRegistrationListener;
 
     public RegistrationInteractor(RegistrationContract.onRegistrationListener onRegistrationListener){
         this.mOnRegistrationListener = onRegistrationListener;

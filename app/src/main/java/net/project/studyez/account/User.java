@@ -1,4 +1,4 @@
-package net.project.studyez.model;
+package net.project.studyez.account;
 
 import java.util.Date;
 
