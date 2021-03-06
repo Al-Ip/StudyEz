@@ -25,7 +25,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     private FlashCardPagerAdapter pagerAdapter;
     private SeekBar deckSeekBar;
     public List<Card> testCardList;
-    
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,12 +36,6 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
 
         flashCardPresenter = new FlashCardPresenter(this);
         flashCardPresenter.getCardsFromDeck();
-
-        //testCardList = cardInteractor.testGetCardsToDisplay();
-        Log.e("Test Frag", String.valueOf(testCardList.size()));
-
-
-
 
         // Creating the seek bar
         deckSeekBar = root.findViewById(R.id.deckSeekBar);
@@ -104,6 +98,14 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
         return root;
     }
 
+    @Override
+    public void displayFlashCards(List list) {
+        testCardList = list;
+        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
+        pager.setAdapter(pagerAdapter);
+        Log.e("View", String.valueOf(testCardList.size()));
+    }
+
 
     /**
      * Sets the seek bar correctly to the fill out how far the user is into the deck.
@@ -155,14 +157,6 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     @Override
     public void changeFragment(Fragment fragment, int id) {
 
-    }
-
-    @Override
-    public void displayFlashCards(List list) {
-        testCardList = list;
-        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
-        pager.setAdapter(pagerAdapter);
-        Log.e("View", String.valueOf(testCardList.size()));
     }
 
 }

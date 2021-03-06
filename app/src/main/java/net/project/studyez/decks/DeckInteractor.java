@@ -43,10 +43,12 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards) {
-        deck = new Deck(deckName, dateTime,  fUser.getEmail(), numCards);
+        deck = new Deck(deckName, dateTime,  fUser.getDisplayName(), numCards);
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deck.getName());
         docRef.set(deck).addOnCompleteListener(task -> {
@@ -62,8 +64,10 @@ public class DeckInteractor implements DeckContract.Interactor{
     @Override
     public FirestoreRecyclerOptions getDecksFromFirebase(Activity activity) {
         query = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .orderBy("dateTimeCreated", Query.Direction.DESCENDING);
         allDecks = new FirestoreRecyclerOptions.Builder<Deck>()
@@ -75,8 +79,10 @@ public class DeckInteractor implements DeckContract.Interactor{
     @Override
     public void deleteDeck(String docID) {
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(docID);
         docRef.delete().addOnCompleteListener(task -> {

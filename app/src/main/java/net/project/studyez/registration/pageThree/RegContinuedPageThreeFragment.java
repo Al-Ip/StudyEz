@@ -16,7 +16,7 @@ import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageThreeBinding;
-import net.project.studyez.registration.main.RegisterActivity;
+import net.project.studyez.registration.RegisterActivity;
 import net.project.studyez.registration.pageFour.RegContinuedPageFourFragment;
 
 import java.text.SimpleDateFormat;
@@ -89,7 +89,7 @@ public class RegContinuedPageThreeFragment extends Fragment implements com.tsong
     void showDate(int year, int monthOfYear, int dayOfMonth, int spinnerTheme) {
         new SpinnerDatePickerDialogBuilder()
                 .context(this.getContext())
-                .callback((com.tsongkha.spinnerdatepicker.DatePickerDialog.OnDateSetListener) this)
+                .callback(this)
                 .spinnerTheme(spinnerTheme)
                 .defaultDate(year, monthOfYear, dayOfMonth)
                 .build()

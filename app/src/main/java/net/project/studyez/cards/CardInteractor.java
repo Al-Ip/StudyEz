@@ -49,8 +49,10 @@ public class CardInteractor implements CardContract.Interactor{
     public void addNewCardToFirebase(String deckName, String question, String answer, String dateCreated, boolean isStarred) {
         card = new Card(deckName, question, answer, dateCreated, isStarred);
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName)
                 .collection("Cards")
@@ -68,8 +70,10 @@ public class CardInteractor implements CardContract.Interactor{
     @Override
     public FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName) {
         query = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName)
                 .collection("Cards")
@@ -83,8 +87,10 @@ public class CardInteractor implements CardContract.Interactor{
     @Override
     public void deleteCardFromFirebase(String deckName, String docID) {
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName)
                 .collection("Cards")
@@ -105,8 +111,10 @@ public class CardInteractor implements CardContract.Interactor{
         map.put("answer", answer);
         map.put("question", question);
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName)
                 .collection("Cards")
@@ -126,8 +134,10 @@ public class CardInteractor implements CardContract.Interactor{
         Map<String, Object> map = new HashMap<>();
         map.put("numCards", numCards);
         docRef = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName);
         docRef.update(map);

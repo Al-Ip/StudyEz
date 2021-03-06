@@ -1,16 +1,15 @@
-package net.project.studyez.registration.main;
+package net.project.studyez.login;
 
 import android.app.Activity;
+
 import androidx.fragment.app.Fragment;
 
-
-import com.google.firebase.auth.FirebaseUser;
-
-public interface RegistrationContract {
+public interface LoginContract {
 
     // implemented by RegisterActivity to provide concrete implementation
-    interface View {
+    interface view {
         void onNextAnimatedButtonClick();
+        void displayRegisterActivity();
         void showAnimatedNextButton();
         void hideAnimatedNextButton();
         void showBlackFadeIn();
@@ -22,24 +21,25 @@ public interface RegistrationContract {
         void showEmailError();
         void showPasswordError();
         void changeFragment(Fragment fragment, int id);
-        void onRegistrationSuccess(FirebaseUser firebaseUser);
-        void onRegistrationFailure(String message);
+        void loginSuccessMessage(String message);
+        void loginFailureMessage(String message);
     }
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
         void doChangeFragment(Fragment fragment, int id);
+        void clickRegisterText(android.view.View view);
         void clickAnimatedNextButton(android.view.View view);
         void toggleAnimatedTextButtonVisibility(String email, String password);
-        void addEmailAndPasswordToDatabase(Activity activity, String email, String password);
+        void sendEmailAndPasswordData(Activity activity, String email, String password);
     }
 
     interface Interactor{
-        void performFirebaseRegistration(Activity activity, String email, String password);
+        void performUserLogin(String email, String password);
     }
 
-    interface onRegistrationListener{
-        void onSuccess(FirebaseUser firebaseUser);
-        void onFailure(String message);
+    interface onLoginListener{
+        void onLoginSuccess(String message);
+        void onLoginFailure(String message);
     }
 }

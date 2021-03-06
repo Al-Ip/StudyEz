@@ -4,16 +4,15 @@ import java.util.Date;
 
 public class User {
 
-    private int id;
-    private String firstName;
-    private String lastName;
+    private String id;
+    private String profileImage;
+    private String username;
     private String email;
     private String password;
-    private String sex;
     private Date dateOfBirth;
-    private String occupation;
 
-    public User() {
+    public User(){
+
     }
 
     //On initial sign up, REQUIRED
@@ -22,16 +21,28 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -50,14 +61,6 @@ public class User {
         this.password = password;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -66,11 +69,5 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getOccupation() {
-        return occupation;
-    }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
 }

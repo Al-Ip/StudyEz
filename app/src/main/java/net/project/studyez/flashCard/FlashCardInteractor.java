@@ -34,8 +34,10 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     @Override
     public void getCardsToDisplayOnFlashcards() {
         query = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckName)
                 .collection("Cards")

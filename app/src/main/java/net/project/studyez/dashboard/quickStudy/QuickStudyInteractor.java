@@ -30,8 +30,10 @@ public class QuickStudyInteractor implements QuickStudyContract.Interactor{
     @Override
     public FirestoreRecyclerOptions getDecksFromFirebase(Activity activity) {
         query = fStore
-                .collection("Decks")
-                .document(fUser.getEmail())
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .orderBy("dateTimeCreated", Query.Direction.DESCENDING);
         allDecks = new FirestoreRecyclerOptions.Builder<Deck>()

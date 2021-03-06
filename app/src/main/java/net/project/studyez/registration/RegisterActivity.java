@@ -1,5 +1,6 @@
-package net.project.studyez.registration.main;
+package net.project.studyez.registration;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -7,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.ActivityRegisterBinding;
-import net.project.studyez.registration.pageOne.RegContinuedPageOneFragment;
+import net.project.studyez.login.LoginActivity;
 
 public class RegisterActivity extends AppCompatActivity implements RegistrationContract.View {
 
@@ -27,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     private ImageView nextButton, blackFadeImage;
     private ProgressBar progressBar;
     private RegistrationPresenter presenter;
+    private TextView loginText;
 
 
     @Override
@@ -44,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
         nextButton = findViewById(R.id.registrationPageNextButton);
         blackFadeImage = findViewById(R.id.blackFadeImage);
         progressBar = findViewById(R.id.registerPage1ProgressBar);
+        loginText = findViewById(R.id.registrationLoginText);
 
         email.addTextChangedListener(textWatcher);
         password.addTextChangedListener(textWatcher);
@@ -56,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
         public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.toggleAnimatedTextButtonVisibility(getEmailText(), getPasswordText());
+            presenter.toggleAnimatedTextButtonVisibilityForRegPageOne(getEmailText(), getPasswordText());
         }
         @Override
         public void afterTextChanged(Editable s) {
@@ -65,8 +69,25 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     };
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void displayImageGallery() {
+
+    }
+
+    @Override
     public void onNextAnimatedButtonClick() {
         presenter.addEmailAndPasswordToDatabase(this, getEmailText(), getPasswordText());
+    }
+
+    @Override
+    public void displayLoginActivity() {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -130,12 +151,42 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
     @Override
     public void onRegistrationSuccess(FirebaseUser firebaseUser) {
         Toast.makeText(getApplicationContext(), "Successfully Registered" , Toast.LENGTH_SHORT).show();
-        presenter.doChangeFragment(new RegContinuedPageOneFragment(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegistrationContinuedFragment(), R.id.registerLayout);
     }
 
     @Override
     public void onRegistrationFailure(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRegistrationUpdateSuccess(String message) {
+
+    }
+
+    @Override
+    public void onRegistrationUpdateFailure(String message) {
+
+    }
+
+    @Override
+    public void onRegistrationAddImageSuccess(String message) {
+
+    }
+
+    @Override
+    public void onRegistrationAddImageFailure(String message) {
+
+    }
+
+    @Override
+    public String getUsernameText() {
+        return null;
+    }
+
+    @Override
+    public void showUsernameError() {
+
     }
 
 }

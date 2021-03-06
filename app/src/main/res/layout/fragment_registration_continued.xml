@@ -9,59 +9,59 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/registerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_color"
-        app:layout_constraintEnd_toStartOf="@+id/editTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        tools:context=".registration.RegisterActivity">
-
+        tools:context=".registration.RegistrationContinuedFragment" >
 
         <ImageView
-            android:id="@+id/imageWhiteLine"
+            android:id="@+id/imageWhiteLine3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:srcCompat="@drawable/white_line" />
-
-        <ImageView
-            android:id="@+id/imageWhiteLine4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextField"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
             app:srcCompat="@drawable/white_line" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
-            android:text="Register Account"
+            android:text="Account Details"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/imageWhiteLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:text="Great, your account is created. But you need a unique Username before you can continue"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3" />
+
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/registrationPageNextButton"
+            android:id="@+id/mainPageNextButton"
             android:layout_width="98dp"
             android:layout_height="91dp"
             android:layout_marginEnd="8dp"
@@ -76,66 +76,68 @@
             app:lottie_rawRes="@raw/arrow_right3"
             android:focusable="true" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextField"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:endIconMode="password_toggle"
-            android:background="#00000000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailTextField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableStart="@drawable/ic_twotone_lock_24"
-                android:drawablePadding="15dp"
-                android:hint="Enter a Strong Password"
-                android:inputType="textPassword"
-                android:textSize="18sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailTextField"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            app:errorEnabled="true"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{presenter::clickAddProfilePicture}"
+            android:src="@drawable/profile_picture"
+            app:civ_border_color="#00000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/usernameTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine">
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameTextField"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="284dp"
+            app:errorEnabled="true"
+            app:layout_constraintBottom_toTopOf="@+id/mainPageNextButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/editTextUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_twotone_email_24"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_twotone_tag_faces_24"
                 android:drawablePadding="15dp"
-                android:hint="Enter an Email Address"
-                android:inputType="textEmailAddress"
+                android:hint="Enter a Username"
+                android:inputType="textPersonName|text|textCapSentences"
+                android:maxLength="20"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/blackFadeImage"
+            android:id="@+id/blackFadeImage2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#A6000000"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
 
         <ProgressBar
-            android:id="@+id/registerPage1ProgressBar"
+            android:id="@+id/registerUsernameProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,24 +147,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="gone" />
-
-        <Button
-            android:id="@+id/registrationLoginText"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:textColor="@color/QuickStudyColorTheme"
-            android:onClick="@{presenter::clickLoginText}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Already have an account? Click Here!"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

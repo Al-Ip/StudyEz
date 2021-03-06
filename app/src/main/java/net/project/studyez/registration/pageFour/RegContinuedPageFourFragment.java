@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageFourBinding;
-import net.project.studyez.registration.main.RegisterActivity;
+import net.project.studyez.registration.RegisterActivity;
 import net.project.studyez.registration.pageFive.RegContinuedPageFiveFragment;
 
 public class RegContinuedPageFourFragment extends Fragment implements RegContinuedPageFourContract.view {

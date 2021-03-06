@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentIntro4Binding;
-import net.project.studyez.registration.main.RegisterActivity;
+import net.project.studyez.login.LoginActivity;
+import net.project.studyez.registration.RegisterActivity;
 
 public class IntroductionFragment4 extends Fragment implements IntroContract.View{
 
@@ -31,6 +32,12 @@ public class IntroductionFragment4 extends Fragment implements IntroContract.Vie
     @Override
     public void showRegisterScreen() {
         Intent intent = new Intent(getActivity(), RegisterActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showLoginScreen() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
     }
 }

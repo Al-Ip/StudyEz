@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.registration.RegistrationPresenter" />
+            type="net.project.studyez.login.LoginPresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,8 +15,7 @@
         android:background="@drawable/background_color"
         app:layout_constraintEnd_toStartOf="@+id/editTextPassword"
         app:layout_constraintStart_toStartOf="@+id/editTextPassword"
-        tools:context=".registration.RegisterActivity">
-
+        tools:context=".login.LoginActivity">
 
         <ImageView
             android:id="@+id/imageWhiteLine"
@@ -40,7 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextField"
+            app:layout_constraintTop_toBottomOf="@+id/loginPasswordTextField"
             app:srcCompat="@drawable/white_line" />
 
         <TextView
@@ -51,7 +50,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="8dp"
-            android:text="Register Account"
+            android:text="Login Account"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30sp"
@@ -61,7 +60,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/registrationPageNextButton"
+            android:id="@+id/loginPageNextButton"
             android:layout_width="98dp"
             android:layout_height="91dp"
             android:layout_marginEnd="8dp"
@@ -73,11 +72,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/arrow_right3"
-            android:focusable="true" />
+            app:lottie_rawRes="@raw/arrow_right3" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordTextField"
+            android:id="@+id/loginPasswordTextField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -87,21 +85,21 @@
             android:background="#00000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailTextField">
+            app:layout_constraintTop_toBottomOf="@+id/loginEmailTextField">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/loginEditTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableStart="@drawable/ic_twotone_lock_24"
                 android:drawablePadding="15dp"
-                android:hint="Enter a Strong Password"
+                android:hint="Enter Your Password"
                 android:inputType="textPassword"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailTextField"
+            android:id="@+id/loginEmailTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -114,18 +112,18 @@
             app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/loginEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_twotone_email_24"
                 android:drawablePadding="15dp"
-                android:hint="Enter an Email Address"
+                android:hint="Enter Your Email Address"
                 android:inputType="textEmailAddress"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
-            android:id="@+id/blackFadeImage"
+            android:id="@+id/loginBlackFadeImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#A6000000"
@@ -135,7 +133,7 @@
             tools:visibility="gone" />
 
         <ProgressBar
-            android:id="@+id/registerPage1ProgressBar"
+            android:id="@+id/loginProgressBar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -147,10 +145,8 @@
             tools:visibility="gone" />
 
         <Button
-            android:id="@+id/registrationLoginText"
+            android:id="@+id/registerRegistrationText"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:textColor="@color/QuickStudyColorTheme"
-            android:onClick="@{presenter::clickLoginText}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -158,7 +154,9 @@
             android:layout_marginEnd="32dp"
             android:clickable="true"
             android:focusable="true"
-            android:text="Already have an account? Click Here!"
+            android:onClick="@{presenter::clickRegisterText}"
+            android:text="Don't have an account? Click Here!"
+            android:textColor="@color/QuickStudyColorTheme"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -10,9 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyEz">
         <activity
-            android:name=".registration.main.RegisterActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar"
-            android:noHistory="true">
+            android:noHistory="false"
+            android:launchMode="standard">
+        </activity>
+        <activity
+            android:name=".registration.RegisterActivity"
+            android:theme="@style/Theme.StudyEz.NoActionBar"
+            android:noHistory="false"
+            android:launchMode="standard">
         </activity>
         <activity
             android:name=".MainActivity"
@@ -27,6 +34,11 @@
             android:name=".splashScreen.SplashScreenActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar"
             android:noHistory="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <meta-data
             android:name="preloaded_fonts"
