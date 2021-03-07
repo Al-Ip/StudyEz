@@ -1,6 +1,7 @@
 package net.project.studyez.registration;
 
 import android.app.Activity;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
@@ -16,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import net.project.studyez.account.User;
+import net.project.studyez.userProfile.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -122,6 +123,12 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
 
     @Override
     public void addProfilePictureToDatabase(String imageUri) {
+        Uri imageUriParse = Uri.parse(imageUri);
+        //Changing user profile picture in firebase to the username entered
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(imageUriParse).build();
+        fUser.updateProfile(profileUpdates);
+
         //You can store new user information here
         docRef = fStore.collection("users")
                 .document(fUser.getUid());

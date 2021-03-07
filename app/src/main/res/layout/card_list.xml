@@ -12,7 +12,7 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#52467A95">
+            android:background="@drawable/layout_card_background_transparent">
 
             <ImageButton
                 android:id="@+id/deleteCardButton"

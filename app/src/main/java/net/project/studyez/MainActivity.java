@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -27,8 +26,8 @@ import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
 import net.project.studyez.splashScreen.SplashScreenActivity;
+import net.project.studyez.userProfile.UserProfileFragment;
 import net.project.studyez.view.AboutUsFragment;
-import net.project.studyez.view.MyProfileFragment;
 import net.project.studyez.view.SettingsFragment;
 
 import java.util.Arrays;
@@ -133,16 +132,11 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            super.onBackPressed();
             finish();
-        }else if(count == 1){
-            super.onBackPressed();
-            Toast.makeText(this, "Warning: Closing Application on Next Back Press", Toast.LENGTH_LONG).show();
         }
         else {
             getSupportFragmentManager().popBackStack();
         }
-
     }
 
     @Override
@@ -150,29 +144,54 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         if (position == POS_DASHBOARD){
-            toolbar.setTitle(R.string.toolbar_dashboard);
-            DashboardFragment dashboardFragment = new DashboardFragment();
-            transaction.replace(R.id.main_container, dashboardFragment);
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+            else {
+                toolbar.setTitle(R.string.toolbar_dashboard);
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                transaction.replace(R.id.main_container, dashboardFragment);
+            }
         }
         else if (position == POS_MY_PROFILE) {
-            toolbar.setTitle(R.string.toolbar_profile);
-            MyProfileFragment myProfileFragment = new MyProfileFragment();
-            transaction.replace(R.id.main_container, myProfileFragment);
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+            else {
+                toolbar.setTitle(R.string.toolbar_profile);
+                UserProfileFragment userProfileFragment = new UserProfileFragment();
+                transaction.replace(R.id.main_container, userProfileFragment);
+            }
         }
         else if(position == POS_DECKS){
-            toolbar.setTitle(R.string.toolbar_decks);
-            DecksFragment decksFragment = new DecksFragment();
-            transaction.replace(R.id.main_container, decksFragment);
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+            else {
+                toolbar.setTitle(R.string.toolbar_decks);
+                DecksFragment decksFragment = new DecksFragment();
+                transaction.replace(R.id.main_container, decksFragment);
+            }
         }
         else if (position == POS_SETTINGS){
-            toolbar.setTitle(R.string.toolbar_settings);
-            SettingsFragment settingsFragment = new SettingsFragment();
-            transaction.replace(R.id.main_container, settingsFragment);
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+            else {
+                toolbar.setTitle(R.string.toolbar_settings);
+                SettingsFragment settingsFragment = new SettingsFragment();
+                transaction.replace(R.id.main_container, settingsFragment);
+            }
         }
         else if (position == POS_ABOUT_US){
-            toolbar.setTitle(R.string.toolbar_about);
-            AboutUsFragment aboutUsFragment = new AboutUsFragment();
-            transaction.replace(R.id.main_container, aboutUsFragment);
+            if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            }
+            else {
+                toolbar.setTitle(R.string.toolbar_about);
+                AboutUsFragment aboutUsFragment = new AboutUsFragment();
+                transaction.replace(R.id.main_container, aboutUsFragment);
+            }
         }
         else if (position == POS_LOGOUT) {
             FirebaseAuth.getInstance().signOut();
@@ -181,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         }
 
         slidingRootNav.closeMenu();
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

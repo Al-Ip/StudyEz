@@ -1,10 +1,10 @@
 package net.project.studyez.decks;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +14,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.R;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
@@ -26,15 +28,17 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
 
     @Override
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
+        Uri imageUriParse = Uri.parse(deck.getImage());
         deckHolder.deckName.setText(deck.getName());
         deckHolder.creatorText.setText(deck.getCreator());
         deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
+        deckHolder.userImage.setImageURI(imageUriParse);
     }
 
     @NonNull
     @Override
     public DeckHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list_transparent, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deck_list, parent, false);
         return new DeckHolder(view);
     }
 
@@ -52,7 +56,7 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
         TextView deckSize;
         TextView creatorText;
         TextView favoriteText;
-        ImageView userImage;
+        CircleImageView userImage;
         ImageButton favoriteButton;
 
         public DeckHolder(@NonNull View itemView) {
@@ -62,7 +66,7 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
             deckSize = itemView.findViewById(R.id.deckSize);
             creatorText = itemView.findViewById(R.id.creatorText);
             favoriteText = itemView.findViewById(R.id.favoriteText);
-            userImage = itemView.findViewById(R.id.userImage);
+            userImage = itemView.findViewById(R.id.deckUserProfileImage);
             favoriteButton = itemView.findViewById(R.id.favoriteButton);
         }
     }

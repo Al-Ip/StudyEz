@@ -1,7 +1,5 @@
 package net.project.studyez.flashCard;
 
-import android.util.Log;
-
 import com.google.firebase.firestore.QuerySnapshot;
 
 import net.project.studyez.cards.Card;
@@ -29,7 +27,6 @@ public class FlashCardPresenter implements FlashCardContract.presenter, FlashCar
 
     @Override
     public void onGetSuccess(QuerySnapshot querySnapshot) {
-        Log.e("Presemter", String.valueOf(querySnapshot.size()));
         mView.displayFlashCards(querySnapshot.toObjects(Card.class));
     }
 

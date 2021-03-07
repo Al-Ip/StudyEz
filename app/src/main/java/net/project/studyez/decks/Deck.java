@@ -1,18 +1,13 @@
 package net.project.studyez.decks;
 
 
-import net.project.studyez.cards.Card;
-
-import java.util.ArrayList;
-
 import javax.inject.Inject;
 
 
 public class Deck {
 
     private String name;
-    private ArrayList<Card> cards;
-    private String id;
+    private String creatorID;
     private String creator;
     private String image;
     private String dateTimeCreated;
@@ -21,16 +16,13 @@ public class Deck {
     public Deck() {}
 
     @Inject
-    public Deck(String name, String dateTimeCreated, String creator, int numCards) {
+    public Deck(String creatorID, String name, String dateTimeCreated, String creator, int numCards, String image) {
+        this.creatorID = creatorID;
         this.name = name;
         this.dateTimeCreated = dateTimeCreated;
         this.creator = creator;
         this.numCards = numCards;
-    }
-
-    public Deck(String name, ArrayList<Card> cards) {
-        this.name = name;
-        this.cards = cards;
+        this.image = image;
     }
 
     public String getName() {
@@ -41,20 +33,12 @@ public class Deck {
         this.name = name;
     }
 
-    public ArrayList<Card> getCards() {
-        return cards;
+    public String getCreatorID() {
+        return creatorID;
     }
 
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setCreatorID(String creatorID) {
+        this.creatorID = creatorID;
     }
 
     public String getCreator() {

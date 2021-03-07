@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:hint="Enter New Deck Name..."
-        android:inputType="text"
+        android:inputType="textCapSentences|textAutoCorrect"
         android:maxLines="1"
         android:textAlignment="center" />
 

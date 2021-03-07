@@ -1,7 +1,5 @@
 package net.project.studyez.flashCard;
 
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,7 +43,6 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
         query.get().addOnCompleteListener(task -> {
             if(task.isComplete()){
                 onCardGetListener.onGetSuccess(task.getResult());
-                Log.e("DB", String.valueOf(task.getResult().size()));
             }
         });
     }

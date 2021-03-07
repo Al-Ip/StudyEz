@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +32,6 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;
-    private Toolbar toolbar;
 
     private DeckAdapter deckAdapter;
 

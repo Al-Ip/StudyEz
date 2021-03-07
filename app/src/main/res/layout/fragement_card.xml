@@ -12,6 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/custom_background_grey"
         tools:context=".cards.CardsFragment">
 
         <com.google.android.material.appbar.AppBarLayout

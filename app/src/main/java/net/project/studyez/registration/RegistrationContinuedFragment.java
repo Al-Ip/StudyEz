@@ -71,16 +71,19 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
 
     @Override
     public void displayImageGallery() {
-        Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        this.startActivityForResult(openGalleryIntent, 1000);
+//        Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        this.startActivityForResult(openGalleryIntent, 1000);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        this.startActivityForResult(intent, 1000);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if( requestCode == 1000 ) {
-            if(resultCode == Activity.RESULT_OK){
+            if(resultCode == Activity.RESULT_OK && data.getData() != null){
                 Uri imageUri = data.getData();
+                getContext().getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                 String uri = imageUri.toString();
                 Picasso.get().load(imageUri).into(profileImage);
                 presenter.imageSelectedSendToDatabase(uri);

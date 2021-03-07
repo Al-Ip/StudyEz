@@ -2,21 +2,27 @@ package net.project.studyez.flashCard;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckName;
 
 public class FlashCardViewerFragment extends Fragment implements FlashCardContract.view {
 
@@ -24,22 +30,25 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     private ViewPager pager;
     private FlashCardPagerAdapter pagerAdapter;
     private SeekBar deckSeekBar;
-    public List<Card> testCardList;
-
+    private Toolbar toolbar;
+    public List<Card> cardList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_flashcard_viewer, container, false);
 
-        testCardList = new ArrayList<>();
         pager = root.findViewById(R.id.pager);
+        toolbar = root.findViewById(R.id.flashcardToolbar);
 
+        initToolbar();
+
+        cardList = new ArrayList<>();
         flashCardPresenter = new FlashCardPresenter(this);
         flashCardPresenter.getCardsFromDeck();
 
         // Creating the seek bar
         deckSeekBar = root.findViewById(R.id.deckSeekBar);
-        deckSeekBar.setMax(testCardList.size()-1);
+        deckSeekBar.setMax(cardList.size()-1);
 
         // Change the seek bar progress when cards are swiped
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -64,6 +73,9 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 pager.setCurrentItem(i);
+                if(pager.getCurrentItem() == cardList.size()){
+                    Toast.makeText(getContext(), "Finished all the cards in deck", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -77,33 +89,27 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
             }
         });
 
-
-    // Change the current card when the seek bar is dragged
-        deckSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-            pager.setCurrentItem(i);
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-
-        }
-    });
         return root;
+    }
+
+    private void initToolbar(){
+        ((MainActivity)getActivity()).getSupportActionBar().hide();
+        toolbar.setTitle(deckName);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbar.setTitleTextColor(color(R.color.white));
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
+    }
+
+    @ColorInt
+    public int color(@ColorRes int res){
+        return ContextCompat.getColor(getContext(), res);
     }
 
     @Override
     public void displayFlashCards(List list) {
-        testCardList = list;
-        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
+        cardList = list;
+        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), cardList);
         pager.setAdapter(pagerAdapter);
-        Log.e("View", String.valueOf(testCardList.size()));
     }
 
 
@@ -126,7 +132,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     private void toggleStarred() {
         if (pagerAdapter.isShowingStarred()) {
             pager.setAdapter(null);
-            pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
+            pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), cardList);
             pager.setAdapter(pagerAdapter);
         } else {
             ArrayList<Card> starredCards = pagerAdapter.getStarredCards();
@@ -145,12 +151,12 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
      */
     private void toggleBackside() {
         pager.setAdapter(null);
-        for (Card card : testCardList) {
+        for (Card card : cardList) {
             String oldFront = card.getQuestion();
             card.setQuestion(card.getAnswer());
             card.setAnswer(oldFront);
         }
-        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), testCardList);
+        pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), cardList);
         pager.setAdapter(pagerAdapter);
     }
 

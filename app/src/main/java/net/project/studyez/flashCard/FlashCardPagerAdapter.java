@@ -1,6 +1,7 @@
 package net.project.studyez.flashCard;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -40,6 +41,7 @@ public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
         bundle = flashCardContainerFragment.getArguments();
         Card updatedCard = bundle.getParcelable(CARD);
         testCardList.set(position, updatedCard);
+        Log.e("testCardList.get()", String.valueOf(testCardList.get(position).toString()));
 
         return flashCardContainerFragment;
     }

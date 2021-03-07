@@ -1,4 +1,4 @@
-package net.project.studyez.account;
+package net.project.studyez.userProfile;
 
 import java.util.Date;
 
