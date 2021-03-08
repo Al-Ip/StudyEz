@@ -17,9 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.ActivityLoginBinding;
+import net.project.studyez.main.MainActivity;
 import net.project.studyez.registration.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.view {

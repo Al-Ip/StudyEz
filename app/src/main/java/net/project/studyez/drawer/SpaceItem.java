@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 // To add space between items in drawer menu
 public class SpaceItem extends DrawerItem<SpaceItem.ViewHolder> {
 
-    private int spaceDp;
+    private final int spaceDp;
 
     public SpaceItem(int spaceDp){
         this.spaceDp = spaceDp;

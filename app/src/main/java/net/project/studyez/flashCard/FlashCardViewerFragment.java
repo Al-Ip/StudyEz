@@ -15,9 +15,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.cards.Card;
+import net.project.studyez.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,10 @@
-package net.project.studyez;
+package net.project.studyez.main;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -19,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
+import net.project.studyez.R;
 import net.project.studyez.dashboard.DashboardFragment;
 import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
@@ -26,13 +28,14 @@ import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
 import net.project.studyez.splashScreen.SplashScreenActivity;
+import net.project.studyez.userProfile.User;
 import net.project.studyez.userProfile.UserProfileFragment;
 import net.project.studyez.view.AboutUsFragment;
 import net.project.studyez.view.SettingsFragment;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener, MainContract.View{
 
     private static final int POS_CLOSE = 0;
     private static final int POS_DASHBOARD = 1;
@@ -48,11 +51,16 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private SlidingRootNav slidingRootNav;
     public Toolbar toolbar;
 
+    private NoUsernameDialog dialog;
+    private MainPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        presenter = new MainPresenter(this);
+        presenter.getUserDetails();
         initToolbar();
 
         slidingRootNav = new SlidingRootNavBuilder(this)
@@ -209,6 +217,35 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         ft.replace(id, fragment, "new").commit();
     }
 
+    public void getEnteredUsernameText(String username) {
+        presenter.setUsername(username);
+    }
 
+    @Override
+    public void displayUserInformationDialog() {
+
+    }
+
+    @Override
+    public void noUsernameFoundDialog(User user) {
+        dialog = new NoUsernameDialog(MainActivity.this, user);
+        dialog.show();
+    }
+
+    @Override
+    public void onRegistrationUpdateSuccess(String message) {
+        dialog.dismiss();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRegistrationUpdateFailure(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onGetUserInfoFailure(String message) {
+        dialog.setUsernameAlreadyTakenError(message);
+    }
 
 }

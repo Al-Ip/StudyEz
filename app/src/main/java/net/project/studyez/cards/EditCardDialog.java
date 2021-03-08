@@ -2,7 +2,6 @@ package net.project.studyez.cards;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class EditCardDialog extends DialogFragment {
 
-    private String getTextQuestion, getTextAnswer;
+    private final String getTextQuestion;
+    private final String getTextAnswer;
     private EditText editTextQuestion, editTextAnswer;
 
     public EditCardDialog(String getTextQuestion, String getTextAnswer){

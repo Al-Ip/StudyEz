@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/customNoUsernameDialogID"
+    android:layout_width="match_parent"
+    android:background="@drawable/layout_card_background_transparent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="8dp"
+        android:text="Uh Oh, Something must have happened and your account does not have a unique Username, Set one now."
+        android:textColor="@color/fireOpal"
+        android:textSize="14sp"
+        app:drawableStartCompat="@drawable/ic_baseline_error_24"
+        android:drawablePadding="8dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/noUsernameTextField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/noUsernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_twotone_tag_faces_24"
+            android:drawablePadding="15dp"
+            android:hint="Enter a Username"
+            android:inputType="textPersonName|text|textCapSentences|textAutoCorrect"
+            android:maxLength="20"
+            android:textSize="18sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/noUsernameButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:text="Add Username!"
+        android:focusable="true" />
+
+
+</LinearLayout>

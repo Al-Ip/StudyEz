@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -71,10 +70,14 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
 
     @Override
     public void displayImageGallery() {
-//        Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        this.startActivityForResult(openGalleryIntent, 1000);
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        this.startActivityForResult(intent, 1000);
+        Intent intent;
+        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setType("image/*");
+        this.startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"),1000);
     }
 
     @Override
@@ -87,6 +90,9 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
                 String uri = imageUri.toString();
                 Picasso.get().load(imageUri).into(profileImage);
                 presenter.imageSelectedSendToDatabase(uri);
+            }
+            else if (resultCode == Activity.RESULT_CANCELED)  {
+                Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -136,7 +142,7 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
 
     @Override
     public void onRegistrationUpdateFailure(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        username.setError(message);
     }
 
     @Override

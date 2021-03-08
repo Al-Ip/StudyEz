@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageOneBinding;
+import net.project.studyez.main.MainActivity;
 
 public class RegContinuedPageOneFragment extends Fragment implements RegContinuedPageOneContract.view{
 
@@ -32,6 +32,7 @@ public class RegContinuedPageOneFragment extends Fragment implements RegContinue
     public void onNextAnimatedButtonClick() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
+        getActivity().onBackPressed();
     }
 
 }

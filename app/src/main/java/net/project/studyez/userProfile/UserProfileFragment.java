@@ -12,9 +12,9 @@ import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentUserProfileBinding;
+import net.project.studyez.main.MainActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,8 +45,10 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
 
     @Override
     public void displayUserInformation(User user) {
-        Uri imageUriParse = Uri.parse(user.getProfileImage());
-        profileImage.setImageURI(imageUriParse);
+        if (user.getProfileImage() != null) {
+            Uri imageUriParse = Uri.parse(user.getProfileImage());
+            profileImage.setImageURI(imageUriParse);
+        }
         username.setText(user.getUsername());
         email.setText(user.getEmail());
     }

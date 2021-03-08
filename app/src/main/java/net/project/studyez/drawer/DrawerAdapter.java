@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder> {
 
-    private List<DrawerItem> items;
-    private Map<Class<? extends DrawerItem>, Integer> viewTypes;
-    private SparseArray<DrawerItem> holderFactories;
+    private final List<DrawerItem> items;
+    private final Map<Class<? extends DrawerItem>, Integer> viewTypes;
+    private final SparseArray<DrawerItem> holderFactories;
 
     private OnItemSelectedListener listener;
 

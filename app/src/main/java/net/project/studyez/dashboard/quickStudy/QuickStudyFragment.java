@@ -22,13 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.ItemClickSupport;
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.cards.Card;
 import net.project.studyez.databinding.FragmentQuickStudyBinding;
 import net.project.studyez.decks.Deck;
 import net.project.studyez.decks.DeckAdapter;
 import net.project.studyez.flashCard.FlashCardViewerFragment;
+import net.project.studyez.main.MainActivity;
 
 import java.util.ArrayList;
 

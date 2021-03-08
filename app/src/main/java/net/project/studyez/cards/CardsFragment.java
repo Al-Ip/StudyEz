@@ -20,9 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragementCardBinding;
+import net.project.studyez.main.MainActivity;
 
 import static net.project.studyez.decks.DecksFragment.deckName;
 

@@ -2,6 +2,7 @@ package net.project.studyez.registration;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -15,7 +16,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import net.project.studyez.userProfile.User;
 
@@ -56,27 +56,28 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
 
     @Override
     public void performFirebaseRegistration(Activity activity, String email, String password) {
-        user.setEmail(email);
-        user.setPassword(password);
-        fAuth.createUserWithEmailAndPassword(user.getEmail(), user.getPassword())
-                .addOnCompleteListener(task -> {
-                    if(!task.isSuccessful()){
-                        mOnRegistrationListener.onRegFailure(task.getException().getMessage());
-                    }
-                    else{
-                        docRef = fStore.collection("users")
-                                .document(task.getResult().getUser().getUid());
-                        docRef.set(user).addOnCompleteListener(task1 -> {
-                            if (!task1.isSuccessful()) {
-                                mOnRegistrationListener.onRegFailure(task1.getException().getMessage());
-                            }
-                            else {
-                                mOnRegistrationListener.onRegSuccess(task.getResult().getUser());
-                            }
-                        });
-                        //mOnRegistrationListener.onRegSuccess(task.getResult().getUser());
-                    }
-                });
+        fAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(task -> {
+                if(!task.isSuccessful()){
+                    mOnRegistrationListener.onRegFailure(task.getException().getMessage());
+                }
+                else{
+                    user.setId(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    docRef = fStore.collection("users")
+                            .document(task.getResult().getUser().getUid());
+                    docRef.set(user).addOnCompleteListener(task1 -> {
+                        if (!task1.isSuccessful()) {
+                            mOnRegistrationListener.onRegFailure("Error Registering Account, Try again!");
+                            Log.e("Register Error", task.getException().getMessage());
+                        }
+                        else {
+                            mOnRegistrationListener.onRegSuccess(task.getResult().getUser());
+                        }
+                    });
+                }
+            });
     }
 
     @Override
@@ -87,36 +88,29 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
         fUser.updateProfile(profileUpdates);
 
         query = fStore.collection("users").whereEqualTo("username", username);
-        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()){
-                    for(DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
-                        String user = documentSnapshot.getString("username");
-                        assert user != null;
-                        if(user.equals(username)){
-                            onRegistrationUpdateListener.onRegUpdateFailure("Username Already Exists. Try Another!");
-                        }
+        query.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                for(DocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
+                    String user = documentSnapshot.getString("username");
+                    assert user != null;
+                    if(user.equals(username)){
+                        onRegistrationUpdateListener.onRegUpdateFailure("Username Already Exists. Try Another!");
                     }
                 }
-                if(task.getResult().size() == 0 ){
-                    //You can store new user information here
-                    docRef = fStore.collection("users")
-                            .document(fUser.getUid());
-                    map.put("id", fUser.getUid());
-                    map.put("username", username);
-                    docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(!task.isSuccessful()){
-                                onRegistrationUpdateListener.onRegUpdateFailure(task.getException().getMessage());
-                            }
-                            else{
-                                onRegistrationUpdateListener.onRegUpdateSuccess("Successfully Added Username to Account!");
-                            }
-                        }
-                    });
-                }
+            }
+            if(task.getResult().size() == 0 ){
+                //You can store new user information here
+                docRef = fStore.collection("users")
+                        .document(fUser.getUid());
+                map.put("username", username);
+                docRef.update(map).addOnCompleteListener(task1 -> {
+                    if(!task1.isSuccessful()){
+                        onRegistrationUpdateListener.onRegUpdateFailure("Error: Check if connected to Internet");
+                    }
+                    else{
+                        onRegistrationUpdateListener.onRegUpdateSuccess("Successfully Added Username to Account!");
+                    }
+                });
             }
         });
     }

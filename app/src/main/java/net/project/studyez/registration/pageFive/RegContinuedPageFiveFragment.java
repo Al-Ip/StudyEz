@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedPageFiveBinding;
+import net.project.studyez.main.MainActivity;
 import net.project.studyez.registration.RegisterActivity;
 
 public class RegContinuedPageFiveFragment extends Fragment implements RegContinuedPageFiveContract.view {

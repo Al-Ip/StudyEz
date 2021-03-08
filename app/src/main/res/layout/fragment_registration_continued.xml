@@ -52,13 +52,28 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:text="Great, your account is created. But you need a unique Username before you can continue"
+            android:text="Great, your account is created. You need a unique Username before you can continue"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageWhiteLine3" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="Add a profile picture:"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/mainPageNextButton"
@@ -81,9 +96,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{presenter::clickAddProfilePicture}"
@@ -94,17 +108,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameTextField"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            app:counterEnabled="true"
-            app:counterMaxLength="20"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="284dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
             app:errorEnabled="true"
             app:layout_constraintBottom_toTopOf="@+id/mainPageNextButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +133,7 @@
                 android:drawableStart="@drawable/ic_twotone_tag_faces_24"
                 android:drawablePadding="15dp"
                 android:hint="Enter a Username"
-                android:inputType="textPersonName|text|textCapSentences"
+                android:inputType="textPersonName|text|textCapSentences|textAutoCorrect"
                 android:maxLength="20"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>

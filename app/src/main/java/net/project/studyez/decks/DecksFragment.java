@@ -15,10 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import net.project.studyez.ItemClickSupport;
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
+import net.project.studyez.main.MainActivity;
 
 import javax.inject.Inject;
 

@@ -16,7 +16,7 @@ import net.project.studyez.R;
 
 public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.CardHolder> {
 
-    private FirestoreRecyclerOptions<Card> options;
+    private final FirestoreRecyclerOptions<Card> options;
     String cardID;
     CardPresenter presenter;
     String question, answer;
@@ -67,10 +67,10 @@ public class CardAdapter extends FirestoreRecyclerAdapter<Card, CardAdapter.Card
 
         public CardHolder(@NonNull View itemView) {
             super(itemView);
-            frontText = (TextView) itemView.findViewById(R.id.cardFrontText);
-            backText = (TextView) itemView.findViewById(R.id.cardBackText);
-            deleteCardButton = (ImageButton) itemView.findViewById(R.id.deleteCardButton);
-            editCardButton = (ImageButton) itemView.findViewById(R.id.editCardButton);
+            frontText = itemView.findViewById(R.id.cardFrontText);
+            backText = itemView.findViewById(R.id.cardBackText);
+            deleteCardButton = itemView.findViewById(R.id.deleteCardButton);
+            editCardButton = itemView.findViewById(R.id.editCardButton);
         }
     }
 }

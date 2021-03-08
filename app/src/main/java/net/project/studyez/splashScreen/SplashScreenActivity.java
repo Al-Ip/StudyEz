@@ -16,11 +16,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.adapters.ScreenSlideAdapter;
 import net.project.studyez.introduction.IntroductionFragment1;
+import net.project.studyez.main.MainActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ScreenSlideAdapter pagerAdapter;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser fUser;
 
     Animation anim;
 
@@ -54,14 +56,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         appName.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
         progBar.animate().translationY(1400).setDuration(1000).setStartDelay(4000);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // check if the user is logged in
-                if(firebaseAuth.getCurrentUser() != null){
+                if(fUser != null){
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }

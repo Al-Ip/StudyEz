@@ -9,10 +9,10 @@ import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import net.project.studyez.MainActivity;
 import net.project.studyez.R;
 import net.project.studyez.dashboard.quickStudy.QuickStudyFragment;
 import net.project.studyez.databinding.FragmentDashboardBinding;
+import net.project.studyez.main.MainActivity;
 
 public class DashboardFragment extends Fragment implements DashboardContract.view {
 
