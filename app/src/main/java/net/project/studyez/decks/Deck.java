@@ -25,6 +25,15 @@ public class Deck {
         this.image = image;
     }
 
+    public Deck(String creatorID, String name, String dateTimeCreated, String creator, int numCards) {
+        this.creatorID = creatorID;
+        this.name = name;
+        this.dateTimeCreated = dateTimeCreated;
+        this.creator = creator;
+        this.numCards = numCards;
+    }
+
+
     public String getName() {
         return name;
     }

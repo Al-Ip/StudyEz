@@ -43,7 +43,11 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards) {
-        deck = new Deck(fUser.getUid(), deckName, dateTime,  fUser.getDisplayName(), numCards, fUser.getPhotoUrl().toString());
+        if(fUser.getPhotoUrl() == null)
+            deck = new Deck(fUser.getUid(), deckName, dateTime,  fUser.getDisplayName(), numCards);
+        else
+            deck = new Deck(fUser.getUid(), deckName, dateTime,  fUser.getDisplayName(), numCards, fUser.getPhotoUrl().toString());
+
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())

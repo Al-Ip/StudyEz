@@ -28,11 +28,18 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
 
     @Override
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
-        Uri imageUriParse = Uri.parse(deck.getImage());
-        deckHolder.deckName.setText(deck.getName());
-        deckHolder.creatorText.setText(deck.getCreator());
-        deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
-        deckHolder.userImage.setImageURI(imageUriParse);
+        if(deck.getImage() != null){
+            Uri imageUriParse = Uri.parse(deck.getImage());
+            deckHolder.deckName.setText(deck.getName());
+            deckHolder.creatorText.setText(deck.getCreator());
+            deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
+            deckHolder.userImage.setImageURI(imageUriParse);
+        }
+        else {
+            deckHolder.deckName.setText(deck.getName());
+            deckHolder.creatorText.setText(deck.getCreator());
+            deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
+        }
     }
 
     @NonNull
