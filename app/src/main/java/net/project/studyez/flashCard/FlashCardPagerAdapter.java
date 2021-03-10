@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import net.project.studyez.cards.Card;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,13 @@ public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
     private static final float WIDTH_SCALE = 0.95f;
 
     private final int count;
-    private final List<Card> testCardList;
+    private final List<Card> cardList;
+
+    private final long baseId = 0;
 
     public FlashCardPagerAdapter(FragmentManager fragmentManager, List<Card> cards) {
-        super(fragmentManager);
-        this.testCardList = cards;
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.cardList = cards;
         this.count = cards.size();
     }
 
@@ -31,19 +35,34 @@ public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
      * @param position
      * @return
      */
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         FlashCardContainerFragment flashCardContainerFragment = new FlashCardContainerFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(CARD, testCardList.get(position));
+        bundle.putParcelable(CARD, cardList.get(position));
         flashCardContainerFragment.setArguments(bundle);
+        Log.e("(1)AdapterCard_position", String.valueOf(cardList.size()));
 
         bundle = flashCardContainerFragment.getArguments();
+        assert bundle != null;
         Card updatedCard = bundle.getParcelable(CARD);
-        testCardList.set(position, updatedCard);
-        Log.e("testCardList.get()", String.valueOf(testCardList.get(position).toString()));
+        cardList.set(position, updatedCard);
+
+        Log.e("(3)CardtoString", updatedCard.toString());
 
         return flashCardContainerFragment;
+    }
+
+    void deleteCurrentPage(int position) {
+//        if (canDelete()) {
+//            cardList.remove(position);
+//            notifyDataSetChanged();
+//        }
+    }
+
+    boolean canDelete() {
+        return cardList.size() > 0;
     }
 
     @Override
@@ -67,9 +86,10 @@ public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
         return WIDTH_SCALE;
     }
 
+
     public ArrayList<Card> getStarredCards() {
         ArrayList<Card> starredCards = new ArrayList<>();
-        for (Card card : testCardList) {
+        for (Card card : cardList) {
             if (card.isStarred()) {
                 starredCards.add(card);
             }
@@ -79,6 +99,6 @@ public class FlashCardPagerAdapter extends FragmentStatePagerAdapter {
 
     public boolean isShowingStarred() {
         ArrayList<Card> starredCards = this.getStarredCards();
-        return starredCards.size() == testCardList.size();
+        return starredCards.size() == cardList.size();
     }
 }

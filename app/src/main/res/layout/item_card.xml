@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/flashcard_cardview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center|center_vertical"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="20dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginBottom="20dp"
-    android:background="@color/cardview_light_background"
-    android:stateListAnimator="@null"
-    app:cardUseCompatPadding="true">
+    android:background="?attr/selectableItemBackground"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@android:color/white">
 
     <ImageButton
         android:id="@+id/starButton"
@@ -59,5 +58,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-</FrameLayout>
+</androidx.cardview.widget.CardView>

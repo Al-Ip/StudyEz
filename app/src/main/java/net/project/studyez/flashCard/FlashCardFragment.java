@@ -3,6 +3,7 @@ package net.project.studyez.flashCard;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import static net.project.studyez.flashCard.FlashCardContainerFragment.FLIPPED;
 
 public class FlashCardFragment extends Fragment {
 
-    private TextView cardText;
+    public static  TextView cardText;
     private ImageButton starButton;
     private ImageButton speakButton;
 
@@ -35,9 +36,13 @@ public class FlashCardFragment extends Fragment {
         speakButton = view.findViewById(R.id.speakButton);
 
         final Bundle bundle = this.getArguments();
+        assert bundle != null;
         final Card card = bundle.getParcelable(FlashCardPagerAdapter.CARD);
 
         boolean cardFlipped = bundle.getByte(FLIPPED) != 0;
+
+        // Scroll long text cards
+        cardText.setMovementMethod(new ScrollingMovementMethod());
 
         // Change camera perspective to not have the flip animation be distorted
         float scale = getResources().getDisplayMetrics().density;
@@ -47,6 +52,7 @@ public class FlashCardFragment extends Fragment {
         if (cardFlipped) {
             cardText.setText(card.getAnswer());
         } else {
+            cardText.setMovementMethod(null);
             cardText.setText(card.getQuestion());
         }
 
@@ -96,4 +102,5 @@ public class FlashCardFragment extends Fragment {
 
         return view;
     }
+
 }

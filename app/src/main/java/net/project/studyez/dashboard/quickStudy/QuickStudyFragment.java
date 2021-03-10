@@ -27,7 +27,7 @@ import net.project.studyez.cards.Card;
 import net.project.studyez.databinding.FragmentQuickStudyBinding;
 import net.project.studyez.decks.Deck;
 import net.project.studyez.decks.DeckAdapter;
-import net.project.studyez.flashCard.FlashCardViewerFragment;
+import net.project.studyez.flashCard.NewFlashcardFragment;
 import net.project.studyez.main.MainActivity;
 
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             docID = position;
             deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
-            presenter.shortPressOnDeck(new FlashCardViewerFragment(), R.id.main_container);
+            presenter.shortPressOnDeck(new NewFlashcardFragment(), R.id.main_container);
         });
 
         return view;

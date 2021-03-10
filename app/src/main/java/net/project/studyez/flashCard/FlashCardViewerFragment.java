@@ -2,6 +2,7 @@ package net.project.studyez.flashCard;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.fragment_flashcard_viewer, container, false);
 
-        pager = root.findViewById(R.id.pager);
+        pager = root.findViewById(R.id.flashcardPager);
         toolbar = root.findViewById(R.id.flashcardToolbar);
 
         initToolbar();
@@ -73,9 +74,6 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 pager.setCurrentItem(i);
-                if(pager.getCurrentItem() == cardList.size()){
-                    Toast.makeText(getContext(), "Finished all the cards in deck", Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
@@ -108,6 +106,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     @Override
     public void displayFlashCards(List list) {
         cardList = list;
+        Log.e("(2)disFlashCardListSize", String.valueOf(cardList.size()));
         pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), cardList);
         pager.setAdapter(pagerAdapter);
     }

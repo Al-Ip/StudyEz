@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,11 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Front:"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/frontEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,11 +22,15 @@
         android:id="@+id/frontEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="start|top"
+        android:hint="Write a Question here..."
         android:layout_marginLeft="14dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="14dp"
+        android:isScrollContainer="true"
+        android:maxLines="3"
         android:ems="10"
-        android:inputType="textCapSentences|textAutoCorrect"
+        android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frontText" />
@@ -36,11 +40,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Back:"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/backEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frontEditText" />
 
@@ -50,11 +55,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginRight="14dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
+        android:gravity="start|top"
+        android:maxLines="10"
+        android:hint="Write the Answer here..."
         android:inputType="textCapSentences|textAutoCorrect|textMultiLine"
+        android:isScrollContainer="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backText" />

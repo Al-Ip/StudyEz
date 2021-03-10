@@ -111,6 +111,16 @@ public class Card extends Deck implements Parcelable {
         return colorCode.get(number);
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "deckName='" + deckName + '\'' +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", isStarred=" + isStarred +
+                ", dateTimeCreated='" + dateTimeCreated + '\'' +
+                '}';
+    }
 
     @Override
     public int describeContents() {

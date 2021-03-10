@@ -2,12 +2,15 @@ package net.project.studyez.flashCard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
+
+import java.util.Calendar;
 
 public class FlashCardContainerFragment extends Fragment {
 
@@ -17,6 +20,9 @@ public class FlashCardContainerFragment extends Fragment {
     private FlashCardFragment frontFlashCardFragment;
     private FlashCardFragment backFlashCardFragment;
     private boolean cardFlipped;
+
+    private static final int MAX_CLICK_DURATION = 200;
+    private long startClickTime;
 
     public FlashCardContainerFragment() {
         setHasOptionsMenu(true);
@@ -49,12 +55,30 @@ public class FlashCardContainerFragment extends Fragment {
                 .commit();
 
         // Flip the card once touched
-        rootView.setOnClickListener(new View.OnClickListener() {
+        rootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                flipCard();
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        startClickTime = Calendar.getInstance().getTimeInMillis();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
+                        if(clickDuration < MAX_CLICK_DURATION) {
+                            flipCard();
+                        }
+                    }
+                }
+                return true;
             }
         });
+//        rootView.getRootView().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                flipCard();
+//            }
+//        });
 
         return rootView;
     }
