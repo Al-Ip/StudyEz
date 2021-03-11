@@ -12,7 +12,7 @@
     <color name="selected_icon_tint">#A9C0DA</color>
 
     <!--  Card colors  -->
-    <color name="custom_background_grey">#F3F3F3</color>
+    <color name="custom_background_grey">#E9F3F3F3</color>
     <color name="silverPink">#D0B8AC</color>
     <color name="canary">#B6B668</color>
     <color name="grannySmithApple">#B5D99C</color>

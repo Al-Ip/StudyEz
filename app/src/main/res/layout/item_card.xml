@@ -4,12 +4,14 @@
     android:id="@+id/flashcard_cardview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground"
+    android:background="#FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
-    app:cardUseCompatPadding="true"
-    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="8dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
     <ImageButton
         android:id="@+id/starButton"
@@ -35,27 +37,65 @@
         android:tint="@android:color/darker_gray"
         app:srcCompat="@drawable/ic_volume_up_black_48dp" />
 
-    <TextView
-        android:id="@+id/cardText"
+
+    <RelativeLayout
+        android:id="@+id/card_back"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:gravity="center"
-        android:nestedScrollingEnabled="true"
-        android:scrollIndicators="top"
-        android:scrollbarStyle="insideOverlay"
-        android:scrollbars="vertical"
-        android:text="This is the card contents."
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/fireOpal"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cardBackText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:nestedScrollingEnabled="true"
+            android:scrollIndicators="top"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:text="This is the back card contents."
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/card_front"
+        android:layout_width="match_parent"
+        android:background="@color/fireOpal"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cardFrontText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:nestedScrollingEnabled="true"
+            android:scrollIndicators="top"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:text="This is the front card contents."
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

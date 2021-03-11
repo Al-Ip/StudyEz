@@ -23,7 +23,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <SeekBar
-        android:id="@+id/deckSeekBar"
+        android:id="@+id/seekBar"
         style="@android:style/Widget.Material.SeekBar"
         android:layout_width="0dp"
         android:layout_height="20dp"
@@ -44,6 +44,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deckSeekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

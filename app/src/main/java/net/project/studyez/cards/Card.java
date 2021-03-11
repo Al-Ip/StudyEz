@@ -18,6 +18,7 @@ public class Card extends Deck implements Parcelable {
     private String answer;
     private boolean isStarred;
     private String dateTimeCreated;
+    boolean isFlipped;
 
     public Card(){}
 
@@ -72,6 +73,14 @@ public class Card extends Deck implements Parcelable {
 
     public void setDateTimeCreated(String dateTimeCreated) {
         this.dateTimeCreated = dateTimeCreated;
+    }
+
+    public boolean isFlipped() {
+        return isFlipped;
+    }
+
+    public void setFlipped(boolean flipped) {
+        isFlipped = flipped;
     }
 
     public void toggleStarred() {

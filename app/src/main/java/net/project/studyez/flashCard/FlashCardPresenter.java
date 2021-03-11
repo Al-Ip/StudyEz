@@ -1,5 +1,7 @@
 package net.project.studyez.flashCard;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.firestore.QuerySnapshot;
 
 import net.project.studyez.cards.Card;
@@ -24,10 +26,15 @@ public class FlashCardPresenter implements FlashCardContract.presenter, FlashCar
         mInteractor.getCardsToDisplayOnFlashcards();
     }
 
+    @Override
+    public void finishedCards(Fragment fragment, int id) {
+        mView.changeFragment(fragment, id);
+    }
+
 
     @Override
     public void onGetSuccess(QuerySnapshot querySnapshot) {
-        mView.displayFlashCards(querySnapshot.toObjects(Card.class));
+        mView.initFlashCards(querySnapshot.toObjects(Card.class));
     }
 
     @Override

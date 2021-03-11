@@ -10,12 +10,13 @@ public interface FlashCardContract {
 
     interface view{
         void changeFragment(Fragment fragment, int id);
-        void displayFlashCards(List list);
+        void initFlashCards(List list);
     }
 
     interface presenter{
         void clickFlashCard();
         void getCardsFromDeck();
+        void finishedCards(Fragment fragment, int id);
     }
 
     interface Interactor{

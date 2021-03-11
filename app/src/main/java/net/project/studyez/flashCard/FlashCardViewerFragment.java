@@ -48,7 +48,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
         flashCardPresenter.getCardsFromDeck();
 
         // Creating the seek bar
-        deckSeekBar = root.findViewById(R.id.deckSeekBar);
+        deckSeekBar = root.findViewById(R.id.seekBar);
         deckSeekBar.setMax(cardList.size()-1);
 
         // Change the seek bar progress when cards are swiped
@@ -104,7 +104,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
     }
 
     @Override
-    public void displayFlashCards(List list) {
+    public void initFlashCards(List list) {
         cardList = list;
         Log.e("(2)disFlashCardListSize", String.valueOf(cardList.size()));
         pagerAdapter = new FlashCardPagerAdapter(getFragmentManager(), cardList);
@@ -161,7 +161,7 @@ public class FlashCardViewerFragment extends Fragment implements FlashCardContra
 
     @Override
     public void changeFragment(Fragment fragment, int id) {
-
+        ((MainActivity) getActivity()).changeFragment(fragment, id);
     }
 
 }

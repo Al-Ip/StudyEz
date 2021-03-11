@@ -66,7 +66,7 @@ public class FlashCardContainerFragment extends Fragment {
                     case MotionEvent.ACTION_UP: {
                         long clickDuration = Calendar.getInstance().getTimeInMillis() - startClickTime;
                         if(clickDuration < MAX_CLICK_DURATION) {
-                            flipCard();
+                            //flipCard();
                         }
                     }
                 }
@@ -87,24 +87,24 @@ public class FlashCardContainerFragment extends Fragment {
      * Swaps the visible fragment with the other fragment (the other side of the card)
      * Animates the transition between the change with a flip animation.
      */
-    public void flipCard() {
-        Fragment fragment;
-        if (cardFlipped) {
-            fragment = frontFlashCardFragment;
-        } else {
-            fragment = backFlashCardFragment;
-        }
-
-        getChildFragmentManager()
-                .beginTransaction()
-                .setCustomAnimations(
-                        R.anim.card_flip_left_in,
-                        R.anim.card_flip_left_out,
-                        R.anim.card_flip_right_in,
-                        R.anim.card_flip_right_out)
-                .replace(R.id.flashcard_Frame, fragment)
-                .commit();
-
-        cardFlipped = !cardFlipped;
-    }
+//    public void flipCard() {
+//        Fragment fragment;
+//        if (cardFlipped) {
+//            fragment = frontFlashCardFragment;
+//        } else {
+//            fragment = backFlashCardFragment;
+//        }
+//
+//        getChildFragmentManager()
+//                .beginTransaction()
+//                .setCustomAnimations(
+//                        R.anim.card_flip_left_in,
+//                        R.anim.card_flip_left_out,
+//                        R.anim.card_flip_right_in,
+//                        R.anim.card_flip_right_out)
+//                .replace(R.id.flashcard_Frame, fragment)
+//                .commit();
+//
+//        cardFlipped = !cardFlipped;
+//    }
 }
