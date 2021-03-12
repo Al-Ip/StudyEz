@@ -17,7 +17,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import net.project.studyez.userProfile.User;
+import net.project.studyez.user_profile.User;
 
 import java.util.HashMap;
 import java.util.Map;

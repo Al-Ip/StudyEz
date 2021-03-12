@@ -23,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentRegistrationContinuedBinding;
-import net.project.studyez.registration.pageOne.RegContinuedPageOneFragment;
+import net.project.studyez.registration.finished.RegistrationFinishedFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -137,7 +137,7 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
     @Override
     public void onRegistrationUpdateSuccess(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        presenter.doChangeFragment(new RegContinuedPageOneFragment(), R.id.registerLayout);
+        presenter.doChangeFragment(new RegistrationFinishedFragment(), R.id.registerLayout);
     }
 
     @Override

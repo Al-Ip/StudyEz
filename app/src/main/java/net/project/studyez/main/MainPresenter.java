@@ -1,6 +1,6 @@
 package net.project.studyez.main;
 
-import net.project.studyez.userProfile.User;
+import net.project.studyez.user_profile.User;
 
 public class MainPresenter implements MainContract.Presenter, MainContract.onGetInfoListener, MainContract.onRegistrationUpdateListener {
 

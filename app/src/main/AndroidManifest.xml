@@ -39,7 +39,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".splashScreen.SplashScreenActivity"
+            android:name=".splash_screen.SplashScreenActivity"
             android:theme="@style/Theme.StudyEz.NoActionBar"
             android:noHistory="true">
             <intent-filter>

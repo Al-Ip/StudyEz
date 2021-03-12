@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import net.project.studyez.R;
-import net.project.studyez.userProfile.User;
+import net.project.studyez.user_profile.User;
 
 public class NoUsernameDialog extends Dialog implements View.OnClickListener {
 

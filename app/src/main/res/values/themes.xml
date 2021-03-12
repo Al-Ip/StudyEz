@@ -7,6 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -20,6 +21,7 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.StudyEz.QuickStudy">
@@ -31,6 +33,7 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="Theme.StudyEz.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -71,10 +74,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
-    <style name="DatePickerSpinner">
-        <item name="android:textSize">22dp</item>
-        <item name="android:textColorPrimary">@color/default_blue</item>
-        <item name="android:colorControlNormal" tools:targetApi="1">?attr/colorPrimaryVariant</item>
+    <!-- BottomSheetDialog -->
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/layout_card_background_transparent</item>
+    </style>
+
+
 
 </resources>

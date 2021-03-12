@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import net.project.studyez.userProfile.User;
+import net.project.studyez.user_profile.User;
 
 import java.util.HashMap;
 import java.util.Map;

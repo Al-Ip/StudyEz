@@ -26,10 +26,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     public int docID;
     public static String deckName;
-
     @Inject
     public DeckPresenter deckPresenter;
-
     private RecyclerView deckRecyclerView;
     private ImageView emptyDeck;
 
@@ -91,12 +89,18 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void changeFragment(Fragment fragment, int id) {
-        ((MainActivity) getActivity()).changeFragment(fragment, id);
+        ((MainActivity) getActivity()).changeFragment(fragment, id, true);
     }
 
     @Override
     public void displayNumOfCardsInDeck(int numCards) {
         Toast.makeText(getContext(), "In Deck Now... " + numCards + " Total cards in this deck!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayMenu() {
+        MenuDeckDialog menuDeckDialog = new MenuDeckDialog();
+        menuDeckDialog.show(getChildFragmentManager(), "Deck Menu Dialog");
     }
 
     @Override
@@ -117,8 +121,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void displayDeleteDeckPopupWindow() {
-        DeleteDeckDialog newFragment = new DeleteDeckDialog();
-        newFragment.show(getChildFragmentManager(), "Delete Deck Dialog");
+        DeleteDeckDialog deleteDeckDialog = new DeleteDeckDialog();
+        deleteDeckDialog.show(getChildFragmentManager(), "Delete Deck Dialog");
     }
 
     @Override

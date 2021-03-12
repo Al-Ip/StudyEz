@@ -82,7 +82,6 @@ dependencies {
 
     // Application dependency injection
     implementation 'com.google.dagger:dagger:2.15'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.google.dagger:dagger-android:2.15' // If you're using classes in dagger.android
     implementation 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries

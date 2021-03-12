@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,9 +28,9 @@ import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
-import net.project.studyez.splashScreen.SplashScreenActivity;
-import net.project.studyez.userProfile.User;
-import net.project.studyez.userProfile.UserProfileFragment;
+import net.project.studyez.splash_screen.SplashScreenActivity;
+import net.project.studyez.user_profile.User;
+import net.project.studyez.user_profile.UserProfileFragment;
 import net.project.studyez.view.AboutUsFragment;
 import net.project.studyez.view.SettingsFragment;
 
@@ -143,7 +144,10 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
             finish();
         }
         else {
-            getSupportFragmentManager().popBackStack();
+            if(!getSupportActionBar().isShowing()) {
+                getSupportActionBar().show();
+                getSupportFragmentManager().popBackStack();
+            }
         }
     }
 
@@ -211,10 +215,19 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         transaction.commit();
     }
 
-    public void changeFragment(Fragment fragment, int id) {
+    public void changeFragment(Fragment fragment, int id, boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (addToBackStack) {
+            ft.addToBackStack(null);
+
+        } else {
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        }
         ft.addToBackStack(null);//add the transaction to the back stack so the user can navigate back
         ft.replace(id, fragment, "new").commit();
+        getSupportFragmentManager().executePendingTransactions();
     }
 
     public void getEnteredUsernameText(String username) {

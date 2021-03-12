@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.userProfile.UserProfilePresenter" />
+            type="net.project.studyez.user_profile.UserProfilePresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".userProfile.UserProfileFragment">
+        tools:context=".user_profile.UserProfileFragment">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userProfile_Image"

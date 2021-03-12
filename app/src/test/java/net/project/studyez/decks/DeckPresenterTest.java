@@ -95,7 +95,7 @@ public class DeckPresenterTest {
     @Test
     public void long_press_on_deck() {
         presenter.longPressOnDeck();
-        verify(view).displayDeleteDeckPopupWindow();
+        verify(view).displayMenu();
     }
 
     @Test

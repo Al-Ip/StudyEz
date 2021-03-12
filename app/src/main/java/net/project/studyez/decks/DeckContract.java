@@ -14,6 +14,7 @@ public interface DeckContract {
 
     interface view{
         void displayNumOfCardsInDeck(int numCards);
+        void displayMenu();
         void displayEmptyDeckMessage();
         void hideEmptyDeckMessage();
         void displayCreateDeckPopupWindow();
@@ -37,6 +38,7 @@ public interface DeckContract {
         void showEmptyDeckMessage();
         void hideEmptyDeckMessage();
     }
+
 
     interface Interactor{
         void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards);

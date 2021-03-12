@@ -48,7 +48,7 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
 
     @Override
     public void longPressOnDeck() {
-        mView.displayDeleteDeckPopupWindow();
+        mView.displayMenu();
     }
 
     @Override

@@ -17,6 +17,7 @@
 
     <!-- Toolbar Sub Titles -->
     <string name="toolbar_quickStudy">Quick Study</string>
+    <string name="toolbar_studySessionCompleted">"Study Session Completed!"</string>
 
     <!-- Component ID's -->
     <string name="Deck_Fab">DeckFAB</string>

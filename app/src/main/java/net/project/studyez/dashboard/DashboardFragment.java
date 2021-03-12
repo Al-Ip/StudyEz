@@ -33,7 +33,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.vie
 
     @Override
     public void changeFragment(Fragment fragment, int id) {
-        ((MainActivity) getActivity()).changeFragment(fragment, id);
+        ((MainActivity) getActivity()).changeFragment(fragment, id, true);
     }
 
     @Override
