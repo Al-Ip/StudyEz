@@ -120,7 +120,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/deckName">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/deckUserProfileImage"
                     android:layout_width="32dp"
                     android:layout_height="32dp"

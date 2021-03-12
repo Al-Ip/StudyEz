@@ -1,8 +1,10 @@
-package net.project.studyez;
+package net.project.studyez.EXTERNAL;
 
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import net.project.studyez.R;
 
 
 public class ItemClickSupport {

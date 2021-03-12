@@ -27,6 +27,7 @@ import net.project.studyez.registration.finished.RegistrationFinishedFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class RegistrationContinuedFragment extends Fragment implements RegistrationContract.View {
 
     private RegistrationPresenter presenter;

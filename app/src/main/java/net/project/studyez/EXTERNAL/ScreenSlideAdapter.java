@@ -1,4 +1,4 @@
-package net.project.studyez.adapters;
+package net.project.studyez.EXTERNAL;
 
 import android.view.ViewGroup;
 

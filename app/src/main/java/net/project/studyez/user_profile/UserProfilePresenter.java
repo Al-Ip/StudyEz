@@ -24,6 +24,22 @@ public class UserProfilePresenter implements UserProfileContract.Presenter, User
     }
 
     @Override
+    public void menuClickFiles() {
+        mView.displayFileSelector();
+    }
+
+    @Override
+    public void menuClickCamera() {
+        mView.displayPhoneCamera();
+    }
+
+    @Override
+    public void menuClickDelete() {
+        mView.removeProfilePicture();
+    }
+
+
+    @Override
     public void getUserDetails() {
         mInteractor.getUserDetailsFromFirebase();
     }
@@ -31,6 +47,11 @@ public class UserProfilePresenter implements UserProfileContract.Presenter, User
     @Override
     public void clickUpdateProfileButton(View view) {
         mView.updateButtonClick("Clicked Update Button, Will be implemented soon");
+    }
+
+    @Override
+    public void clickProfilePicture(View view) {
+        mView.displayProfilePictureMenu();
     }
 
     @Override

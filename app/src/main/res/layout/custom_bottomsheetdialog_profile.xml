@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+    <TextView
+        android:id="@+id/filesTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="24dp"
+        android:padding="16dp"
+        android:text="Select From Files"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_baseline_image_search_24" />
+
+    <TextView
+        android:id="@+id/cameraTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="24dp"
+        android:padding="16dp"
+        android:text="Take a Picture With Camera"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_baseline_camera_alt_24" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/dp_8"
+
+        android:layout_marginTop="@dimen/md_bottom_sheet_separator_top_margin"
+        android:background="#E98F8F8F" />
+
+    <TextView
+        android:id="@+id/deleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="24dp"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Remove Profile Picture"
+        android:textSize="18sp"
+        app:drawableStartCompat="@drawable/ic_baseline_delete_forever_24" />
+</LinearLayout>

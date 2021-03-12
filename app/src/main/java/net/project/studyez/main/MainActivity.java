@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private String[] screenTitles;
     private Drawable[] screenIcons;
 
-    private SlidingRootNav slidingRootNav;
+    public static SlidingRootNav slidingRootNav;
     public Toolbar toolbar;
 
     private NoUsernameDialog dialog;
@@ -170,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 getSupportFragmentManager().popBackStack();
             }
             else {
-                toolbar.setTitle(R.string.toolbar_profile);
                 UserProfileFragment userProfileFragment = new UserProfileFragment();
                 transaction.replace(R.id.main_container, userProfileFragment);
             }

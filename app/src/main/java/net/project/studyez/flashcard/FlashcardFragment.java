@@ -47,7 +47,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
     private int seekBarCounter = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.new__fragment_quickstudy, container, false);
+        View root = inflater.inflate(R.layout.fragment_study, container, false);
 
         presenter = new FlashCardPresenter(this);
         toolbar = root.findViewById(R.id.flashcardToolbar);

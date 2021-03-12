@@ -18,7 +18,6 @@ public interface DeckContract {
         void displayEmptyDeckMessage();
         void hideEmptyDeckMessage();
         void displayCreateDeckPopupWindow();
-        void displayDeleteDeckPopupWindow();
         void onDeckCreationSuccess(String message);
         void onDeckCreationFailure(String message);
         void onDeckDeletionSuccess(String message);

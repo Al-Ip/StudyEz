@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import net.project.studyez.ItemClickSupport;
+import net.project.studyez.EXTERNAL.ItemClickSupport;
 import net.project.studyez.R;
 import net.project.studyez.cards.Card;
 import net.project.studyez.databinding.FragmentQuickStudyBinding;

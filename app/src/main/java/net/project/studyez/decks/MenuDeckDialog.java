@@ -26,7 +26,7 @@ public class MenuDeckDialog extends BottomSheetDialogFragment {
     @NotNull
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.custom_dialog_menu_deck, container, false);
+        View view = inflater.inflate(R.layout.custom_bottomsheetdialog_deck, container, false);
 
         update = view.findViewById(R.id.updateTextView);
         makePublic = view.findViewById(R.id.makePublicTextView);

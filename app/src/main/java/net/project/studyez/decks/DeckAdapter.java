@@ -17,6 +17,7 @@ import net.project.studyez.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
     private final FirestoreRecyclerOptions<Deck> options;

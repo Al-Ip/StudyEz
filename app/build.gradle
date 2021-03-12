@@ -12,7 +12,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,7 +40,6 @@ android {
 apply plugin: 'com.google.gms.google-services'
 
 dependencies {
-
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation "com.airbnb.android:lottie:3.6.0"
     implementation 'com.google.firebase:firebase-analytics'
@@ -74,11 +72,25 @@ dependencies {
     implementation 'com.cuberto:liquid-swipe:1.0.0'
     implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
     implementation 'com.github.drawers:SpinnerDatePicker:2.0.1'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:3.0.0'
+    //dexter permissions
+    implementation "com.karumi:dexter:6.2.2"
+    // circular imageview
+    //implementation 'com.mikhaellopez:circularimageview:4.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.github.bumptech.glide:annotations:4.9.0'
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.0.0') {
+        exclude group: 'glide-parent'
+    }
+    annotationProcessor 'androidx.annotation:annotation:1.1.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    implementation 'com.github.yalantis:ucrop:2.2.6'
 
     // Application dependency injection
     implementation 'com.google.dagger:dagger:2.15'

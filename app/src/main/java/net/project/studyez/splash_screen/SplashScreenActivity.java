@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import net.project.studyez.R;
-import net.project.studyez.adapters.ScreenSlideAdapter;
+import net.project.studyez.EXTERNAL.ScreenSlideAdapter;
 import net.project.studyez.introduction.IntroductionFragment1;
 import net.project.studyez.main.MainActivity;
 

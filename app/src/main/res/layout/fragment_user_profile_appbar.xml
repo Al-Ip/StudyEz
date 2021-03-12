@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="presenter"
+            type="net.project.studyez.user_profile.UserProfilePresenter" />
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Theme.StudyEz.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/userProfileToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/default_blue"
+                app:popupTheme="@style/Theme.StudyEz.PopupOverlay" />
+
+            <include layout="@layout/new_fragment_user_profile" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+    <!--    <include layout="@layout/content_main" />-->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

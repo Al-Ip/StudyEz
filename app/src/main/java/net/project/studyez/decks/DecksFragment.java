@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import net.project.studyez.ItemClickSupport;
+import net.project.studyez.EXTERNAL.ItemClickSupport;
 import net.project.studyez.R;
 import net.project.studyez.cards.CardsFragment;
 import net.project.studyez.databinding.FragmentDecksBinding;
@@ -117,12 +117,6 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     public void displayCreateDeckPopupWindow() {
         NewDeckDialog newFragment = new NewDeckDialog();
         newFragment.show(getChildFragmentManager(), "Deck Name Dialog");
-    }
-
-    @Override
-    public void displayDeleteDeckPopupWindow() {
-        DeleteDeckDialog deleteDeckDialog = new DeleteDeckDialog();
-        deleteDeckDialog.show(getChildFragmentManager(), "Delete Deck Dialog");
     }
 
     @Override
