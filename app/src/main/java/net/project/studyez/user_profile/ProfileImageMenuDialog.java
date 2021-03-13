@@ -35,9 +35,9 @@ public class ProfileImageMenuDialog extends BottomSheetDialogFragment {
         camera = view.findViewById(R.id.cameraTextView);
         delete = view.findViewById(R.id.deleteTextView);
 
-        files.setOnClickListener(v ->  userProfilePresenter.menuClickFiles());
-        camera.setOnClickListener(v -> userProfilePresenter.menuClickCamera());
-        delete.setOnClickListener(v -> userProfilePresenter.menuClickDelete());
+//        files.setOnClickListener(v ->  userProfilePresenter.menuClickFiles());
+//        camera.setOnClickListener(v -> userProfilePresenter.menuClickCamera());
+//        delete.setOnClickListener(v -> userProfilePresenter.menuClickDelete());
 
         return view;
     }

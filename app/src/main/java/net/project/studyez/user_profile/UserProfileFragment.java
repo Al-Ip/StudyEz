@@ -1,13 +1,10 @@
 package net.project.studyez.user_profile;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,8 +28,6 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.yalantis.ucrop.UCrop;
-import com.yarolegovich.slidingrootnav.SlidingRootNav;
 
 import net.project.studyez.EXTERNAL.GlideApp;
 import net.project.studyez.EXTERNAL.ImagePickerActivity;
@@ -42,13 +37,8 @@ import net.project.studyez.main.MainActivity;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static net.project.studyez.main.MainActivity.slidingRootNav;
 
@@ -121,8 +111,8 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
     @Override
     public void displayUserInformation(User user) {
         if (user.getProfileImage() != null) {
-//            Uri imageUriParse = Uri.parse(user.getProfileImage());
-//            profileImage.setImageURI(imageUriParse);
+            Uri imageUriParse = Uri.parse(user.getProfileImage());
+            loadProfile(imageUriParse.toString());
         }
         username.setText(user.getUsername());
     }
@@ -137,26 +127,35 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+
+//    @Override
+//    public void displayProfilePictureMenu() {
+//        profileImageMenuDialog = new ProfileImageMenuDialog();
+//        profileImageMenuDialog.show(getChildFragmentManager(), "Profile Menu Dialog");
+//    }
+//    @Override
+//    public void displayFileSelector() {
+//        Log.e("Files", "Clicked on Files");
+//    }
+//
+//    @Override
+//    public void displayPhoneCamera() {
+//        Log.e("Camera", "Clicked on Camera");
+//    }
+//
+//    @Override
+//    public void removeProfilePicture() {
+//        Log.e("Delete", "Clicked on Delete Profile");
+//    }
+
     @Override
-    public void displayProfilePictureMenu() {
-        profileImageMenuDialog = new ProfileImageMenuDialog();
-        profileImageMenuDialog.show(getChildFragmentManager(), "Profile Menu Dialog");
+    public void onProfilePictureSetSuccessfully(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void displayFileSelector() {
-
-    }
-
-
-    @Override
-    public void displayPhoneCamera() {
-        Log.e("Camera", "Clicked on Camera");
-    }
-
-    @Override
-    public void removeProfilePicture() {
-        Log.e("Delete", "Clicked on Delete Profile");
+    public void onProfilePictureSetFailed(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -241,15 +240,11 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
         if (requestCode == REQUEST_IMAGE) {
             if (resultCode == Activity.RESULT_OK) {
                 Uri uri = data.getParcelableExtra("path");
-                try {
-                    // You can update this bitmap to your server
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), uri);
-
-                    // loading profile image from local cache
-                    loadProfile(uri.toString());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // You can update this bitmap to your server
+                // loading profile image from local cache
+                loadProfile(uri.toString());
+                String stringUri = uri.toString();
+                presenter.clickChangeProfileImage(stringUri);
             }
         }
     }

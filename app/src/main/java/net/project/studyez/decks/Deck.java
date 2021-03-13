@@ -9,22 +9,12 @@ public class Deck {
     private String name;
     private String creatorID;
     private String creator;
-    private String image;
     private String dateTimeCreated;
     private int numCards;
 
     public Deck() {}
 
     @Inject
-    public Deck(String creatorID, String name, String dateTimeCreated, String creator, int numCards, String image) {
-        this.creatorID = creatorID;
-        this.name = name;
-        this.dateTimeCreated = dateTimeCreated;
-        this.creator = creator;
-        this.numCards = numCards;
-        this.image = image;
-    }
-
     public Deck(String creatorID, String name, String dateTimeCreated, String creator, int numCards) {
         this.creatorID = creatorID;
         this.name = name;
@@ -32,7 +22,6 @@ public class Deck {
         this.creator = creator;
         this.numCards = numCards;
     }
-
 
     public String getName() {
         return name;
@@ -56,14 +45,6 @@ public class Deck {
 
     public void setCreator(String creator) {
         this.creator = creator;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String creatorImage) {
-        this.image = creatorImage;
     }
 
     public String getDateTimeCreated() {

@@ -10,7 +10,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public interface CardContract {
 
     interface view{
-        void createCardDialogConfirm(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
+        void createCardDialogConfirm(String deckID, String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
         void changeFragment(Fragment fragment, int id);
         void frontAndBackOfCardText(String question, String answer);
         void displayEmptyCardsMessage();
@@ -34,7 +34,7 @@ public interface CardContract {
         void getNumberOfCards(String deckName, int numCards);
         void clickRemoveImage(View view);
         FirestoreRecyclerOptions getCardsFromDeck(Activity activity, String deckName);
-        void getCardDetails(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
+        void getCardDetails(String deckID, String deckName, String question, String answer, String dateTimeCreated, boolean isStarred);
         void editCardDetails(String deckName, String question, String answer, String docID);
         void deleteCardFromFirebase(String deckName, String docID);
         void showEmptyCardsMessage();
@@ -42,7 +42,7 @@ public interface CardContract {
     }
 
     interface Interactor{
-        void addNewCardToFirebase(String deckName, String question, String answer, String dateCreated, boolean isStarred);
+        void addNewCardToFirebase(String deckID, String deckName, String question, String answer, String dateCreated, boolean isStarred);
         FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName);
         void deleteCardFromFirebase(String deckName, String docID);
         void editCardFromFirebase(String deckName, String question, String answer, String docID);

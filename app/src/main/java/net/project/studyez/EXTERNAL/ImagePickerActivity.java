@@ -108,7 +108,7 @@ public class ImagePickerActivity extends AppCompatActivity {
     }
 
     private void takeCameraImage() {
-        Dexter.withActivity(this)
+        Dexter.withContext(this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -131,7 +131,7 @@ public class ImagePickerActivity extends AppCompatActivity {
     }
 
     private void chooseImageFromGallery() {
-        Dexter.withActivity(this)
+        Dexter.withContext(this)
                 .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new MultiplePermissionsListener() {
                     @Override

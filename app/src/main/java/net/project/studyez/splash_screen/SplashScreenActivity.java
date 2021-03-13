@@ -73,7 +73,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
                 }
             }
-        }, 1000); //change this back to 4000 ... only testing purposes now
+        }, 4000); //change this back to 4000 ... only testing purposes now
 
     }
 

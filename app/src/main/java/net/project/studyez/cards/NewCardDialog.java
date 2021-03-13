@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 public class NewCardDialog extends DialogFragment {
 
+    private String deckID;
     private String deckName;
     private EditText question;
     private EditText answer;
@@ -35,7 +36,7 @@ public class NewCardDialog extends DialogFragment {
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                assert getParentFragment() != null;
+                deckID = ((CardsFragment)getParentFragment()).getDeckIDFromDecksFragment();
                 deckName = ((CardsFragment)getParentFragment()).getDeckNameFromDecksFragment();
                 question = view.findViewById(R.id.frontEditText);
                 answer = view.findViewById(R.id.backEditText);
@@ -43,7 +44,7 @@ public class NewCardDialog extends DialogFragment {
                 isStarred = false;
 
                 if (!question.getText().toString().isEmpty() && !answer.getText().toString().isEmpty()) {
-                    ((CardsFragment)getParentFragment()).createCardDialogConfirm(deckName, question.getText().toString(), answer.getText().toString(), dateTime, isStarred);
+                    ((CardsFragment)getParentFragment()).createCardDialogConfirm(deckID, deckName, question.getText().toString(), answer.getText().toString(), dateTime, isStarred);
                     dialog.dismiss();
                 } else {
                     Toast.makeText(view.getContext(), "Please enter both a front and back for the card.", Toast.LENGTH_LONG).show();

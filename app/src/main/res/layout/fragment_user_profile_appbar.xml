@@ -22,7 +22,7 @@
                 android:background="@color/default_blue"
                 app:popupTheme="@style/Theme.StudyEz.PopupOverlay" />
 
-            <include layout="@layout/new_fragment_user_profile" />
+            <include layout="@layout/fragment_user_profile" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

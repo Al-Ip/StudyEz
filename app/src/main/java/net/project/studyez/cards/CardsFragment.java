@@ -24,12 +24,12 @@ import net.project.studyez.R;
 import net.project.studyez.databinding.FragementCardBinding;
 import net.project.studyez.main.MainActivity;
 
+import static net.project.studyez.decks.DecksFragment.deckID;
 import static net.project.studyez.decks.DecksFragment.deckName;
 
 public class CardsFragment extends Fragment implements CardContract.view {
 
     private int docID;
-    private String deckNameAssociatedWithCards;
     private CardPresenter cardPresenter;
     private FloatingActionButton addCard;
     private RecyclerView cardRecycler;
@@ -53,13 +53,13 @@ public class CardsFragment extends Fragment implements CardContract.view {
         cardRecycler = view.findViewById(R.id.cardsRecycler);
 
         initToolbar();
-        setUpRecyclerView(cardPresenter.getCardsFromDeck(getActivity(), getDeckNameFromDecksFragment()));
+        setUpRecyclerView(cardPresenter.getCardsFromDeck(getActivity(), getDeckIDFromDecksFragment()));
 
         return view;
     }
 
     private void initToolbar(){
-        toolbar.setTitle(getDeckNameFromDecksFragment());
+        toolbar.setTitle(deckName);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         toolbar.setTitleTextColor(color(R.color.white));
         toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
@@ -79,7 +79,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
                     cardPresenter.showEmptyCardsMessage();
                 else{
                     cardPresenter.hideEmptyCardsMessage();
-                    cardPresenter.getNumberOfCards(getDeckNameFromDecksFragment(), cardAdapter.getItemCount());
+                    cardPresenter.getNumberOfCards(getDeckIDFromDecksFragment(), cardAdapter.getItemCount());
                 }
             }
         };
@@ -89,12 +89,16 @@ public class CardsFragment extends Fragment implements CardContract.view {
     }
 
     public String getDeckNameFromDecksFragment(){
-        return deckNameAssociatedWithCards = deckName;
+        return deckName;
+    }
+
+    public String getDeckIDFromDecksFragment(){
+        return deckID;
     }
 
     @Override
-    public void createCardDialogConfirm(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
-        cardPresenter.getCardDetails(deckName, question, answer, dateTimeCreated, isStarred);
+    public void createCardDialogConfirm(String deckID, String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
+        cardPresenter.getCardDetails(deckID, deckName, question, answer, dateTimeCreated, isStarred);
     }
 
     @Override
@@ -104,7 +108,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
 
     @Override
     public void frontAndBackOfCardText(String question, String answer) {
-        cardPresenter.editCardDetails(getDeckNameFromDecksFragment(), question, answer, cardAdapter.cardID);
+        cardPresenter.editCardDetails(getDeckIDFromDecksFragment(), question, answer, cardAdapter.cardID);
     }
 
     @Override
@@ -139,7 +143,7 @@ public class CardsFragment extends Fragment implements CardContract.view {
 
     @Override
     public void deleteCardDialogConfirm() {
-        cardPresenter.deleteCardFromFirebase(getDeckNameFromDecksFragment(), cardAdapter.cardID);
+        cardPresenter.deleteCardFromFirebase(getDeckIDFromDecksFragment(), cardAdapter.cardID);
     }
 
     @Override

@@ -12,8 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import net.project.studyez.R;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -21,20 +31,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
     private final FirestoreRecyclerOptions<Deck> options;
+    private FirebaseUser fUser;
 
     public DeckAdapter(@NonNull FirestoreRecyclerOptions<Deck> options) {
         super(options);
         this.options = options;
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
-        if(deck.getImage() != null){
-            Uri imageUriParse = Uri.parse(deck.getImage());
+        if(fUser.getPhotoUrl() != null){
             deckHolder.deckName.setText(deck.getName());
             deckHolder.creatorText.setText(deck.getCreator());
             deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
-            deckHolder.userImage.setImageURI(imageUriParse);
+            deckHolder.userImage.setImageURI(fUser.getPhotoUrl());
         }
         else {
             deckHolder.deckName.setText(deck.getName());

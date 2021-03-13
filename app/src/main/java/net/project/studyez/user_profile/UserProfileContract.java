@@ -9,30 +9,31 @@ public interface UserProfileContract {
         void displayUserInformation(User user);
         void changeFragment(Fragment fragment, int id);
         void updateButtonClick(String message);
-        void displayProfilePictureMenu();
-        void displayFileSelector();
-        void displayPhoneCamera();
-        void removeProfilePicture();
+        void onProfilePictureSetSuccessfully(String message);
+        void onProfilePictureSetFailed(String message);
     }
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
         void doChangeFragment(Fragment fragment, int id);
-        void menuClickFiles();
-        void menuClickCamera();
-        void menuClickDelete();
+        void clickChangeProfileImage(String stringUri);
         void getUserDetails();
         void clickUpdateProfileButton(android.view.View view);
-        void clickProfilePicture(android.view.View view);
     }
 
     interface Interactor{
         void getUserDetailsFromFirebase();
+        void setUserProfileImageToFirebase(String stringUri);
     }
 
     interface onGetInfoListener{
         void onGetInfoSuccess(User user);
         void onGetInfoFailure(String message);
+    }
+
+    interface onSetInfoListener{
+        void onSetInfoSuccess(String message);
+        void onSetInfoFailure(String message);
     }
 
 }

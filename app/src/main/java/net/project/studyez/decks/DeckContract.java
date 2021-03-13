@@ -54,4 +54,9 @@ public interface DeckContract {
         void onDeleteSuccess(String message);
         void onDeleteFailure(String message);
     }
+
+    interface onDeckGetListener{
+        void onGetSuccess(String message);
+        void onGetFailure(String message);
+    }
 }

@@ -46,7 +46,7 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void addNewCardToFirebase(String deckName, String question, String answer, String dateCreated, boolean isStarred) {
+    public void addNewCardToFirebase(String deckID, String deckName, String question, String answer, String dateCreated, boolean isStarred) {
         card = new Card(deckName, question, answer, dateCreated, isStarred);
         docRef = fStore
                 .collection("users")
@@ -54,7 +54,7 @@ public class CardInteractor implements CardContract.Interactor{
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName)
+                .document(deckID)
                 .collection("Cards")
                 .document();
         docRef.set(card).addOnCompleteListener(task -> {
@@ -68,14 +68,14 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName) {
+    public FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckID) {
         query = fStore
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName)
+                .document(deckID)
                 .collection("Cards")
                 .orderBy("dateTimeCreated", Query.Direction.DESCENDING);
         allCards = new FirestoreRecyclerOptions.Builder<Card>()
@@ -85,14 +85,14 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void deleteCardFromFirebase(String deckName, String docID) {
+    public void deleteCardFromFirebase(String deckID, String docID) {
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName)
+                .document(deckID)
                 .collection("Cards")
                 .document(docID);
         docRef.delete().addOnCompleteListener(task -> {
@@ -106,7 +106,7 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void editCardFromFirebase(String deckName, String question, String answer, String docID) {
+    public void editCardFromFirebase(String deckID, String question, String answer, String docID) {
         Map<String, Object> map = new HashMap<>();
         map.put("answer", answer);
         map.put("question", question);
@@ -116,7 +116,7 @@ public class CardInteractor implements CardContract.Interactor{
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName)
+                .document(deckID)
                 .collection("Cards")
                 .document(docID);
         docRef.update(map).addOnCompleteListener(task -> {
@@ -130,7 +130,7 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void updateNumberOfCardsFromFirebase(String deckName, int numCards) {
+    public void updateNumberOfCardsFromFirebase(String deckID, int numCards) {
         Map<String, Object> map = new HashMap<>();
         map.put("numCards", numCards);
         docRef = fStore
@@ -139,7 +139,7 @@ public class CardInteractor implements CardContract.Interactor{
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName);
+                .document(deckID);
         docRef.update(map);
     }
 

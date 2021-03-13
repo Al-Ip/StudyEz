@@ -56,8 +56,8 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
     }
 
     @Override
-    public void getCardDetails(String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
-        mInteractor.addNewCardToFirebase(deckName, question, answer, dateTimeCreated, isStarred);
+    public void getCardDetails(String deckID, String deckName, String question, String answer, String dateTimeCreated, boolean isStarred) {
+        mInteractor.addNewCardToFirebase(deckID, deckName, question, answer, dateTimeCreated, isStarred);
     }
 
     @Override

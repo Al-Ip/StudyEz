@@ -26,6 +26,7 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     public int docID;
     public static String deckName;
+    public static String deckID;
     @Inject
     public DeckPresenter deckPresenter;
     private RecyclerView deckRecyclerView;
@@ -48,7 +49,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             deckPresenter.shortPressOnDeck(new CardsFragment(), R.id.main_container);
         });
         // Long press to delete Deck
