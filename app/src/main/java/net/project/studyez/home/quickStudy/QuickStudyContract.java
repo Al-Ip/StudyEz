@@ -1,4 +1,4 @@
-package net.project.studyez.dashboard.quickStudy;
+package net.project.studyez.home.quickStudy;
 
 import android.app.Activity;
 

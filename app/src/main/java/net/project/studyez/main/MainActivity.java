@@ -22,7 +22,7 @@ import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import net.project.studyez.R;
-import net.project.studyez.dashboard.DashboardFragment;
+import net.project.studyez.home.HomeFragment;
 import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
@@ -39,7 +39,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener, MainContract.View{
 
     private static final int POS_CLOSE = 0;
-    private static final int POS_DASHBOARD = 1;
+    private static final int POS_HOME = 1;
     private static final int POS_MY_PROFILE = 2;
     private static final int POS_DECKS = 3;
     private static final int POS_SETTINGS = 4;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
 
         DrawerAdapter adapter = new DrawerAdapter(Arrays.asList(
                 createItemFor(POS_CLOSE),
-                createItemFor(POS_DASHBOARD).setChecked(true),
+                createItemFor(POS_HOME).setChecked(true),
                 createItemFor(POS_MY_PROFILE),
                 createItemFor(POS_DECKS),
                 createItemFor(POS_SETTINGS),
@@ -95,12 +95,12 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(adapter);
 
-        adapter.setSelected(POS_DASHBOARD);
+        adapter.setSelected(POS_HOME);
     }
 
     public void initToolbar(){
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.toolbar_dashboard);
+        toolbar.setTitle(R.string.toolbar_home);
         toolbar.setTitleTextColor(color(R.color.white));
         setSupportActionBar(toolbar);
     }
@@ -155,14 +155,14 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     public void onItemSelected(int position) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        if (position == POS_DASHBOARD){
+        if (position == POS_HOME){
             if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
                 getSupportFragmentManager().popBackStack();
             }
             else {
-                toolbar.setTitle(R.string.toolbar_dashboard);
-                DashboardFragment dashboardFragment = new DashboardFragment();
-                transaction.replace(R.id.main_container, dashboardFragment);
+                toolbar.setTitle(R.string.toolbar_home);
+                HomeFragment homeFragment = new HomeFragment();
+                transaction.replace(R.id.main_container, homeFragment);
             }
         }
         else if (position == POS_MY_PROFILE) {

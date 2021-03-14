@@ -4,7 +4,7 @@
     <string-array name="id_activityScreenTitles">
 
         <item></item>
-        <item>Dashboard</item>
+        <item>Home</item>
         <item>My Profile</item>
         <item>Decks</item>
         <item>Settings</item>

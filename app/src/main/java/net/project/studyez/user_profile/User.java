@@ -9,7 +9,8 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private Date dateOfBirth;
+    private String description;
+    private int friendsCount;
 
     public User(){
 
@@ -61,13 +62,19 @@ public class User {
         this.password = password;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
+    public int getFriendsCount() {
+        return friendsCount;
+    }
 
+    public void setFriendsCount(int friendsCount) {
+        this.friendsCount = friendsCount;
+    }
 }

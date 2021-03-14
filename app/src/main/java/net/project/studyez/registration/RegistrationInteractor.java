@@ -27,7 +27,6 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
 
     private RegistrationContract.onRegistrationListener mOnRegistrationListener;
     private RegistrationContract.onRegistrationUpdateListener onRegistrationUpdateListener;
-    private RegistrationContract.onRegistrationAddImageListener onRegistrationAddImageListener;
     private final FirebaseFirestore fStore;
     private final FirebaseAuth fAuth;
     private final FirebaseUser fUser;
@@ -44,11 +43,9 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
     }
 
     public RegistrationInteractor(RegistrationContract.onRegistrationListener onRegistrationListener,
-                                  RegistrationContract.onRegistrationUpdateListener onRegistrationUpdateListener,
-                                  RegistrationContract.onRegistrationAddImageListener onRegistrationAddImageListener){
+                                  RegistrationContract.onRegistrationUpdateListener onRegistrationUpdateListener){
         this.mOnRegistrationListener = onRegistrationListener;
         this.onRegistrationUpdateListener = onRegistrationUpdateListener;
-        this.onRegistrationAddImageListener = onRegistrationAddImageListener;
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -111,31 +108,6 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
                         onRegistrationUpdateListener.onRegUpdateSuccess("Successfully Added Username to Account!");
                     }
                 });
-            }
-        });
-    }
-
-    @Override
-    public void addProfilePictureToDatabase(String imageUri) {
-        Uri imageUriParse = Uri.parse(imageUri);
-        //Changing user profile picture in firebase to the username entered
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setPhotoUri(imageUriParse).build();
-        fUser.updateProfile(profileUpdates);
-
-        //You can store new user information here
-        docRef = fStore.collection("users")
-                .document(fUser.getUid());
-        map.put("profileImage", imageUri);
-        docRef.update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(!task.isSuccessful()){
-                    onRegistrationAddImageListener.onRegAddImageFailure(task.getException().getMessage());
-                }
-                else{
-                    onRegistrationAddImageListener.onRegAddImageSuccess("Successfully Added Profile Image!");
-                }
             }
         });
     }

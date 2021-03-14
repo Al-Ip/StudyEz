@@ -10,7 +10,6 @@ public interface RegistrationContract {
 
     // implemented by RegisterActivity to provide concrete implementation
     interface View {
-        void displayImageGallery();
         void onNextAnimatedButtonClick();
         void displayLoginActivity();
         void showAnimatedNextButton();
@@ -30,16 +29,12 @@ public interface RegistrationContract {
         void onRegistrationFailure(String message);
         void onRegistrationUpdateSuccess(String message);
         void onRegistrationUpdateFailure(String message);
-        void onRegistrationAddImageSuccess(String message);
-        void onRegistrationAddImageFailure(String message);
     }
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
         void doChangeFragment(Fragment fragment, int id);
-        void imageSelectedSendToDatabase(String imageUri);
         void clickAnimatedNextButton(android.view.View view);
-        void clickAddProfilePicture(android.view.View view);
         void toggleAnimatedTextButtonVisibilityForRegPageOne(String email, String password);
         void toggleAnimatedTextButtonVisibilityForRegPageTwo(String username);
         void addEmailAndPasswordToDatabase(Activity activity, String email, String password);
@@ -51,7 +46,6 @@ public interface RegistrationContract {
     interface Interactor{
         void performFirebaseRegistration(Activity activity, String email, String password);
         void storeUserDetailsInFirebase(Activity activity, String username);
-        void addProfilePictureToDatabase(String imageUri);
     }
 
     interface onRegistrationListener{
@@ -62,10 +56,5 @@ public interface RegistrationContract {
     interface onRegistrationUpdateListener{
         void onRegUpdateSuccess(String message);
         void onRegUpdateFailure(String message);
-    }
-
-    interface onRegistrationAddImageListener{
-        void onRegAddImageSuccess(String message);
-        void onRegAddImageFailure(String message);
     }
 }

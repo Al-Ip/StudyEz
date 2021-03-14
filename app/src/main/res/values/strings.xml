@@ -8,7 +8,7 @@
     <string name="cancelled">Cancelled!</string>
 
     <!-- Toolbar Titles -->
-    <string name="toolbar_dashboard">Dashboard</string>
+    <string name="toolbar_home">Home</string>
     <string name="toolbar_profile">My Profile</string>
     <string name="toolbar_decks">My Decks</string>
     <string name="toolbar_about">About Us</string>
@@ -27,8 +27,8 @@
     <string name="profile_desc">A simple description about you or whatever you wish to put here describing yourself :)</string>
     <string name="profile_title">Alex</string>
     <string name="posts">Decks</string>
-    <string name="followers">followers</string>
-    <string name="following">following</string>
+    <string name="score">Score</string>
+    <string name="Friends">Friends</string>
     <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
     <string name="lbl_set_profile_photo">Set profile image</string>
     <string name="lbl_take_camera_picture">Take a picture</string>

@@ -9,8 +9,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrationPresenter implements RegistrationContract.Presenter,
         RegistrationContract.onRegistrationListener,
-        RegistrationContract.onRegistrationUpdateListener,
-        RegistrationContract.onRegistrationAddImageListener{
+        RegistrationContract.onRegistrationUpdateListener{
 
 
     // to keep reference to view
@@ -21,7 +20,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter,
 
     public RegistrationPresenter(RegistrationContract.View view){
         mView = view;
-        mInteractor = new RegistrationInteractor(this,this, this);
+        mInteractor = new RegistrationInteractor(this,this);
     }
 
     @Override
@@ -29,20 +28,12 @@ public class RegistrationPresenter implements RegistrationContract.Presenter,
         mView.changeFragment(fragment, id);
     }
 
-    @Override
-    public void imageSelectedSendToDatabase(String imageUri) {
-        mInteractor.addProfilePictureToDatabase(imageUri);
-    }
 
     @Override
     public void clickAnimatedNextButton(android.view.View view) {
         mView.onNextAnimatedButtonClick();
     }
 
-    @Override
-    public void clickAddProfilePicture(View view) {
-        mView.displayImageGallery();
-    }
 
     @Override
     public void toggleAnimatedTextButtonVisibilityForRegPageOne(String email, String password) {
@@ -112,13 +103,4 @@ public class RegistrationPresenter implements RegistrationContract.Presenter,
         mView.hideProgressBar();
     }
 
-    @Override
-    public void onRegAddImageSuccess(String message) {
-        mView.onRegistrationAddImageSuccess(message);
-    }
-
-    @Override
-    public void onRegAddImageFailure(String message) {
-        mView.onRegistrationAddImageFailure(message);
-    }
 }

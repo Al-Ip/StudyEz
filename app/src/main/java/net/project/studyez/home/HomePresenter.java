@@ -1,14 +1,14 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.home;
 
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-public class DashboardPresenter implements DashboardContract.presenter {
+public class HomePresenter implements HomeContract.presenter {
 
-    private final DashboardContract.view mView;
+    private final HomeContract.view mView;
 
-    public DashboardPresenter(DashboardContract.view view){
+    public HomePresenter(HomeContract.view view){
         mView = view;
     }
 

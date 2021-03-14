@@ -4,7 +4,7 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.dashboard.quickStudy.QuickStudyPresenter" />
+            type="net.project.studyez.home.quickStudy.QuickStudyPresenter" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

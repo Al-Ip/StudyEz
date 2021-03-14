@@ -1,4 +1,4 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,20 +10,20 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
-import net.project.studyez.dashboard.quickStudy.QuickStudyFragment;
-import net.project.studyez.databinding.FragmentDashboardBinding;
+import net.project.studyez.databinding.FragmentHomeBinding;
+import net.project.studyez.home.quickStudy.QuickStudyFragment;
 import net.project.studyez.main.MainActivity;
 
-public class DashboardFragment extends Fragment implements DashboardContract.view {
+public class HomeFragment extends Fragment implements HomeContract.view {
 
-    private DashboardPresenter presenter;
+    private HomePresenter presenter;
     private CardView quickStudyCard;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FragmentDashboardBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
+        FragmentHomeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         View view = binding.getRoot();
-        presenter = new DashboardPresenter(this);
+        presenter = new HomePresenter(this);
         binding.setPresenter(presenter);
 
         quickStudyCard = view.findViewById(R.id.CardView_QuickStudy);

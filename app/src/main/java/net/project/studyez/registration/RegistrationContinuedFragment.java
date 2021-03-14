@@ -47,7 +47,6 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
         nextButton = view.findViewById(R.id.mainPageNextButton);
         blackFadeImage = view.findViewById(R.id.blackFadeImage2);
         progressBar = view.findViewById(R.id.registerUsernameProgressBar);
-        profileImage = view.findViewById(R.id.userImage);
 
         username.addTextChangedListener(textWatcher);
 
@@ -68,35 +67,6 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
         }
     };
 
-
-    @Override
-    public void displayImageGallery() {
-        Intent intent;
-        intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.setType("image/*");
-        this.startActivityForResult(Intent.createChooser(intent, "Select Profile Picture"),1000);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if( requestCode == 1000 ) {
-            if(resultCode == Activity.RESULT_OK && data.getData() != null){
-                Uri imageUri = data.getData();
-                getContext().getContentResolver().takePersistableUriPermission(imageUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                String uri = imageUri.toString();
-                Picasso.get().load(imageUri).into(profileImage);
-                presenter.imageSelectedSendToDatabase(uri);
-            }
-            else if (resultCode == Activity.RESULT_CANCELED)  {
-                Toast.makeText(getActivity(), "Canceled", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     public void onNextAnimatedButtonClick() {
@@ -147,16 +117,6 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
     }
 
     @Override
-    public void onRegistrationAddImageSuccess(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRegistrationAddImageFailure(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showAnimatedNextButton() {
         nextButton.setVisibility(android.view.View.VISIBLE);
     }
@@ -202,7 +162,7 @@ public class RegistrationContinuedFragment extends Fragment implements Registrat
 
     @Override
     public void onRegistrationFailure(String message) {
-
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 

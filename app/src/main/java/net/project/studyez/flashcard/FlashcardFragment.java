@@ -31,8 +31,8 @@ import net.project.studyez.study_session.StudySessionFinishedFragment;
 
 import java.util.List;
 
-import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckID;
-import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckName;
+import static net.project.studyez.home.quickStudy.QuickStudyFragment.deckID;
+import static net.project.studyez.home.quickStudy.QuickStudyFragment.deckName;
 
 
 public class FlashcardFragment extends Fragment implements FlashCardContract.view{

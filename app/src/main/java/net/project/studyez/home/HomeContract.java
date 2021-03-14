@@ -1,10 +1,10 @@
-package net.project.studyez.dashboard;
+package net.project.studyez.home;
 
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
 
-public interface DashboardContract {
+public interface HomeContract {
 
     interface view{
         void changeFragment(Fragment fragment, int id);

@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
-import net.project.studyez.dashboard.DashboardFragment;
+import net.project.studyez.home.HomeFragment;
 import net.project.studyez.main.MainActivity;
 
 public class StudySessionFinishedFragment extends Fragment {
@@ -38,7 +38,7 @@ public class StudySessionFinishedFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).getSupportActionBar().show();
-                ((MainActivity) requireActivity()).changeFragment(new DashboardFragment(), R.id.main_container, false);
+                ((MainActivity) requireActivity()).changeFragment(new HomeFragment(), R.id.main_container, false);
             }
         });
     }

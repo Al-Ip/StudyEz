@@ -73,10 +73,6 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void displayImageGallery() {
-
-    }
 
     @Override
     public void onNextAnimatedButtonClick() {
@@ -166,16 +162,6 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationC
 
     @Override
     public void onRegistrationUpdateFailure(String message) {
-
-    }
-
-    @Override
-    public void onRegistrationAddImageSuccess(String message) {
-
-    }
-
-    @Override
-    public void onRegistrationAddImageFailure(String message) {
 
     }
 

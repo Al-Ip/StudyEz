@@ -6,14 +6,14 @@
     <data>
         <variable
             name="presenter"
-            type="net.project.studyez.dashboard.DashboardPresenter" />
+            type="net.project.studyez.home.HomePresenter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/background_light"
-        tools:context=".dashboard.DashboardFragment">
+        tools:context=".home.HomeFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/CardView_QuickStudy"
