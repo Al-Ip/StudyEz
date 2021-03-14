@@ -16,13 +16,13 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     private final DeckContract.view mView;
     private final DeckContract.Interactor mInteractor;
 
-    public DeckPresenter(DeckContract.view view, DeckContract.Interactor interactor){
+    public DeckPresenter(DeckContract.view view, DeckContract.Interactor interactor) {
         mView = view;
         mInteractor = interactor;
     }
 
     @Inject
-    public DeckPresenter(DeckContract.view view){
+    public DeckPresenter(DeckContract.view view) {
         mView = view;
         mInteractor = new DeckInteractor(this, this, this);
     }
@@ -31,9 +31,6 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     public void clickFab(View view) {
         mView.displayCreateDeckPopupWindow();
     }
-
-
-
 
 
     @Override

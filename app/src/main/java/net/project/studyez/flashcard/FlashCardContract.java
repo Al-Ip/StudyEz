@@ -15,12 +15,12 @@ public interface FlashCardContract {
 
     interface presenter{
         void clickFlashCard();
-        void getCardsFromDeck();
+        void getCardsFromDeck(String deckID);
         void finishedCards(Fragment fragment, int id);
     }
 
     interface Interactor{
-        void getCardsToDisplayOnFlashcards();
+        void getCardsToDisplayOnFlashcards(String deckID);
     }
 
     interface onCardGetListener{

@@ -23,13 +23,13 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
-import net.project.studyez.EXTERNAL.GlideApp;
 import net.project.studyez.EXTERNAL.ImagePickerActivity;
 import net.project.studyez.R;
 import net.project.studyez.databinding.FragmentUserProfileAppbarBinding;
@@ -161,12 +161,12 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
 
     private void loadProfile(String url) {
         Log.d(TAG, "Image cache path: " + url);
-        GlideApp.with(this).load(url).into(imgProfile);
+        Glide.with(this).load(url).circleCrop().into(imgProfile);
         imgProfile.setColorFilter(ContextCompat.getColor(requireContext(), android.R.color.transparent));
     }
 
     private void loadProfileDefault() {
-        GlideApp.with(this).load(R.drawable.baseline_account_circle_black_48).into(imgProfile);
+        Glide.with(this).load(R.drawable.baseline_account_circle_black_48).circleCrop().into(imgProfile);
         imgProfile.setColorFilter(ContextCompat.getColor(requireContext(), R.color.profile_default_tint));
     }
 

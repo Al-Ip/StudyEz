@@ -1,6 +1,5 @@
 package net.project.studyez.decks;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +13,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import net.project.studyez.R;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -41,13 +32,12 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
 
     @Override
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
-        if(fUser.getPhotoUrl() != null){
+        if (fUser.getPhotoUrl() != null) {
             deckHolder.deckName.setText(deck.getName());
             deckHolder.creatorText.setText(deck.getCreator());
             deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
             deckHolder.userImage.setImageURI(fUser.getPhotoUrl());
-        }
-        else {
+        } else {
             deckHolder.deckName.setText(deck.getName());
             deckHolder.creatorText.setText(deck.getCreator());
             deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
@@ -62,13 +52,12 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         final int count = options.getSnapshots().size();
         return count;
     }
 
-    static class DeckHolder extends RecyclerView.ViewHolder{
+    static class DeckHolder extends RecyclerView.ViewHolder {
 
         View view;
         TextView deckName;

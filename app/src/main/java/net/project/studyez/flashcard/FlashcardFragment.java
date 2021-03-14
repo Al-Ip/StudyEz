@@ -31,6 +31,7 @@ import net.project.studyez.study_session.StudySessionFinishedFragment;
 
 import java.util.List;
 
+import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckID;
 import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckName;
 
 
@@ -54,7 +55,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         seekBar = root.findViewById(R.id.seekBar);
         cardStackView = root.findViewById(R.id.card_stack_view);
 
-        presenter.getCardsFromDeck();
+        presenter.getCardsFromDeck(deckID);
         initToolbar();
         initCardStackLayout(root);
 

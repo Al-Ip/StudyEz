@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import static net.project.studyez.dashboard.quickStudy.QuickStudyFragment.deckName;
 
 public class FlashCardInteractor implements FlashCardContract.Interactor {
 
@@ -30,14 +29,14 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     }
 
     @Override
-    public void getCardsToDisplayOnFlashcards() {
+    public void getCardsToDisplayOnFlashcards(String deckID) {
         query = fStore
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("decks")
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
-                .document(deckName)
+                .document(deckID)
                 .collection("Cards")
                 .orderBy("dateTimeCreated", Query.Direction.DESCENDING);
         query.get().addOnCompleteListener(task -> {

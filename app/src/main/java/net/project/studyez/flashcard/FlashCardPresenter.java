@@ -22,8 +22,8 @@ public class FlashCardPresenter implements FlashCardContract.presenter, FlashCar
     }
 
     @Override
-    public void getCardsFromDeck() {
-        mInteractor.getCardsToDisplayOnFlashcards();
+    public void getCardsFromDeck(String deckID) {
+        mInteractor.getCardsToDisplayOnFlashcards(deckID);
     }
 
     @Override

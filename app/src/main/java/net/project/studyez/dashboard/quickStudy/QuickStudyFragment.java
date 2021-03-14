@@ -35,6 +35,7 @@ import java.util.ArrayList;
 public class QuickStudyFragment extends Fragment implements QuickStudyContract.view {
 
     public int docID;
+    public static String deckID;
     public static String deckName;
 
     private RecyclerView deckRecyclerView;
@@ -64,7 +65,8 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckName = deckAdapter.getSnapshots().getSnapshot(docID).getId();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             presenter.shortPressOnDeck(new FlashcardFragment(), R.id.main_container);
         });
 
