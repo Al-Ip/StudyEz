@@ -27,7 +27,7 @@
     <string name="profile_desc">A simple description about you or whatever you wish to put here describing yourself :)</string>
     <string name="profile_title">Alex</string>
     <string name="posts">Decks</string>
-    <string name="score">Score</string>
+    <string name="ez_points">Ez Points</string>
     <string name="Friends">Friends</string>
     <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
     <string name="lbl_set_profile_photo">Set profile image</string>

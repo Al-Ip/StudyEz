@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,6 +31,7 @@ import net.project.studyez.cards.Card;
 import net.project.studyez.main.MainActivity;
 import net.project.studyez.study_session.StudySessionFinishedFragment;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static net.project.studyez.home.quickStudy.QuickStudyFragment.deckID;
@@ -47,6 +50,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
     private List<Card> cardList;
     private int seekBarCounter = 1;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_study, container, false);
 
@@ -105,11 +109,13 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
                 }
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onCardSwiped(Direction direction) {
                 Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
                     //Toast.makeText(getContext(), "Direction Right", Toast.LENGTH_SHORT).show();
+                    presenter.swipedRight();
                 }
                 if (direction == Direction.Left){
                     //Toast.makeText(getContext(), "Direction Left", Toast.LENGTH_SHORT).show();
@@ -118,6 +124,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
                 if (seekBarCounter > seekBar.getMax() + 1) {
                     // -------------------- last position reached, do something ---------------------
                     //Toast.makeText(getContext(), "FINISHD ALL THE CARDS", Toast.LENGTH_SHORT).show();-
+                    presenter.endStudySession();
                     presenter.finishedCards(new StudySessionFinishedFragment(), R.id.main_container);
                 }
             }
@@ -157,6 +164,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         manager.setOverlayInterpolator(new LinearInterpolator());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void initFlashCards(List list) {
         cardList = list;
@@ -165,6 +173,14 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         cardStackView.setLayoutManager(manager);
         cardStackView.setAdapter(adapter);
         cardStackView.setItemAnimator(new DefaultItemAnimator());
+
+        // Starting study Session
+        presenter.initStudySession("quickStudy", deckName, cardList.size(), LocalTime.now());
+    }
+
+    @Override
+    public void displayFailedToWriteMessage(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

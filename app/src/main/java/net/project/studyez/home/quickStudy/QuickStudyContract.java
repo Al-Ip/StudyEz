@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
+import java.time.LocalTime;
+
 public interface QuickStudyContract {
 
     interface view{
@@ -24,4 +26,5 @@ public interface QuickStudyContract {
     interface Interactor{
         FirestoreRecyclerOptions getDecksFromFirebase(Activity activity);
     }
+
 }
