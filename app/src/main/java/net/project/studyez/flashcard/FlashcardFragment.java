@@ -2,7 +2,6 @@ package net.project.studyez.flashcard;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,15 +74,10 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
     }
 
     private void setSeekBar() {
-        Log.e("GetDeckBar", String.valueOf(seekBar.getMax()));
         // Allows the progress bar to animate for API 24 and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             seekBar.setProgress(seekBarCounter++, true);
-            Log.e("SETDeckBar", String.valueOf(seekBarCounter));
-            Log.e("manager", String.valueOf(manager.getChildCount()));
-            Log.e("adapter", String.valueOf(adapter.getItemCount()));
         } else {
-            Log.e("SETDeckBar", String.valueOf(seekBarCounter));
             seekBar.setProgress(seekBarCounter++);
         }
     }
@@ -97,7 +91,6 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         manager = new CardStackLayoutManager(getContext(), new CardStackListener() {
             @Override
             public void onCardDragging(Direction direction, float ratio) {
-                Log.d(TAG, "onCardDragging: d=" + direction.name() + " ratio=" + ratio);
                 if (direction == Direction.Left && ratio > 0.3) {
 
                 }
@@ -112,7 +105,6 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onCardSwiped(Direction direction) {
-                Log.d(TAG, "onCardSwiped: p=" + manager.getTopPosition() + " d=" + direction);
                 if (direction == Direction.Right){
                     //Toast.makeText(getContext(), "Direction Right", Toast.LENGTH_SHORT).show();
                     presenter.swipedRight();
@@ -131,12 +123,10 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
 
             @Override
             public void onCardRewound() {
-                Log.d(TAG, "onCardRewound: " + manager.getTopPosition());
             }
 
             @Override
             public void onCardCanceled() {
-                Log.d(TAG, "onCardRewound: " + manager.getTopPosition());
             }
 
             @Override

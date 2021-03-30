@@ -1,7 +1,6 @@
 package net.project.studyez.flashcard;
 
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -24,14 +23,14 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     private FlashCardContract.onCardGetListener onCardGetListener;
     private FlashCardContract.onStudySessionCompleted onStudySessionCompleted;
 
-    private FirebaseFirestore fStore;
-    private FirebaseAuth fAuth;
-    private FirebaseUser fUser;
+    private final FirebaseFirestore fStore;
+    private final FirebaseAuth fAuth;
+    private final FirebaseUser fUser;
     private DocumentReference docRef;
     private Query query;
     private QuickStudySession quickStudySession;
-    public static String studySessionId;
     public static String quickStudySessionId;
+    public static String deckName;
     private final Map<String, Object> map = new HashMap<>();
 
     public FlashCardInteractor(){
@@ -70,18 +69,13 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     public void createNewStudySessionInFirebase(String studyType, String deckName, int numCards, LocalTime startTime) {
         quickStudySession = new QuickStudySession(studyType, deckName, numCards, startTime.toString());
 
-        studySessionId = fStore
-                .collection("users")
-                .document(fUser.getUid())
-                .collection("studySessions")
-                .document()
-                .getId();
+        FlashCardInteractor.deckName = deckName;
 
         quickStudySessionId = fStore
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("studySessions")
-                .document(studySessionId)
+                .document(deckName)
                 .collection(quickStudySession.getSessionMode())
                 .document()
                 .getId();
@@ -90,7 +84,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("studySessions")
-                .document(studySessionId)
+                .document(deckName)
                 .collection(studyType)
                 .document(quickStudySessionId);
         docRef.set(quickStudySession).addOnCompleteListener(task -> {
@@ -115,7 +109,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("studySessions")
-                .document(studySessionId)
+                .document(deckName)
                 .collection(quickStudySession.getSessionMode())
                 .document(quickStudySessionId);
 

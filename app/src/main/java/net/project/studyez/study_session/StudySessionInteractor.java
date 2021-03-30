@@ -1,16 +1,14 @@
 package net.project.studyez.study_session;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import net.project.studyez.home.quickStudy.QuickStudySession;
 
+import static net.project.studyez.flashcard.FlashCardInteractor.deckName;
 import static net.project.studyez.flashcard.FlashCardInteractor.quickStudySessionId;
-import static net.project.studyez.flashcard.FlashCardInteractor.studySessionId;
 
 public class StudySessionInteractor implements StudySessionContract.interactor {
 
@@ -39,7 +37,7 @@ public class StudySessionInteractor implements StudySessionContract.interactor {
                 .collection("users")
                 .document(fUser.getUid())
                 .collection("studySessions")
-                .document(studySessionId)
+                .document(deckName)
                 .collection("quickStudy")
                 .document(quickStudySessionId);
 
