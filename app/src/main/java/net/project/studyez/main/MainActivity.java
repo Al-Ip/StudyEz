@@ -22,17 +22,17 @@ import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
 import net.project.studyez.R;
-import net.project.studyez.home.HomeFragment;
 import net.project.studyez.decks.DecksFragment;
 import net.project.studyez.drawer.DrawerAdapter;
 import net.project.studyez.drawer.DrawerItem;
 import net.project.studyez.drawer.SimpleItem;
 import net.project.studyez.drawer.SpaceItem;
+import net.project.studyez.home.HomeFragment;
 import net.project.studyez.splash_screen.SplashScreenActivity;
+import net.project.studyez.statistics.StatisticsFragment;
 import net.project.studyez.user_profile.User;
 import net.project.studyez.user_profile.UserProfileFragment;
 import net.project.studyez.view.AboutUsFragment;
-import net.project.studyez.view.SettingsFragment;
 
 import java.util.Arrays;
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
     private static final int POS_HOME = 1;
     private static final int POS_MY_PROFILE = 2;
     private static final int POS_DECKS = 3;
-    private static final int POS_SETTINGS = 4;
+    private static final int POS_STATISTICS = 4;
     private static final int POS_ABOUT_US = 5;
     private static final int POS_LOGOUT = 7;
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 createItemFor(POS_HOME).setChecked(true),
                 createItemFor(POS_MY_PROFILE),
                 createItemFor(POS_DECKS),
-                createItemFor(POS_SETTINGS),
+                createItemFor(POS_STATISTICS),
                 createItemFor(POS_ABOUT_US),
                 new SpaceItem(260),
                 createItemFor(POS_LOGOUT)
@@ -184,14 +184,14 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
                 transaction.replace(R.id.main_container, decksFragment);
             }
         }
-        else if (position == POS_SETTINGS){
+        else if (position == POS_STATISTICS){
             if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
                 getSupportFragmentManager().popBackStack();
             }
             else {
-                toolbar.setTitle(R.string.toolbar_settings);
-                SettingsFragment settingsFragment = new SettingsFragment();
-                transaction.replace(R.id.main_container, settingsFragment);
+                toolbar.setTitle(R.string.toolbar_stats);
+                StatisticsFragment statisticsFragment = new StatisticsFragment();
+                transaction.replace(R.id.main_container, statisticsFragment);
             }
         }
         else if (position == POS_ABOUT_US){

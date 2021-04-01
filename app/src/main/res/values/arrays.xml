@@ -7,7 +7,7 @@
         <item>Home</item>
         <item>My Profile</item>
         <item>Decks</item>
-        <item>Settings</item>
+        <item>Statistics</item>
         <item>About Us</item>
         <item/>
         <item>Log out</item>
@@ -19,7 +19,7 @@
         <item>@drawable/home_icon</item>
         <item>@drawable/my_profile_icon</item>
         <item>@drawable/decks_icon</item>
-        <item>@drawable/settings_icon</item>
+        <item>@drawable/ic_baseline_query_stats_24</item>
         <item>@drawable/about_icon</item>
         <item/>
         <item>@drawable/logout_icon</item>
