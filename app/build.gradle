@@ -76,6 +76,7 @@ dependencies {
     implementation "com.yuyakaido.android:card-stack-view:2.3.4"
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:3.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //dexter permissions
     implementation "com.karumi:dexter:6.2.2"
     // circular imageview

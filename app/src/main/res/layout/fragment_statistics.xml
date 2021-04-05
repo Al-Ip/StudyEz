@@ -9,12 +9,12 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="false">
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="300dp"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/TextAppearance.App.CollapsingToolbar.Collapsed"
             app:expanded="true"
@@ -24,21 +24,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
+
+                app:expandedTitleMarginBottom="160dp"
+                app:expandedTitleMarginEnd="64dp"
+                app:expandedTitleMarginStart="48dp"
+
                 android:theme="@style/QuickStudy.Theme.App"
                 app:contentScrim="@color/default_blue"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:statusBarScrim="@color/default_blue"
                 app:toolbarId="@+id/quick_study_toolbar">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginEnd="64dp"
+                    android:layout_marginStart="48dp"
+                    app:layout_collapseMode="parallax"
+                    android:layout_gravity="bottom"
+                    android:text="Personalized Statistics Based on your Studying of Decks and Study Modes!"/>
+
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/statsLottie"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_height="180dp"
+                    android:layout_marginStart="200sp"
                     android:layout_marginTop="16sp"
                     android:layout_marginEnd="16sp"
-                    android:layout_marginStart="150sp"
                     android:layout_marginBottom="32sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,5 +75,68 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:id="@+id/line_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/lineChart_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dip"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginEnd="16dip"
+                    android:text="Deck's Studied This Week:"
+                    android:textColor="#BA000000"
+                    android:textSize="18sp" />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/lineChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="16dip" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/barChart_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dip"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginEnd="16dip"
+                    android:text="Deck's Studied This Week:"
+                    android:textColor="#BA000000"
+                    android:textSize="18sp" />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginStart="30dip"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginEnd="30dip" />
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

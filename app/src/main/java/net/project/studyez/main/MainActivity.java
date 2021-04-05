@@ -35,6 +35,7 @@ import net.project.studyez.user_profile.UserProfileFragment;
 import net.project.studyez.view.AboutUsFragment;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener, MainContract.View{
 
@@ -141,10 +142,11 @@ public class MainActivity extends AppCompatActivity implements DrawerAdapter.OnI
         int count = getSupportFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            finish();
+            //Toast.makeText(this, "Warning. Press back again to close application.", Toast.LENGTH_SHORT).show();
+            moveTaskToBack(true);
         }
         else {
-            if(!getSupportActionBar().isShowing()) {
+            if(!Objects.requireNonNull(getSupportActionBar()).isShowing()) {
                 getSupportActionBar().show();
                 getSupportFragmentManager().popBackStack();
             }
