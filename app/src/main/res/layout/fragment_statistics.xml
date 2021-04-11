@@ -83,58 +83,29 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
-                android:id="@+id/line_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lineChart_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dip"
-                    android:layout_marginTop="16dip"
-                    android:layout_marginEnd="16dip"
-                    android:text="Deck's Studied This Week:"
-                    android:textColor="#BA000000"
-                    android:textSize="18sp" />
-
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/lineChart"
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:layout_marginTop="16dip" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/bar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/barChart_text"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="16dip"
-                    android:layout_marginTop="16dip"
-                    android:layout_marginEnd="16dip"
-                    android:text="Deck's Studied This Week:"
-                    android:textColor="#BA000000"
-                    android:textSize="18sp" />
+                    android:background="@color/default_blue"
+                    android:minHeight="?attr/actionBarSize"
+                    android:showDividers="none"
+                    android:tag="NationFragmentTag"
+                    app:tabIconTint="@color/white"
+                    app:tabIndicatorColor="@color/QuickStudyColorTheme"
+                    app:tabSelectedTextColor="@color/QuickStudyColorTheme"
+                    app:tabTextColor="@color/white" />
 
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/barChart"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:layout_marginStart="30dip"
-                    android:layout_marginTop="16dip"
-                    android:layout_marginEnd="30dip" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

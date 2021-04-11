@@ -1,4 +1,4 @@
-package net.project.studyez.main;
+package net.project.studyez.statistics.graphs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,11 +11,11 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import net.project.studyez.R;
 
-public class CustomMarkerView extends MarkerView {
+public class CustomGraphMarkerView extends MarkerView {
 
     private final TextView tvContent;
 
-    public CustomMarkerView (Context context, int layoutResource) {
+    public CustomGraphMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
         // this markerview only displays a textview
         tvContent = (TextView) findViewById(R.id.tvContent);
