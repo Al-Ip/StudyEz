@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.project.studyez.R;
+import net.project.studyez.statistics.time_graph.TimeStudiedCustomGraphMarker;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class DecksGraphFragment extends Fragment {
         lineChart.setMaxHighlightDistance(200);
         lineChart.setViewPortOffsets(0, 0, 0, 0);
 
-        IMarker marker = new CustomGraphMarkerView(getContext(), R.layout.custom_marker_view_layout);
+        IMarker marker = new TimeStudiedCustomGraphMarker(getContext(), R.layout.custom_marker_view_layout);
         lineChart.setMarker(marker);
 
         lineChartDownFillWithData();

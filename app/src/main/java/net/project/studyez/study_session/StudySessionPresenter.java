@@ -1,10 +1,7 @@
 package net.project.studyez.study_session;
 
 import android.text.format.DateUtils;
-import android.util.Log;
 
-import net.project.studyez.home.quickStudy.QuickStudyContract;
-import net.project.studyez.home.quickStudy.QuickStudyInteractor;
 import net.project.studyez.home.quickStudy.QuickStudySession;
 
 public class StudySessionPresenter implements StudySessionContract.presenter, StudySessionContract.onGetStats {
@@ -19,12 +16,11 @@ public class StudySessionPresenter implements StudySessionContract.presenter, St
 
     @Override
     public void getStudySessionStatistics() {
-        mInteractor.getStudySessionStatisticsFromDatabase();
+        mInteractor.getStudySessionStatisticsFromFirebase();
     }
 
     @Override
     public void onGetStatsSuccess(QuickStudySession quickStudySession) {
-        Log.e("Presenter", String.valueOf(quickStudySession.getSecondsToFinish()));
         String timeToFinish = DateUtils.formatElapsedTime(quickStudySession.getSecondsToFinish());
         mView.displayOnGetStatsSuccess(quickStudySession.getDeckName(), quickStudySession.getNumCards(), quickStudySession.getAnsweredCorrectly(), timeToFinish);
     }

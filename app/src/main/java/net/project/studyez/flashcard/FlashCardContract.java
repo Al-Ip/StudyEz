@@ -17,7 +17,7 @@ public interface FlashCardContract {
 
     interface presenter{
         void clickFlashCard();
-        void initStudySession(String studyType, String deckName, int numCards, LocalTime startTime);
+        void initStudySession(String studyType, String deckName, int numCards, LocalTime startTime, String date);
         void swipedRight();
         void endStudySession();
         void getCardsFromDeck(String deckID);
@@ -26,7 +26,7 @@ public interface FlashCardContract {
 
     interface Interactor{
         void getCardsToDisplayOnFlashcards(String deckID);
-        void createNewStudySessionInFirebase(String studyType, String deckName, int numCards, LocalTime startTime);
+        void createNewStudySessionInFirebase(String studyType, String deckName, int numCards, LocalTime startTime, String date);
         void updateEndOfStudySession(int answeredCorrectly , LocalTime endTime);
     }
 

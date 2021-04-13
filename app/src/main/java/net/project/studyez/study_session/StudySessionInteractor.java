@@ -17,6 +17,7 @@ public class StudySessionInteractor implements StudySessionContract.interactor {
     private final FirebaseAuth fAuth;
     private final FirebaseUser fUser;
     private DocumentReference docRef;
+    private QuickStudySession quickStudySession;
 
     public StudySessionInteractor(){
         fStore = FirebaseFirestore.getInstance();
@@ -32,7 +33,7 @@ public class StudySessionInteractor implements StudySessionContract.interactor {
     }
 
     @Override
-    public void getStudySessionStatisticsFromDatabase() {
+    public void getStudySessionStatisticsFromFirebase() {
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())
@@ -43,7 +44,7 @@ public class StudySessionInteractor implements StudySessionContract.interactor {
 
         docRef.get().addOnSuccessListener(documentSnapshot -> {
             if(documentSnapshot.exists()){
-                QuickStudySession quickStudySession = documentSnapshot.toObject(QuickStudySession.class);
+                quickStudySession = documentSnapshot.toObject(QuickStudySession.class);
                 onGetStats.onGetStatsSuccess(quickStudySession);
             }
             else {

@@ -15,8 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.project.studyez.R;
-import net.project.studyez.home.HomeFragment;
-import net.project.studyez.home.quickStudy.QuickStudySession;
+import net.project.studyez.home.quickStudy.QuickStudyFragment;
 import net.project.studyez.main.MainActivity;
 
 public class StudySessionFinishedFragment extends Fragment implements StudySessionContract.view{
@@ -43,17 +42,10 @@ public class StudySessionFinishedFragment extends Fragment implements StudySessi
     }
 
     private void initToolbar(){
-        ((MainActivity)getActivity()).getSupportActionBar().hide();
         toolbar.setTitle(R.string.toolbar_studySessionCompleted);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         toolbar.setTitleTextColor(color(R.color.white));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity)getActivity()).getSupportActionBar().show();
-                ((MainActivity) requireActivity()).changeFragment(new HomeFragment(), R.id.main_container, false);
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> ((MainActivity) requireActivity()).changeFragment(new QuickStudyFragment(), R.id.main_container, false));
     }
 
     @ColorInt
@@ -72,5 +64,16 @@ public class StudySessionFinishedFragment extends Fragment implements StudySessi
     @Override
     public void displayOnGetStatsFailure(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((MainActivity)getActivity()).getSupportActionBar().hide();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((MainActivity)getActivity()).getSupportActionBar().show();
     }
 }

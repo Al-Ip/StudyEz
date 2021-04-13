@@ -1,6 +1,6 @@
 package net.project.studyez.home.quickStudy;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 public class QuickStudySession {
 
@@ -8,6 +8,7 @@ public class QuickStudySession {
     String deckName;
     int numCards;
     int answeredCorrectly;
+    Date dateCreated;
     String sessionStartTime;
     String sessionEndTime;
     long secondsToFinish;
@@ -15,20 +16,12 @@ public class QuickStudySession {
     public QuickStudySession(){
     }
 
-    public QuickStudySession(String sessionMode, String deckName, int numCards, String sessionStartTime){
+    public QuickStudySession(String sessionMode, String deckName, int numCards, String sessionStartTime, Date dateCreated){
         this.sessionMode = sessionMode;
         this.deckName = deckName;
         this.numCards = numCards;
         this.sessionStartTime = sessionStartTime;
-    }
-
-    public QuickStudySession(String sessionMode, String deckName, int numCards, int answeredCorrectly, String sessionStartTime, String sessionEndTime){
-        this.sessionMode = sessionMode;
-        this.deckName = deckName;
-        this.numCards = numCards;
-        this.answeredCorrectly = answeredCorrectly;
-        this.sessionStartTime = sessionStartTime;
-        this.sessionEndTime = sessionEndTime;
+        this.dateCreated = dateCreated;
     }
 
     public String getSessionMode() {
@@ -85,5 +78,13 @@ public class QuickStudySession {
 
     public void setSecondsToFinish(long secondsToFinish) {
         this.secondsToFinish = secondsToFinish;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

@@ -31,6 +31,7 @@ import net.project.studyez.main.MainActivity;
 import net.project.studyez.study_session.StudySessionFinishedFragment;
 
 import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 
 import static net.project.studyez.home.quickStudy.QuickStudyFragment.deckID;
@@ -49,7 +50,6 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
     private List<Card> cardList;
     private int seekBarCounter = 1;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_study, container, false);
 
@@ -154,7 +154,6 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         manager.setOverlayInterpolator(new LinearInterpolator());
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void initFlashCards(List list) {
         cardList = list;
@@ -165,7 +164,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
         cardStackView.setItemAnimator(new DefaultItemAnimator());
 
         // Starting study Session
-        presenter.initStudySession("quickStudy", deckName, cardList.size(), LocalTime.now());
+        presenter.initStudySession("quickStudy", deckName, cardList.size(), LocalTime.now(), Calendar.getInstance().getTime().toString());
     }
 
     @Override

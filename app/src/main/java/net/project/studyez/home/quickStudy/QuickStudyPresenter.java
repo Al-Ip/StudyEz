@@ -1,14 +1,10 @@
 package net.project.studyez.home.quickStudy;
 
 import android.app.Activity;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-
-import java.time.LocalTime;
 
 public class QuickStudyPresenter implements QuickStudyContract.presenter{
 
@@ -26,8 +22,11 @@ public class QuickStudyPresenter implements QuickStudyContract.presenter{
     }
 
     @Override
-    public void shortPressOnDeck(Fragment fragment, int id) {
-        mView.changeFragment(fragment, id);
+    public void shortPressOnDeck(Fragment fragment, int id, int cardNum) {
+        if(cardNum == 0)
+            mView.noCardsInDeckMessage();
+        else
+            mView.changeFragment(fragment, id);
     }
 
     @Override

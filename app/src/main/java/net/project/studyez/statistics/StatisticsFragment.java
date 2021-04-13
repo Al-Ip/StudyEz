@@ -31,8 +31,8 @@ public class StatisticsFragment extends Fragment implements StatisticsContract.V
     private Toolbar toolbar;
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
-    private final String[] tabTitles = new String[]{"Decks", "Cards", "Modes", "EZ Points"};
-    private final int[] tabIcons = new int[]{R.drawable.decks_icon, R.drawable.cards, R.drawable.modes, R.drawable.ez_points};
+    private final String[] tabTitles = new String[]{"Time", "Decks", "Cards", "Modes"};
+    private final int[] tabIcons = new int[]{R.drawable.time_studied, R.drawable.decks_icon, R.drawable.cards, R.drawable.modes};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

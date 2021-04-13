@@ -29,8 +29,8 @@ public class FlashCardPresenter implements FlashCardContract.presenter, FlashCar
     }
 
     @Override
-    public void initStudySession(String studyType, String deckName, int numCards, LocalTime startTime) {
-        mInteractor.createNewStudySessionInFirebase(studyType, deckName, numCards, startTime);
+    public void initStudySession(String studyType, String deckName, int numCards, LocalTime startTime, String date) {
+        mInteractor.createNewStudySessionInFirebase(studyType, deckName, numCards, startTime, date);
     }
 
     @Override

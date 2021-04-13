@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-import java.time.LocalTime;
-
 public interface QuickStudyContract {
 
     interface view{
         void displayNoDeckMessage();
+        void noCardsInDeckMessage();
         void hideNoDeckMessage();
         void changeFragment(Fragment fragment, int id);
     }
 
     interface presenter{
         FirestoreRecyclerOptions getDecks(Activity activity);
-        void shortPressOnDeck(Fragment fragment, int id);
+        void shortPressOnDeck(Fragment fragment, int id, int cardNum);
         void showNoDeckMessage();
         void hideNoDeckMessage();
     }

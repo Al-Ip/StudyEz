@@ -7,8 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import net.project.studyez.statistics.graphs.CardsGraphFragment;
 import net.project.studyez.statistics.graphs.DecksGraphFragment;
-import net.project.studyez.statistics.graphs.EzPointsGraphFragment;
 import net.project.studyez.statistics.graphs.StudyModesGraphFragment;
+import net.project.studyez.statistics.time_graph.TimeStudiedGraphFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
@@ -23,15 +23,15 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new DecksGraphFragment();
+                return new TimeStudiedGraphFragment();
             case 1:
-                return new CardsGraphFragment();
+                return new DecksGraphFragment();
             case 2:
-                return new StudyModesGraphFragment();
+                return new CardsGraphFragment();
             case 3:
-                return new EzPointsGraphFragment();
+                return new StudyModesGraphFragment();
         }
-        return new DecksGraphFragment();
+        return new TimeStudiedGraphFragment();
     }
 
     @Override

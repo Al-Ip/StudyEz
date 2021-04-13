@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 public class QuickStudyFragment extends Fragment implements QuickStudyContract.view {
 
     public int docID;
+    public int cardNum;
     public static String deckID;
     public static String deckName;
 
@@ -67,7 +69,8 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
             docID = position;
             deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
             deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
-            presenter.shortPressOnDeck(new FlashcardFragment(), R.id.main_container);
+            cardNum = Integer.parseInt(deckAdapter.getSnapshots().getSnapshot(docID).get("numCards").toString());
+            presenter.shortPressOnDeck(new FlashcardFragment(), R.id.main_container, cardNum);
         });
 
         return view;
@@ -154,6 +157,11 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
     @Override
     public void displayNoDeckMessage() {
         emptyDeckText.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void noCardsInDeckMessage() {
+        Toast.makeText(getContext(), "No Cards In Deck, Try adding some before studying", Toast.LENGTH_LONG).show();
     }
 
     @Override

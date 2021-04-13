@@ -14,7 +14,7 @@ public interface StudySessionContract {
     }
 
     interface interactor{
-        void getStudySessionStatisticsFromDatabase();
+        void getStudySessionStatisticsFromFirebase();
     }
 
     interface onGetStats{
