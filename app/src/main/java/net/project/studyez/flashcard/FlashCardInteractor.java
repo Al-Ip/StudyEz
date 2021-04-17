@@ -92,7 +92,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
 
     @Override
     public void createNewStudySessionInFirebase(String studyType, String deckName, int numCards, LocalTime startTime, String dateText) {
-        DateFormat format = new SimpleDateFormat("EEE LLL dd HH:mm:ss Z yyyy", Locale.getDefault());
+        DateFormat format = new SimpleDateFormat("EEE LLL dd HH:mm:ss Z yyyy", Locale.ENGLISH);
         try {
             startStudyDateAndTime = format.parse(dateText);
         } catch (ParseException e) {
@@ -157,6 +157,9 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                 if(isWithinRange(quickStudySession.getDateCreated())){
                     writeTimeStudiedToCorrespondingDay(quickStudySession.getDateCreated());
                 }
+                else{
+                    onStudySessionCompleted.onWriteToFirebaseFail("Date not in range!");
+                }
                 onStudySessionCompleted.onWriteToFirebaseSuccess();
             }
         });
@@ -203,10 +206,11 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
         current.setFirstDayOfWeek(Calendar.SUNDAY);
         current.set(Calendar.DAY_OF_WEEK, current.getFirstDayOfWeek());
         current.add(Calendar.DAY_OF_WEEK, 0);
-        DateFormat df = new SimpleDateFormat("dd, MMM yyyy", Locale.getDefault());
+        DateFormat df = new SimpleDateFormat("dd, MMM yyyy", Locale.ENGLISH);
         currentDateString = df.format(current.getTime());
         try{
             currentDate = df.parse(currentDateString);
+            Log.e("BEGINING DATE", "// " + currentDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -215,10 +219,11 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
         Calendar last = getInstance();
         last.setFirstDayOfWeek(Calendar.SUNDAY);
         last.set(Calendar.DAY_OF_WEEK, current.getFirstDayOfWeek());
-        last.add(Calendar.DAY_OF_WEEK, 6);
+        last.add(Calendar.DAY_OF_WEEK, 7);
         lastDayInCurrentDateString = df.format(last.getTime());
         try{
             lastDayInCurrentDate = df.parse(lastDayInCurrentDateString);
+            Log.e("LAST DAY", "// " + lastDayInCurrentDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }

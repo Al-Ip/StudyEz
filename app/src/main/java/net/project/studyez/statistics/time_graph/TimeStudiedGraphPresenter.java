@@ -42,7 +42,7 @@ public class TimeStudiedGraphPresenter implements TimeStudiedGraphContract.Prese
         c.setFirstDayOfWeek(Calendar.SUNDAY);
         c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
         c.add(Calendar.DAY_OF_WEEK, week);
-        DateFormat df = new SimpleDateFormat("dd, MMM yyyy", Locale.getDefault());
+        DateFormat df = new SimpleDateFormat("dd, MMM yyyy", Locale.ENGLISH);
         startDate = df.format(c.getTime());
         c.add(Calendar.DAY_OF_MONTH, 6);
         mView.setWeekDateTextField(startDate);

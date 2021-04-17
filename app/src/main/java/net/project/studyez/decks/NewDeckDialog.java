@@ -28,7 +28,7 @@ public class NewDeckDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog_create_deck, null);
-        builder.setTitle("Create new Card");
+        builder.setTitle("Create new Deck");
         builder.setIcon(R.drawable.add_deck);
         builder.setCancelable(false);
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {

@@ -38,32 +38,35 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:26.2.0')
-    implementation "com.airbnb.android:lottie:3.6.0"
+    implementation platform('com.google.firebase:firebase-bom:27.0.0')
+    implementation 'com.airbnb.android:lottie:3.6.1'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment:2.3.3'
-    implementation 'androidx.navigation:navigation-ui:2.3.3'
-    implementation 'com.google.firebase:firebase-auth:20.0.3'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
+    implementation 'com.google.firebase:firebase-auth:20.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'com.firebaseui:firebase-ui-database:1.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'com.google.firebase:firebase-firestore:22.1.1'
-    implementation 'com.google.firebase:firebase-core:18.0.2'
+    implementation 'com.google.firebase:firebase-firestore:22.1.2'
+    implementation 'com.google.firebase:firebase-core:18.0.3'
     implementation 'com.firebaseui:firebase-ui-firestore:4.1.0'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.android.support:design:29.0.0'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.31'
     implementation 'androidx.core:core:1.3.2'
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'com.google.android.material:material:1.3.0'
@@ -83,22 +86,24 @@ dependencies {
     //implementation 'com.mikhaellopez:circularimageview:4.2.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'com.github.bumptech.glide:annotations:4.9.0'
-    implementation('com.github.bumptech.glide:okhttp3-integration:4.0.0') {
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.github.bumptech.glide:annotations:4.12.0'
+    implementation('com.github.bumptech.glide:okhttp3-integration:4.12.0') {
         exclude group: 'glide-parent'
     }
-    annotationProcessor 'androidx.annotation:annotation:1.1.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    annotationProcessor 'androidx.annotation:annotation:1.2.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     implementation 'com.github.yalantis:ucrop:2.2.6'
 
     // Application dependency injection
-    implementation 'com.google.dagger:dagger:2.15'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-    implementation 'com.google.dagger:dagger-android:2.15' // If you're using classes in dagger.android
-    implementation 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    implementation 'com.google.dagger:dagger:2.33'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.33'
+    implementation 'com.google.dagger:dagger-android:2.33'
+    // If you're using classes in dagger.android
+    implementation 'com.google.dagger:dagger-android-support:2.33'
+    // if you use the support libraries
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.33'
 
     // Testing
     implementation 'org.mockito:mockito-core:2.28.2'
@@ -109,13 +114,13 @@ dependencies {
     androidTestImplementation 'com.21buttons:fragment-test-rule:2.0.1'
     debugImplementation 'com.21buttons:fragment-test-rule-extras:2.0.1'
     // (Required) Writing and executing Unit Tests on the JUnit Platform
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.1"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.3.1"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 
     // (Optional) If you need "Parameterized Tests"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:5.3.1"
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.1'
 
     // (Optional) If you also have JUnit 4-based tests
-    testImplementation "junit:junit:4.13.1"
-    testRuntimeOnly "org.junit.vintage:junit-vintage-engine:5.3.1"
+    testImplementation 'junit:junit:4.13.2'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.7.1'
 }

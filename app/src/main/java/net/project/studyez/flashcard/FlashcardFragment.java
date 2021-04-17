@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -169,7 +168,7 @@ public class FlashcardFragment extends Fragment implements FlashCardContract.vie
 
     @Override
     public void displayFailedToWriteMessage(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
