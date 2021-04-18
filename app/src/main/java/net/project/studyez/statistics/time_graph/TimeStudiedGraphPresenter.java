@@ -55,12 +55,12 @@ public class TimeStudiedGraphPresenter implements TimeStudiedGraphContract.Prese
         for (Map.Entry<String, Long> entry : timeStudied.getDailyTimesList().entrySet()) {
             dateKey = entry.getKey();
             dateValue = entry.getValue().toString();
-            Log.e("KEY_"+dateKey, "// VALUE_"+dateValue);
+            //Log.e("1KEY_"+dateKey, "// VALUE_"+dateValue);
 
             for (Map.Entry<Integer, Integer> entrys : dateMap.entrySet()) {
                 int key = entrys.getKey();
                 String value = entrys.getValue().toString();
-                Log.e("KEY2_"+key, "// VALUE2_"+value);
+                Log.e("2KEY_"+key, "// VALUE2_"+value);
                 dateMap.put(Integer.parseInt(dateKey), Integer.parseInt(dateValue));
             }
         }

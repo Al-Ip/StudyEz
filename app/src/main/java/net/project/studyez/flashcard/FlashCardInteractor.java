@@ -183,7 +183,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
             else {
                 // Document does not exist so write it
                 // Init list of days as-well as the study session weekly object
-                timeStudied = new TimeStudied(startStudyDateAndTime);
+                timeStudied = new TimeStudied(currentDate);
                 docRef = fStore
                         .collection("users")
                         .document(fUser.getUid())
@@ -253,7 +253,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
             .collection("statistics")
             .document("timeGraph")
             .collection("weekly")
-            .whereNotEqualTo("dailyTimesList", null)
+            .whereEqualTo("weekCreated", currentDate)
             .get()
             .addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
