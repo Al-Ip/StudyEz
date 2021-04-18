@@ -1,20 +1,13 @@
 package net.project.studyez.decks;
 
 import android.app.Activity;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import net.project.studyez.user_profile.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +20,7 @@ public class DeckInteractor implements DeckContract.Interactor{
     private static final String TAG = DeckInteractor.class.getSimpleName();
     private DeckContract.onDeckCreationListener onDeckCreationListener;
     private DeckContract.onDeckDeletionListener onDeckDeletionListener;
-    private DeckContract.onDeckGetListener onDeckGetListener;
+    private DeckContract.onDeckUpdateListener onDeckUpdateListener;
 
     private final FirebaseFirestore fStore;
     private final FirebaseAuth fAuth;
@@ -47,10 +40,10 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     public DeckInteractor(DeckContract.onDeckCreationListener onDeckCreationListener,
                           DeckContract.onDeckDeletionListener onDeckDeletionListener,
-                          DeckContract.onDeckGetListener onDeckGetListener){
+                          DeckContract.onDeckUpdateListener onDeckUpdateListener){
         this.onDeckCreationListener = onDeckCreationListener;
         this.onDeckDeletionListener = onDeckDeletionListener;
-        this.onDeckGetListener = onDeckGetListener;
+        this.onDeckUpdateListener = onDeckUpdateListener;
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
@@ -92,7 +85,28 @@ public class DeckInteractor implements DeckContract.Interactor{
     }
 
     @Override
-    public void deleteDeck(String docID) {
+    public void updateExistingDeckFromFirebase(String deckID, String deckName) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", deckName);
+        docRef = fStore
+                .collection("users")
+                .document(fUser.getUid())
+                .collection("decks")
+                .document(fUser.getDisplayName())
+                .collection("myDecks")
+                .document(deckID);
+        docRef.update(map).addOnCompleteListener(task -> {
+            if(!task.isComplete()){
+                onDeckUpdateListener.onUpdateFailure(task.getException().getMessage());
+            }
+            else{
+                onDeckUpdateListener.onUpdateSuccess("Successfully Updated Deck Name!");
+            }
+        });
+    }
+
+    @Override
+    public void deleteDeckFromFirebase(String docID) {
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())

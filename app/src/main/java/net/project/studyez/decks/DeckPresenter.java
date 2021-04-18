@@ -10,7 +10,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import javax.inject.Inject;
 
 public class DeckPresenter implements DeckContract.presenter, DeckContract.onDeckCreationListener,
-        DeckContract.onDeckDeletionListener, DeckContract.onDeckGetListener {
+        DeckContract.onDeckDeletionListener, DeckContract.onDeckUpdateListener {
 
     // to keep reference to view
     private final DeckContract.view mView;
@@ -44,13 +44,18 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void deleteDeckFromFirebase(String docID) {
-        mInteractor.deleteDeck(docID);
+    public void updateDeckName(String deckID, String deckName) {
+        mInteractor.updateExistingDeckFromFirebase(deckID, deckName);
     }
 
     @Override
-    public void longPressOnDeck() {
-        mView.displayMenu();
+    public void deleteDeck(String docID) {
+        mInteractor.deleteDeckFromFirebase(docID);
+    }
+
+    @Override
+    public void longPressOnDeck(String deckID, String deckName) {
+        mView.displayMenu(deckID, deckName);
     }
 
     @Override
@@ -89,12 +94,12 @@ public class DeckPresenter implements DeckContract.presenter, DeckContract.onDec
     }
 
     @Override
-    public void onGetSuccess(String message) {
-
+    public void onUpdateSuccess(String message) {
+        mView.onDeckUpdateSuccess(message);
     }
 
     @Override
-    public void onGetFailure(String message) {
-
+    public void onUpdateFailure(String message) {
+        mView.onDeckUpdateFailure(message);
     }
 }

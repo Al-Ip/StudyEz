@@ -18,9 +18,12 @@ import org.jetbrains.annotations.NotNull;
 public class MenuDeckDialog extends BottomSheetDialogFragment {
 
     TextView update, makePublic, delete;
+    String deckID;
+    String deckName;
 
-    public static MenuDeckDialog newInstance() {
-        return new MenuDeckDialog();
+    public MenuDeckDialog(String deckID, String deckName){
+        this.deckID = deckID;
+        this.deckName = deckName;
     }
 
     @NotNull
@@ -32,7 +35,11 @@ public class MenuDeckDialog extends BottomSheetDialogFragment {
         makePublic = view.findViewById(R.id.makePublicTextView);
         delete = view.findViewById(R.id.deleteTextView);
 
-        update.setOnClickListener(v -> Toast.makeText(getContext(), "Update Name Feature Coming Soon!", Toast.LENGTH_SHORT).show());
+        update.setOnClickListener(v -> {
+            dismiss();
+            assert getParentFragment() != null;
+            ((DecksFragment)getParentFragment()).displayUpdateDeckNameDialog(deckID, deckName);
+        });
         makePublic.setOnClickListener(v -> Toast.makeText(getContext(), "Public Feature Coming Soon!", Toast.LENGTH_SHORT).show());
         delete.setOnClickListener(v -> {
             dismiss();

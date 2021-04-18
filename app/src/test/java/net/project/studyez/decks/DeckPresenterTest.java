@@ -94,15 +94,17 @@ public class DeckPresenterTest {
 
     @Test
     public void long_press_on_deck() {
-        presenter.longPressOnDeck();
-        verify(view).displayMenu();
+        String id = "adadad";
+        String name = "test name";
+        presenter.longPressOnDeck(id, name);
+        verify(view).displayMenu(id, name);
     }
 
     @Test
     public void delete_a_deck_from_firebase() {
         String deck_position_in_recyclerview = "test";
-        presenter.deleteDeckFromFirebase(deck_position_in_recyclerview);
-        verify(deckInteractor).deleteDeck(deck_position_in_recyclerview);
+        presenter.deleteDeck(deck_position_in_recyclerview);
+        verify(deckInteractor).deleteDeckFromFirebase(deck_position_in_recyclerview);
     }
 
     @Test

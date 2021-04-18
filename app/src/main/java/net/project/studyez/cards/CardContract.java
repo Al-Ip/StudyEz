@@ -45,7 +45,7 @@ public interface CardContract {
         void addNewCardToFirebase(String deckID, String deckName, String question, String answer, String dateCreated, boolean isStarred);
         FirestoreRecyclerOptions getCardsFromFirebase(Activity activity, String deckName);
         void deleteCardFromFirebase(String deckName, String docID);
-        void editCardFromFirebase(String deckName, String question, String answer, String docID);
+        void updateCardFromFirebase(String deckName, String question, String answer, String docID);
         void updateNumberOfCardsFromFirebase(String deckName, int numCards);
     }
 

@@ -13,13 +13,13 @@ import net.project.studyez.R;
 
 import org.jetbrains.annotations.NotNull;
 
-public class EditCardDialog extends DialogFragment {
+public class UpdateCardDialog extends DialogFragment {
 
     private final String getTextQuestion;
     private final String getTextAnswer;
     private EditText editTextQuestion, editTextAnswer;
 
-    public EditCardDialog(String getTextQuestion, String getTextAnswer){
+    public UpdateCardDialog(String getTextQuestion, String getTextAnswer){
         this.getTextAnswer = getTextAnswer;
         this.getTextQuestion = getTextQuestion;
     }

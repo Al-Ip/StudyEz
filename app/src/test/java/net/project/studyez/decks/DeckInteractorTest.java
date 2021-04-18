@@ -52,9 +52,10 @@ public class DeckInteractorTest {
         String datetime = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         String deckName = "test";
         String creator = "alexTest";
+        String creatorID = "UkzIFXj3UidlEvBeyVxGMdlsF6a2";
         int numCards = 0;
 
-        deck = new Deck(deckName, datetime,  creator, numCards);
+        deck = new Deck(creatorID, deckName, datetime,  creator, numCards);
 
         docRef = mockFirestore
                 .collection("testDB")

@@ -62,7 +62,7 @@ public class CardPresenter implements CardContract.presenter, CardContract.onCar
 
     @Override
     public void editCardDetails(String deckName, String question, String answer, String docID) {
-        mInteractor.editCardFromFirebase(deckName, question, answer, docID);
+        mInteractor.updateCardFromFirebase(deckName, question, answer, docID);
     }
 
     @Override

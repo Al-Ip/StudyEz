@@ -56,7 +56,9 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         // Long press to delete Deck
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckPresenter.longPressOnDeck();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
+            deckPresenter.longPressOnDeck(deckID, deckName);
             return true;
         });
 
@@ -86,7 +88,18 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void deleteDeckDialogConfirm(){
-        deckPresenter.deleteDeckFromFirebase(deckAdapter.getSnapshots().getSnapshot(docID).getId());
+        deckPresenter.deleteDeck(deckAdapter.getSnapshots().getSnapshot(docID).getId());
+    }
+
+    @Override
+    public void updateDeckNameDialogConfirm(String deckID, String deckName) {
+        deckPresenter.updateDeckName(deckID, deckName);
+    }
+
+    @Override
+    public void displayUpdateDeckNameDialog(String deckID, String deckName) {
+        UpdateDeckNameDialog newFragment = new UpdateDeckNameDialog(deckID, deckName);
+        newFragment.show(getChildFragmentManager(), "Update Deck Name Dialog");
     }
 
     @Override
@@ -95,13 +108,8 @@ public class DecksFragment extends Fragment implements DeckContract.view{
     }
 
     @Override
-    public void displayNumOfCardsInDeck(int numCards) {
-        Toast.makeText(getContext(), "In Deck Now... " + numCards + " Total cards in this deck!", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void displayMenu() {
-        MenuDeckDialog menuDeckDialog = new MenuDeckDialog();
+    public void displayMenu(String deckID, String deckName) {
+        MenuDeckDialog menuDeckDialog = new MenuDeckDialog(deckID, deckName);
         menuDeckDialog.show(getChildFragmentManager(), "Deck Menu Dialog");
     }
 
@@ -140,6 +148,16 @@ public class DecksFragment extends Fragment implements DeckContract.view{
 
     @Override
     public void onDeckDeletionFailure(String message) {
+        Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeckUpdateSuccess(String message) {
+        Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeckUpdateFailure(String message) {
         Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 

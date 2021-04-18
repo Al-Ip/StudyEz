@@ -137,8 +137,8 @@ public class CardsFragment extends Fragment implements CardContract.view {
 
     @Override
     public void displayEditCardPopupWindow(String question, String answer) {
-        EditCardDialog editCardDialog = new EditCardDialog(question, answer);
-        editCardDialog.show(getChildFragmentManager(), "Edit Card Dialog");
+        UpdateCardDialog updateCardDialog = new UpdateCardDialog(question, answer);
+        updateCardDialog.show(getChildFragmentManager(), "Edit Card Dialog");
     }
 
     @Override

@@ -106,7 +106,7 @@ public class CardInteractor implements CardContract.Interactor{
     }
 
     @Override
-    public void editCardFromFirebase(String deckID, String question, String answer, String docID) {
+    public void updateCardFromFirebase(String deckID, String question, String answer, String docID) {
         Map<String, Object> map = new HashMap<>();
         map.put("answer", answer);
         map.put("question", question);
