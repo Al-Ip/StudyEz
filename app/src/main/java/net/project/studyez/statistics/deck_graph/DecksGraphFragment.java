@@ -75,19 +75,25 @@ public class DecksGraphFragment extends Fragment implements DecksGraphContract.V
     }
 
     @Override
-    public void setBarChartWithData(Map<String, Long> dateMap, long average, long total) {
+    public void setBarChartWithData(Map<String, Integer> deckData) {
         Description description = new Description();
         description.setText("");
         barChart.setDescription(description);
 
+        int counter = 0;
         ArrayList<BarEntry> entryArrayList = new ArrayList<>();
-        entryArrayList.add(new BarEntry(0, 2f, "Deck 1"));
-        entryArrayList.add(new BarEntry(1, 0f, "Deck 2"));
-        entryArrayList.add(new BarEntry(2, 4f, "Deck 3"));
-        entryArrayList.add(new BarEntry(3, 5f, "Deck 4"));
-        entryArrayList.add(new BarEntry(4, 1f, "Deck 5"));
-        entryArrayList.add(new BarEntry(5, 6f, "Deck 6"));
-        entryArrayList.add(new BarEntry(6, 2f, "Deck 7"));
+        for (Map.Entry<String, Integer> entry : deckData.entrySet()) {
+            entryArrayList.add(new BarEntry(counter++, entry.getValue().floatValue(), entry.getKey()));
+        }
+
+//        ArrayList<BarEntry> entryArrayList = new ArrayList<>();
+//        entryArrayList.add(new BarEntry(0, 2f, "Deck 1"));
+//        entryArrayList.add(new BarEntry(1, 0f, "Deck 2"));
+//        entryArrayList.add(new BarEntry(2, 4f, "Deck 3"));
+//        entryArrayList.add(new BarEntry(3, 5f, "Deck 4"));
+//        entryArrayList.add(new BarEntry(4, 1f, "Deck 5"));
+//        entryArrayList.add(new BarEntry(5, 6f, "Deck 6"));
+//        entryArrayList.add(new BarEntry(6, 2f, "Deck 7"));
 
         //LineDataSet is the line on the graph
         BarDataSet barDataSet = new BarDataSet(entryArrayList, "This is y bill");

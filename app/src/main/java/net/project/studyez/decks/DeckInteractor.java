@@ -120,8 +120,8 @@ public class DeckInteractor implements DeckContract.Interactor{
                         onDeckUpdateListener.onUpdateFailure(task3.getException().getMessage());
                     }
                     else{
-                        updateDeckObject.setDeckName(previousDeckName);
-                        updateDeckObject.setPreviousDeckName(newDeckName);
+                        updateDeckObject.setDeckName(newDeckName);
+                        updateDeckObject.setPreviousDeckName(previousDeckName);
                         docRef = fStore
                                 .collection("users")
                                 .document(fUser.getUid())

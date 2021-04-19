@@ -9,15 +9,16 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
         android:ellipsize="end"
-        android:singleLine="true"
+        android:maxLines="1"
         android:text="Monday"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/marker_color3"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:textSize="16sp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/numValue"
@@ -28,7 +29,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="5dp"
         android:ellipsize="end"
-        android:singleLine="true"
         android:text="1:20"
         android:drawablePadding="-10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -37,5 +37,4 @@
         android:textStyle="bold"
         app:drawableTopCompat="@drawable/blue_line"
         app:drawableBottomCompat="@drawable/blue_arrow_down" />
-
 </RelativeLayout>

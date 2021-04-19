@@ -1,5 +1,8 @@
 package net.project.studyez.statistics.deck_graph;
 
+import net.project.studyez.home.quickStudy.QuickStudySession;
+
+import java.util.List;
 import java.util.Map;
 
 public interface DecksGraphContract {
@@ -7,7 +10,7 @@ public interface DecksGraphContract {
     interface View {
         void initBarChart();
         void setWeekDateTextField(String date);
-        void setBarChartWithData(Map<String, Long> dateMap, long average, long total);
+        void setBarChartWithData(Map<String, Integer> deckData);
     }
 
     interface Presenter {
@@ -20,7 +23,7 @@ public interface DecksGraphContract {
     }
 
     interface onDataCollectionListener{
-        void onDataSuccess(DecksStudied decksStudied);
+        void onDataSuccess(List<QuickStudySession> dataList);
         void onDataFailure(String message);
     }
 }
