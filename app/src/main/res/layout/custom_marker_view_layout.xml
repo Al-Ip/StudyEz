@@ -5,7 +5,7 @@
     android:layout_height="60dp">
 
     <TextView
-        android:id="@+id/day"
+        android:id="@+id/textValue"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -15,12 +15,12 @@
         android:singleLine="true"
         android:text="Monday"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#395C6E"
+        android:textColor="@color/marker_color3"
         android:textStyle="bold"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/value"
+        android:id="@+id/numValue"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
@@ -32,7 +32,7 @@
         android:text="1:20"
         android:drawablePadding="-10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#6092AA"
+        android:textColor="@color/marker_color3"
         android:textSize="16sp"
         android:textStyle="bold"
         app:drawableTopCompat="@drawable/blue_line"

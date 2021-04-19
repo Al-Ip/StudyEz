@@ -6,7 +6,8 @@ import javax.inject.Inject;
 
 public class Deck {
 
-    private String name;
+    private String deckName;
+    private String previousDeckName;
     private String creatorID;
     private String creator;
     private String dateTimeCreated;
@@ -14,21 +15,31 @@ public class Deck {
 
     public Deck() {}
 
+
     @Inject
-    public Deck(String creatorID, String name, String dateTimeCreated, String creator, int numCards) {
+    public Deck(String creatorID, String deckName, String dateTimeCreated, String creator, int numCards, String previousDeckName) {
         this.creatorID = creatorID;
-        this.name = name;
+        this.deckName = deckName;
         this.dateTimeCreated = dateTimeCreated;
         this.creator = creator;
         this.numCards = numCards;
+        this.previousDeckName = previousDeckName;
     }
 
-    public String getName() {
-        return name;
+    public String getPreviousDeckName() {
+        return previousDeckName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPreviousDeckName(String previousDeckName) {
+        this.previousDeckName = previousDeckName;
+    }
+
+    public String getDeckName() {
+        return deckName;
+    }
+
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
     }
 
     public String getCreatorID() {

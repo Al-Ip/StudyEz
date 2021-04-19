@@ -49,14 +49,14 @@ public class DecksFragment extends Fragment implements DeckContract.view{
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("deckName").toString();
             deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             deckPresenter.shortPressOnDeck(new CardsFragment(), R.id.main_container);
         });
         // Long press to delete Deck
         ItemClickSupport.addTo(deckRecyclerView).setOnItemLongClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("deckName").toString();
             deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             deckPresenter.longPressOnDeck(deckID, deckName);
             return true;

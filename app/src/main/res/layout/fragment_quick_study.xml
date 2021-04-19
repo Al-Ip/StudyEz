@@ -70,7 +70,7 @@
                     android:layout_marginStart="30dip"
                     android:layout_marginTop="16dip"
                     android:layout_marginEnd="30dip"
-                    android:text="Study a random selection of cards from a selected deck down below!"
+                    android:text="Study all of your cards from a selected deck down below!"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
 

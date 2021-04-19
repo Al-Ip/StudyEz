@@ -1,6 +1,7 @@
 package net.project.studyez.decks;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +27,8 @@ public class DeckInteractor implements DeckContract.Interactor{
     private final FirebaseAuth fAuth;
     private final FirebaseUser fUser;
     private Deck deck;
+    private Deck updateDeckObject;
+    private String previousDeckName;
     private DocumentReference docRef;
     private FirestoreRecyclerOptions<Deck> allDecks;
     private Query query;
@@ -51,7 +54,7 @@ public class DeckInteractor implements DeckContract.Interactor{
 
     @Override
     public void addNewDeckToFirebase(String deckName, String dateTime, String creator, int numCards) {
-        deck = new Deck(fUser.getUid(), deckName, dateTime,  fUser.getDisplayName(), numCards);
+        deck = new Deck(fUser.getUid(), deckName, dateTime,  fUser.getDisplayName(), numCards, "");
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())
@@ -64,7 +67,7 @@ public class DeckInteractor implements DeckContract.Interactor{
                 onDeckCreationListener.onDeckCreateFailure(task.getException().getMessage());
             }
             else{
-                onDeckCreationListener.onDeckCreateSuccess("Successfully Created " + deck.getName() + " Deck!");
+                onDeckCreationListener.onDeckCreateSuccess("Successfully Created " + deck.getDeckName() + " Deck!");
             }
         });
     }
@@ -85,9 +88,10 @@ public class DeckInteractor implements DeckContract.Interactor{
     }
 
     @Override
-    public void updateExistingDeckFromFirebase(String deckID, String deckName) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", deckName);
+    public void updateExistingDeckFromFirebase(String deckID, String newDeckName) {
+        // Getting deck to store as object before updating
+        updateDeckObject = new Deck();
+        previousDeckName = "";
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())
@@ -95,12 +99,49 @@ public class DeckInteractor implements DeckContract.Interactor{
                 .document(fUser.getDisplayName())
                 .collection("myDecks")
                 .document(deckID);
-        docRef.update(map).addOnCompleteListener(task -> {
-            if(!task.isComplete()){
-                onDeckUpdateListener.onUpdateFailure(task.getException().getMessage());
+        docRef.get().addOnSuccessListener(documentSnapshot -> {
+            if(documentSnapshot.exists()) {
+                // Document found, store into POJO
+                updateDeckObject = documentSnapshot.toObject(Deck.class);
+                previousDeckName = updateDeckObject.getDeckName();
+                // Deck name with Session records exist, update with new name
+                Map<String, Object> map = new HashMap<>();
+                map.put("deckName", newDeckName);
+                map.put("previousDeckName", previousDeckName);
+                docRef = fStore
+                        .collection("users")
+                        .document(fUser.getUid())
+                        .collection("decks")
+                        .document(fUser.getDisplayName())
+                        .collection("myDecks")
+                        .document(deckID);
+                docRef.update(map).addOnCompleteListener(task3 -> {
+                    if(!task3.isComplete()){
+                        onDeckUpdateListener.onUpdateFailure(task3.getException().getMessage());
+                    }
+                    else{
+                        updateDeckObject.setDeckName(previousDeckName);
+                        updateDeckObject.setPreviousDeckName(newDeckName);
+                        docRef = fStore
+                                .collection("users")
+                                .document(fUser.getUid())
+                                .collection("studySessions")
+                                .document(previousDeckName);
+                        docRef.set(updateDeckObject).addOnCompleteListener(task2 -> {
+                            if(!task2.isComplete()){
+                                onDeckUpdateListener.onUpdateFailure(task2.getException().getMessage());
+                            }
+                            else{
+                                onDeckUpdateListener.onUpdateSuccess("Successfully Updated Deck Name!");
+                            }
+                        });
+                    }
+                });
             }
-            else{
-                onDeckUpdateListener.onUpdateSuccess("Successfully Updated Deck Name!");
+            else {
+                // Document does not exist so write it
+                // Init list of days as-well as the study session weekly object
+                Log.e("TAG", "Document Does Not exist, No Need to update sessions!");
             }
         });
     }

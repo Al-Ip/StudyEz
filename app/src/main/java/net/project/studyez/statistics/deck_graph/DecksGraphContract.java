@@ -1,17 +1,17 @@
-package net.project.studyez.statistics.time_graph;
+package net.project.studyez.statistics.deck_graph;
 
 import java.util.Map;
 
-public interface TimeStudiedGraphContract {
+public interface DecksGraphContract {
 
     interface View {
-        void initLineChart();
+        void initBarChart();
         void setWeekDateTextField(String date);
-        void setLineChartWithData(Map<Integer, Integer> deckMap, long average, long total);
+        void setBarChartWithData(Map<String, Long> dateMap, long average, long total);
     }
 
     interface Presenter {
-        void getLineChartData();
+        void getBarChartData();
         void getCurrentWeekDate(int week);
     }
 
@@ -20,7 +20,7 @@ public interface TimeStudiedGraphContract {
     }
 
     interface onDataCollectionListener{
-        void onDataSuccess(TimeStudied timeStudied);
+        void onDataSuccess(DecksStudied decksStudied);
         void onDataFailure(String message);
     }
 }

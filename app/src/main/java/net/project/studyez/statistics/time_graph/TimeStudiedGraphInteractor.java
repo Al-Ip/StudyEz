@@ -30,7 +30,6 @@ public class TimeStudiedGraphInteractor implements TimeStudiedGraphContract.Inte
 
     @Override
     public void getWeeklyDataFromFirebase(String startDate) {
-
         docRef = fStore
                 .collection("users")
                 .document(fUser.getUid())

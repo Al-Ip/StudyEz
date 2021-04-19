@@ -3,7 +3,6 @@ package net.project.studyez.statistics.time_graph;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.project.studyez.R;
+import net.project.studyez.statistics.CustomMarkerGraph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,17 +47,9 @@ public class TimeStudiedGraphFragment extends Fragment implements TimeStudiedGra
         weekText = view.findViewById(R.id.lineChart_text_week);
         lineChart = view.findViewById(R.id.lineChart);
 
-        graphPresenter.getCurrentDate(0);
+        graphPresenter.getCurrentWeekDate(0);
         initLineChart();
         graphPresenter.getLineChartData();
-
-//        averageSwitch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(averageSwitch.isChecked())
-//                    setAverageSwitchOn();
-//            }
-//        });
 
         return view;
     }
@@ -70,51 +62,22 @@ public class TimeStudiedGraphFragment extends Fragment implements TimeStudiedGra
     @Override
     public void initLineChart() {
         lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.setPinchZoom(true);
+        lineChart.setDragEnabled(false);
+        lineChart.setScaleEnabled(false);
+        lineChart.setPinchZoom(false);
         lineChart.setDrawGridBackground(false);
         lineChart.getAxisRight().setDrawGridLines(false);
         lineChart.getAxisLeft().setDrawGridLines(false);
         lineChart.getXAxis().setDrawGridLines(false);
-        lineChart.setMaxHighlightDistance(200);
         lineChart.setViewPortOffsets(0, 0, 0, 0);
 
-        IMarker marker = new TimeStudiedCustomGraphMarker(getContext(), R.layout.custom_marker_view_layout);
+        IMarker marker = new CustomMarkerGraph(getContext(), R.layout.custom_marker_view_layout);
         lineChart.setMarker(marker);
     }
 
     @Override
     public void setWeekDateTextField(String date) {
         weekText.setText(date);
-    }
-
-    private void setAverageSwitchOn(){
-        Log.e("Toggled Switch", "HERE!");
-        ArrayList<Entry> entryArrayList = new ArrayList<>();
-        entryArrayList.add(new Entry(0, average, "WeeklyAverage"));
-
-        LineDataSet lineDataSet = new LineDataSet(entryArrayList, "dataset");
-
-        //set legend disable or enable to hide {the left down corner name of graph}
-        Legend legend = lineChart.getLegend();
-        legend.setEnabled(false);
-
-        //to add/ remove the circle from the graph
-        lineDataSet.setDrawCircles(false);
-
-        //lineDataSet.setColor(ColorTemplate.COLORFUL_COLORS);
-
-        ArrayList<ILineDataSet> iLineDataSetArrayList = new ArrayList<>();
-        iLineDataSetArrayList.add(lineDataSet);
-
-        //LineData is the data accord
-        LineData lineData = new LineData(iLineDataSetArrayList);
-        lineData.setValueTextSize(13f);
-        lineData.setValueTextColor(Color.BLACK);
-
-        lineChart.setData(lineData);
-        lineChart.invalidate();
     }
 
     @Override
@@ -134,15 +97,16 @@ public class TimeStudiedGraphFragment extends Fragment implements TimeStudiedGra
         LineDataSet lineDataSet = new LineDataSet(entryArrayList, "dataset");
         lineDataSet.setLineWidth(3f);
         lineDataSet.setColor(color(R.color.default_blue));
-        lineDataSet.setCircleHoleColor(color(R.color.babyBlue));
+        lineDataSet.setCircleHoleColor(color(R.color.white));
+        lineDataSet.setCircleHoleRadius(4f);
         lineDataSet.setDrawHorizontalHighlightIndicator(false);
         lineDataSet.setDrawVerticalHighlightIndicator(false);
         lineDataSet.setDrawValues(false);
-        lineDataSet.setCircleRadius(8f);
-        lineDataSet.setCircleColor(color(R.color.QuickStudyColorTheme));
+        lineDataSet.setCircleRadius(7f);
+        lineDataSet.setCircleColor(color(R.color.default_blue));
 
         //to make the smooth line as the graph is adapt change so smooth curve
-        lineDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        lineDataSet.setMode(LineDataSet.Mode.LINEAR);
         //to enable the cubic density : if 1 then it will be sharp curve
         lineDataSet.setCubicIntensity(0.1f);
 

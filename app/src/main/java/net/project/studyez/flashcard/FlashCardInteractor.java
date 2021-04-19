@@ -2,6 +2,10 @@ package net.project.studyez.flashcard;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -9,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import net.project.studyez.decks.Deck;
 import net.project.studyez.home.quickStudy.QuickStudySession;
 import net.project.studyez.statistics.time_graph.TimeStudied;
 
@@ -24,7 +29,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import static java.util.Calendar.getInstance;
-
 
 public class FlashCardInteractor implements FlashCardContract.Interactor {
 
@@ -112,20 +116,62 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                 .document()
                 .getId();
 
-        docRef = fStore
-                .collection("users")
+        // Checking to see if the document already exists
+        docRef = fStore.collection("users")
                 .document(fUser.getUid())
                 .collection("studySessions")
-                .document(deckName)
-                .collection(studyType)
-                .document(quickStudySessionId);
-        docRef.set(quickStudySession).addOnCompleteListener(task -> {
-            if(!task.isComplete()){
-                onStudySessionCompleted.onWriteToFirebaseFail(task.getException().getMessage());
+                .document(deckName);
+        docRef.get().addOnCompleteListener(task -> {
+            if(task.getResult().exists()){
+                docRef = fStore
+                        .collection("users")
+                        .document(fUser.getUid())
+                        .collection("studySessions")
+                        .document(deckName)
+                        .collection(studyType)
+                        .document(quickStudySessionId);
+                docRef.set(quickStudySession).addOnCompleteListener(tasks -> {
+                    if(!tasks.isComplete()){
+                        onStudySessionCompleted.onWriteToFirebaseFail(tasks.getException().getMessage());
+                    }
+                    else{
+                        setupWeeklyTimeStudiedStatisticsToFirebase();
+                        onStudySessionCompleted.onWriteToFirebaseSuccess();
+                    }
+                });
             }
-            else{
-                setupWeeklyTimeStudiedStatisticsToFirebase();
-                onStudySessionCompleted.onWriteToFirebaseSuccess();
+            else {
+                // Document does not exist so write it
+                // Init list of days as-well as the study session weekly object
+                Deck newDeck = new Deck(fUser.getUid(), deckName, dateText, fUser.getDisplayName(), numCards, "");
+                docRef = fStore
+                        .collection("users")
+                        .document(fUser.getUid())
+                        .collection("studySessions")
+                        .document(deckName);
+                docRef.set(newDeck).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isComplete()){
+                            docRef = fStore
+                                    .collection("users")
+                                    .document(fUser.getUid())
+                                    .collection("studySessions")
+                                    .document(deckName)
+                                    .collection(studyType)
+                                    .document(quickStudySessionId);
+                            docRef.set(quickStudySession).addOnCompleteListener(tasks -> {
+                                if(!tasks.isComplete()){
+                                    onStudySessionCompleted.onWriteToFirebaseFail(tasks.getException().getMessage());
+                                }
+                                else{
+                                    setupWeeklyTimeStudiedStatisticsToFirebase();
+                                    onStudySessionCompleted.onWriteToFirebaseSuccess();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }

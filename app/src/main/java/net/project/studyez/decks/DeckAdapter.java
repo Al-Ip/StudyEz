@@ -22,7 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.DeckHolder> {
 
     private final FirestoreRecyclerOptions<Deck> options;
-    private FirebaseUser fUser;
+    private final FirebaseUser fUser;
 
     public DeckAdapter(@NonNull FirestoreRecyclerOptions<Deck> options) {
         super(options);
@@ -33,12 +33,12 @@ public class DeckAdapter extends FirestoreRecyclerAdapter<Deck, DeckAdapter.Deck
     @Override
     protected void onBindViewHolder(@NonNull DeckHolder deckHolder, int i, @NonNull Deck deck) {
         if (fUser.getPhotoUrl() != null) {
-            deckHolder.deckName.setText(deck.getName());
+            deckHolder.deckName.setText(deck.getDeckName());
             deckHolder.creatorText.setText(deck.getCreator());
             deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
             deckHolder.userImage.setImageURI(fUser.getPhotoUrl());
         } else {
-            deckHolder.deckName.setText(deck.getName());
+            deckHolder.deckName.setText(deck.getDeckName());
             deckHolder.creatorText.setText(deck.getCreator());
             deckHolder.deckSize.setText(" #" + deck.getNumCards() + " Cards");
         }

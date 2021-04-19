@@ -1,8 +1,6 @@
 package net.project.studyez.statistics.time_graph;
 
 
-import android.util.Log;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,7 +35,7 @@ public class TimeStudiedGraphPresenter implements TimeStudiedGraphContract.Prese
     }
 
     @Override
-    public void getCurrentDate(int week) {
+    public void getCurrentWeekDate(int week) {
         Calendar c = getInstance();
         c.setFirstDayOfWeek(Calendar.SUNDAY);
         c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
@@ -60,7 +58,7 @@ public class TimeStudiedGraphPresenter implements TimeStudiedGraphContract.Prese
             for (Map.Entry<Integer, Integer> entrys : dateMap.entrySet()) {
                 int key = entrys.getKey();
                 String value = entrys.getValue().toString();
-                Log.e("2KEY_"+key, "// VALUE2_"+value);
+                //Log.e("2KEY_"+key, "// VALUE2_"+value);
                 dateMap.put(Integer.parseInt(dateKey), Integer.parseInt(dateValue));
             }
         }
@@ -74,7 +72,7 @@ public class TimeStudiedGraphPresenter implements TimeStudiedGraphContract.Prese
         for (Map.Entry<Integer, Integer> entry : dateMap.entrySet()) {
             int key = entry.getKey();
             String value = entry.getValue().toString();
-            Log.e("KEY2_"+key, "// VALUE2_"+value);
+            //Log.e("KEY2_"+key, "// VALUE2_"+value);
             dateMap.put(Integer.parseInt(String.valueOf(key)), Integer.parseInt(value));
         }
         mView.setLineChartWithData(dateMap, 0, 0);

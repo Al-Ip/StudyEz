@@ -14,6 +14,9 @@
     <!--  Card colors  -->
     <color name="custom_background_grey">#E9F3F3F3</color>
     <color name="silverPink">#D0B8AC</color>
+    <color name="marker_color1">#AF5B5E</color>
+    <color name="marker_color2">#8E6884</color>
+    <color name="marker_color3">#EE982B</color>
     <color name="canary">#B6B668</color>
     <color name="grannySmithApple">#B5D99C</color>
     <color name="fireOpal">#E65F5C</color>

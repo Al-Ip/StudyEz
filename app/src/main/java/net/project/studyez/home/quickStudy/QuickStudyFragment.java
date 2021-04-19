@@ -67,7 +67,7 @@ public class QuickStudyFragment extends Fragment implements QuickStudyContract.v
         // Single Click support
         ItemClickSupport.addTo(deckRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
             docID = position;
-            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("name").toString();
+            deckName = deckAdapter.getSnapshots().getSnapshot(docID).get("deckName").toString();
             deckID = deckAdapter.getSnapshots().getSnapshot(docID).getId();
             cardNum = Integer.parseInt(deckAdapter.getSnapshots().getSnapshot(docID).get("numCards").toString());
             presenter.shortPressOnDeck(new FlashcardFragment(), R.id.main_container, cardNum);

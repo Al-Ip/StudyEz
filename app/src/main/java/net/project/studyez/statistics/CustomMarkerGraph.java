@@ -1,4 +1,4 @@
-package net.project.studyez.statistics.time_graph;
+package net.project.studyez.statistics;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,17 +15,17 @@ import com.github.mikephil.charting.highlight.Highlight;
 
 import net.project.studyez.R;
 
-public class TimeStudiedCustomGraphMarker extends MarkerView {
+public class CustomMarkerGraph extends MarkerView {
 
-    private final TextView day;
-    private final TextView value;
+    private final TextView textValue;
+    private final TextView numValue;
     private final Context mContext;
 
-    public TimeStudiedCustomGraphMarker(Context context, int layoutResource) {
+    public CustomMarkerGraph(Context context, int layoutResource) {
         super(context, layoutResource);
         this.mContext = context;
-        day = findViewById(R.id.day);
-        value = findViewById(R.id.value);
+        textValue = findViewById(R.id.textValue);
+        numValue = findViewById(R.id.numValue);
     }
 
     // callbacks every time the MarkerView is redrawn, can be used to update the
@@ -34,8 +34,8 @@ public class TimeStudiedCustomGraphMarker extends MarkerView {
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
         String timeInMinutesAndSeconds = DateUtils.formatElapsedTime((long) e.getY());
-        day.setText(e.getData().toString());
-        value.setText(timeInMinutesAndSeconds);
+        textValue.setText(e.getData().toString());
+        numValue.setText(timeInMinutesAndSeconds);
         super.refreshContent(e, highlight);
     }
 

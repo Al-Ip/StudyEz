@@ -16,6 +16,10 @@ public class QuickStudySession {
     public QuickStudySession(){
     }
 
+    public QuickStudySession(Date dateCreated){
+        this.dateCreated = dateCreated;
+    }
+
     public QuickStudySession(String sessionMode, String deckName, int numCards, String sessionStartTime, Date dateCreated){
         this.sessionMode = sessionMode;
         this.deckName = deckName;
