@@ -12,10 +12,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import net.project.studyez.decks.Deck;
 import net.project.studyez.home.quickStudy.QuickStudySession;
 import net.project.studyez.statistics.time_graph.TimeStudied;
+import net.project.studyez.user_profile.User;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -103,7 +106,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
             e.printStackTrace();
         }
 
-        quickStudySession = new QuickStudySession(studyType, deckName, numCards, startTime.toString(), startStudyDateAndTime);
+        quickStudySession = new QuickStudySession(studyType, deckName, numCards, startTime.toString(), startStudyDateAndTime, numCards);
 
         FlashCardInteractor.deckName = deckName;
 
@@ -201,6 +204,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
             }
             else{
                 if(isWithinRange(quickStudySession.getDateCreated())){
+                    updateAccountEzPoints(quickStudySession.getEzPointsEarned());
                     writeTimeStudiedToCorrespondingDay(quickStudySession.getDateCreated());
                 }
                 else{
@@ -345,6 +349,37 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                         Log.e("task.isComplete()", "Completed!");
                     }
                 });
+            });
+    }
+
+    private void updateAccountEzPoints(int ezPoints){
+        fStore.collection("users")
+            .whereEqualTo("id", fUser.getUid())
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful()){
+                        User userData = null;
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            //Log.e("GET DOCUMENT", document.getId() + " => " + document.getData());
+                            userData = document.toObject(User.class);
+                        }
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("ezPoints", userData.getEzPoints() + ezPoints);
+                        docRef = fStore
+                                .collection("users")
+                                .document(fUser.getUid());
+                        docRef.set(map, SetOptions.merge()).addOnCompleteListener(tasks -> {
+                            if(!tasks.isComplete()){
+                                Log.e("!task.isComplete()", "Failed!");
+                            }
+                            else{
+                                Log.e("task.isComplete()", "Completed!");
+                            }
+                        });
+                    }
+                }
             });
     }
 }

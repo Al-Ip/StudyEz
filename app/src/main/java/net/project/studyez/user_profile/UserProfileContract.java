@@ -6,17 +6,20 @@ public interface UserProfileContract {
 
     // implemented by RegisterActivity to provide concrete implementation
     interface View {
-        void displayUserInformation(User user);
+        void displayUserInformation(User user, int countDecks);
         void changeFragment(Fragment fragment, int id);
         void updateButtonClick(String message);
-        void onProfilePictureSetSuccessfully(String message);
-        void onProfilePictureSetFailed(String message);
+        void updateUsernameDialogConfirm(String description);
+        void onUpdateOfProfileSuccess(String message);
+        void onUpdateOfProfileFailed(String message);
     }
 
     // implemented by RegistrationPresenter to handle user event
     interface Presenter {
         void doChangeFragment(Fragment fragment, int id);
         void clickChangeProfileImage(String stringUri);
+        void clickChangeDescription(String description);
+        void clickChangeUsername(String username);
         void getUserDetails();
         void clickUpdateProfileButton(android.view.View view);
     }
@@ -24,10 +27,12 @@ public interface UserProfileContract {
     interface Interactor{
         void getUserDetailsFromFirebase();
         void setUserProfileImageToFirebase(String stringUri);
+        void updateDescriptionInFirebase(String description);
+        void updateUsername(String username);
     }
 
     interface onGetInfoListener{
-        void onGetInfoSuccess(User user);
+        void onGetInfoSuccess(User user, int countDecks);
         void onGetInfoFailure(String message);
     }
 

@@ -1,13 +1,8 @@
 package net.project.studyez.registration;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -62,6 +57,7 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
                     user.setId(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                     user.setEmail(email);
                     user.setPassword(password);
+                    user.setDescription("A simple description about you or whatever you wish to put here describing yourself :)");
                     docRef = fStore.collection("users")
                             .document(task.getResult().getUser().getUid());
                     docRef.set(user).addOnCompleteListener(task1 -> {

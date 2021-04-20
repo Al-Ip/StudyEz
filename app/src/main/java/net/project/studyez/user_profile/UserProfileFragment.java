@@ -46,7 +46,7 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
 
     private UserProfilePresenter presenter;
     private ImageView imgProfile, plus;
-    private TextView username, description, numDecks, numFollowers, numFollowing;
+    private TextView username, description, numDecks, numEzPoints, numFollowing;
     private Toolbar toolbar;
     private ProfileImageMenuDialog profileImageMenuDialog;
 
@@ -66,7 +66,7 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
         username = view.findViewById(R.id.username);
         description = view.findViewById(R.id.profile_desc);
         numDecks = view.findViewById(R.id.numDecks);
-        numFollowers = view.findViewById(R.id.numFollowers);
+        numEzPoints = view.findViewById(R.id.numEzPoints);
         numFollowing = view.findViewById(R.id.numFollowing);
 
         // Getting user details and storing it into a User Object
@@ -74,24 +74,18 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
 
         initToolbar();
 
-        loadProfileDefault();
+        loadProfileImageDefault();
 
         // Clearing older images from cache directory
         // don't call this line if you want to choose multiple images in the same activity
         // call this once the bitmap(s) usage is over
         ImagePickerActivity.clearCache(requireActivity());
 
-        imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onProfileImageClick();
-            }
-        });
-        plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onProfileImageClick();
-            }
+        imgProfile.setOnClickListener(v -> onProfileImageClick());
+        plus.setOnClickListener(v -> onProfileImageClick());
+        description.setOnClickListener(v -> {
+            UpdateUsernameDialog dialog = new UpdateUsernameDialog(description.getText().toString());
+            dialog.show(getChildFragmentManager(), "Update Description Dialog");
         });
 
         return view;
@@ -109,12 +103,16 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
     }
 
     @Override
-    public void displayUserInformation(User user) {
+    public void displayUserInformation(User user, int countDecks) {
         if (user.getProfileImage() != null) {
             Uri imageUriParse = Uri.parse(user.getProfileImage());
-            loadProfile(imageUriParse.toString());
+            loadProfileImage(imageUriParse.toString());
         }
         username.setText(user.getUsername());
+        description.setText(user.getDescription());
+        numDecks.setText(String.valueOf(countDecks));
+        numEzPoints.setText(String.valueOf(user.getEzPoints()));
+        numFollowing.setText(String.valueOf(user.getFriendsCount()));
     }
 
     @Override
@@ -127,45 +125,31 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void updateUsernameDialogConfirm(String description) {
+        presenter.clickChangeDescription(description);
+        this.description.setText(description);
+    }
 
-//    @Override
-//    public void displayProfilePictureMenu() {
-//        profileImageMenuDialog = new ProfileImageMenuDialog();
-//        profileImageMenuDialog.show(getChildFragmentManager(), "Profile Menu Dialog");
-//    }
-//    @Override
-//    public void displayFileSelector() {
-//        Log.e("Files", "Clicked on Files");
-//    }
-//
-//    @Override
-//    public void displayPhoneCamera() {
-//        Log.e("Camera", "Clicked on Camera");
-//    }
-//
-//    @Override
-//    public void removeProfilePicture() {
-//        Log.e("Delete", "Clicked on Delete Profile");
-//    }
 
     @Override
-    public void onProfilePictureSetSuccessfully(String message) {
+    public void onUpdateOfProfileSuccess(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onProfilePictureSetFailed(String message) {
+    public void onUpdateOfProfileFailed(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
 
-    private void loadProfile(String url) {
+    private void loadProfileImage(String url) {
         Log.d(TAG, "Image cache path: " + url);
         Glide.with(this).load(url).circleCrop().into(imgProfile);
         imgProfile.setColorFilter(ContextCompat.getColor(requireContext(), android.R.color.transparent));
     }
 
-    private void loadProfileDefault() {
+    private void loadProfileImageDefault() {
         Glide.with(this).load(R.drawable.baseline_account_circle_black_48).circleCrop().into(imgProfile);
         imgProfile.setColorFilter(ContextCompat.getColor(requireContext(), R.color.profile_default_tint));
     }
@@ -242,7 +226,7 @@ public class UserProfileFragment extends Fragment implements UserProfileContract
                 Uri uri = data.getParcelableExtra("path");
                 // You can update this bitmap to your server
                 // loading profile image from local cache
-                loadProfile(uri.toString());
+                loadProfileImage(uri.toString());
                 String stringUri = uri.toString();
                 presenter.clickChangeProfileImage(stringUri);
             }

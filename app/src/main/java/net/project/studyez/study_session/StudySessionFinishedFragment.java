@@ -21,7 +21,7 @@ import net.project.studyez.main.MainActivity;
 public class StudySessionFinishedFragment extends Fragment implements StudySessionContract.view{
 
     private Toolbar toolbar;
-    private TextView deckName, numCards, ansCorrect, timeToFinish;
+    private TextView deckName, numCards, ansCorrect, timeToFinish, ezPointsText;
     private StudySessionPresenter presenter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class StudySessionFinishedFragment extends Fragment implements StudySessi
         numCards = root.findViewById(R.id.numCardsTextField);
         ansCorrect = root.findViewById(R.id.ansCorrectTextField);
         timeToFinish = root.findViewById(R.id.timeFinishedTextField);
+        ezPointsText = root.findViewById(R.id.ezPointsTextField);
 
         initToolbar();
         presenter.getStudySessionStatistics();
@@ -59,6 +60,7 @@ public class StudySessionFinishedFragment extends Fragment implements StudySessi
         this.numCards.setText(String.valueOf(numCards));
         this.ansCorrect.setText(String.valueOf(ansCorrect));
         this.timeToFinish.setText(timeToFinish);
+        this.ezPointsText.setText(numCards + " EZ Points Earned!");
     }
 
     @Override

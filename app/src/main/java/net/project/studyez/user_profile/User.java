@@ -1,10 +1,9 @@
 package net.project.studyez.user_profile;
 
-import java.util.Date;
-
 public class User {
 
     private String id;
+    private int ezPoints;
     private String profileImage;
     private String username;
     private String email;
@@ -76,5 +75,13 @@ public class User {
 
     public void setFriendsCount(int friendsCount) {
         this.friendsCount = friendsCount;
+    }
+
+    public int getEzPoints() {
+        return ezPoints;
+    }
+
+    public void setEzPoints(int ezPoints) {
+        this.ezPoints = ezPoints;
     }
 }

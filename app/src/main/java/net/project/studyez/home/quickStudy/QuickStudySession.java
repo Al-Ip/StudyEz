@@ -12,6 +12,7 @@ public class QuickStudySession {
     String sessionStartTime;
     String sessionEndTime;
     long secondsToFinish;
+    int ezPointsEarned;
 
     public QuickStudySession(){
     }
@@ -20,12 +21,13 @@ public class QuickStudySession {
         this.dateCreated = dateCreated;
     }
 
-    public QuickStudySession(String sessionMode, String deckName, int numCards, String sessionStartTime, Date dateCreated){
+    public QuickStudySession(String sessionMode, String deckName, int numCards, String sessionStartTime, Date dateCreated, int ezPointsEarned){
         this.sessionMode = sessionMode;
         this.deckName = deckName;
         this.numCards = numCards;
         this.sessionStartTime = sessionStartTime;
         this.dateCreated = dateCreated;
+        this.ezPointsEarned = ezPointsEarned;
     }
 
     public String getSessionMode() {
@@ -90,5 +92,13 @@ public class QuickStudySession {
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public int getEzPointsEarned() {
+        return ezPointsEarned;
+    }
+
+    public void setEzPointsEarned(int ezPointsEarned) {
+        this.ezPointsEarned = ezPointsEarned;
     }
 }

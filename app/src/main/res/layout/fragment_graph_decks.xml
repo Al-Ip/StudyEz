@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Time Spent Studying Decks Week: "
+        android:text="Decks Studied for Week: "
         android:textColor="#BA000000"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/lineChart_text_week"
+        app:layout_constraintEnd_toStartOf="@+id/barChart_text_week"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginStart="81dp"
         android:layout_marginTop="16dp"
         android:text="DATE!"
         android:textColor="@color/default_blue"

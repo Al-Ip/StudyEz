@@ -28,21 +28,15 @@ public class UserProfilePresenter implements UserProfileContract.Presenter, User
         mInteractor.setUserProfileImageToFirebase(stringUri);
     }
 
-//    @Override
-//    public void menuClickFiles() {
-//        mView.displayFileSelector();
-//    }
-//
-//    @Override
-//    public void menuClickCamera() {
-//        mView.displayPhoneCamera();
-//    }
-//
-//    @Override
-//    public void menuClickDelete() {
-//        mView.removeProfilePicture();
-//    }
+    @Override
+    public void clickChangeDescription(String description) {
+        mInteractor.updateDescriptionInFirebase(description);
+    }
 
+    @Override
+    public void clickChangeUsername(String username) {
+
+    }
 
     @Override
     public void getUserDetails() {
@@ -56,8 +50,8 @@ public class UserProfilePresenter implements UserProfileContract.Presenter, User
 
 
     @Override
-    public void onGetInfoSuccess(User user) {
-        mView.displayUserInformation(user);
+    public void onGetInfoSuccess(User user, int countDecks) {
+        mView.displayUserInformation(user, countDecks);
     }
 
     @Override
@@ -67,11 +61,11 @@ public class UserProfilePresenter implements UserProfileContract.Presenter, User
 
     @Override
     public void onSetInfoSuccess(String message) {
-        mView.onProfilePictureSetSuccessfully(message);
+        mView.onUpdateOfProfileSuccess(message);
     }
 
     @Override
     public void onSetInfoFailure(String message) {
-        mView.onProfilePictureSetFailed(message);
+        mView.onUpdateOfProfileFailed(message);
     }
 }
