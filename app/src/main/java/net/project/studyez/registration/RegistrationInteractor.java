@@ -56,7 +56,6 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
                 else{
                     user.setId(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid());
                     user.setEmail(email);
-                    user.setPassword(password);
                     user.setDescription("A simple description about you or whatever you wish to put here describing yourself :)");
                     docRef = fStore.collection("users")
                             .document(task.getResult().getUser().getUid());

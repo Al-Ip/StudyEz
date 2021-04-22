@@ -46,7 +46,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     private Query query;
 
     // Date variables
-    private Map<String, Long> dayValuesList = new HashMap<>();
+    private Map<String, Long> dayValuesList;
     private Date currentDate;
     private String currentDateString;
     private Date lastDayInCurrentDate;
@@ -325,6 +325,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                     totalTime = dayValuesList.values().stream().reduce((long)0, Long::sum);
                     averageTime = totalTime / dayValuesList.size();
                 } else {
+                    dayValuesList = new HashMap<>();
                     dayValuesList.put(dayNumber, quickStudySession.getSecondsToFinish());
                     averageTime = quickStudySession.getSecondsToFinish();
                     totalTime = quickStudySession.getSecondsToFinish();
