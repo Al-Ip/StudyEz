@@ -25,6 +25,7 @@ In case issues may arise and the applicaiton cannot be run, I have included my S
 
 ### Step 5 - Run the App
 Now that you have an AVD installed, you can press the Run button beside the created AVD and begin running the app. The build process will happen automatically and an emulator should open automatically also. This emulator will launch the app after a few moments, you can set it so that the emulator opens directly inside the IDE like so but its fine if it opens a sperate window.
+
 ![image](https://user-images.githubusercontent.com/43743759/115952815-224c7e00-a4e0-11eb-9ce9-6f966811b668.png)
 
 ### Step 6 - Using the App
