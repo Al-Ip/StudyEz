@@ -1,6 +1,8 @@
 package net.project.studyez.statistics.time_graph;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TimeStudied {
@@ -22,6 +24,13 @@ public class TimeStudied {
 
     public void setWeekCreated(Date weekCreated) {
         this.weekCreated = weekCreated;
+    }
+
+    public void initMap() {
+        dailyTimesList = new HashMap<>();
+    }
+    public void deleteMap() {
+        dailyTimesList = Collections.emptyMap();
     }
 
     public Map<String, Long> getDailyTimesList() {

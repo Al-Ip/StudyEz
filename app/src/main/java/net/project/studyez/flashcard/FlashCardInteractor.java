@@ -77,7 +77,6 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
-        dayValuesList = new HashMap<>();
     }
 
     @Override
@@ -235,6 +234,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                 // Document does not exist so write it
                 // Init list of days as-well as the study session weekly object
                 timeStudied = new TimeStudied(currentDate);
+                timeStudied.initMap();
                 docRef = fStore
                         .collection("users")
                         .document(fUser.getUid())
@@ -326,7 +326,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
                     totalTime = dayValuesList.values().stream().reduce((long)0, Long::sum);
                     averageTime = totalTime / dayValuesList.size();
                 } else {
-                    dayValuesList.put(dayNumber, quickStudySession.getSecondsToFinish());
+                    dayValuesList.putIfAbsent(dayNumber, quickStudySession.getSecondsToFinish());
                     averageTime = quickStudySession.getSecondsToFinish();
                     totalTime = quickStudySession.getSecondsToFinish();
                 }
