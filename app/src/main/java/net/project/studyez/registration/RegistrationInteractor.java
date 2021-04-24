@@ -79,6 +79,7 @@ public class RegistrationInteractor implements RegistrationContract.Interactor {
                 .setDisplayName(username).build();
         fUser.updateProfile(profileUpdates);
 
+        // Getting all users to check whether or not a user with the same username already exists
         query = fStore.collection("users").whereEqualTo("username", username);
         query.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
