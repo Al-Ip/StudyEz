@@ -46,7 +46,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
     private Query query;
 
     // Date variables
-    private Map<String, Long> dayValuesList = new HashMap<>();
+    private Map<String, Long> dayValuesList;
     private Date currentDate;
     private String currentDateString;
     private Date lastDayInCurrentDate;
@@ -77,6 +77,7 @@ public class FlashCardInteractor implements FlashCardContract.Interactor {
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
         fUser = fAuth.getCurrentUser();
+        dayValuesList = new HashMap<>();
     }
 
     @Override
